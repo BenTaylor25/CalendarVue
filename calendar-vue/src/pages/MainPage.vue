@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import MainPage from './pages/MainPage.vue';
 </script>
 
 <template>
   <!-- eslint-disable vue/no-multiple-template-root -->
 
-  <!-- Router? -->
-  <main-page />
+  <p>main page</p>
 
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<styles scoped lang="scss">
+</styles>
