@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import CalendarMain from '../components/CalendarMain.vue';
 </script>
 
 <template>
   <!-- eslint-disable vue/no-multiple-template-root -->
 
-  <calendar-main />
+  <p>calendar-main</p>
 
 </template>
 
-<styles scoped lang="scss">
-</styles>
+<style scoped lang="sass">
+</style>
