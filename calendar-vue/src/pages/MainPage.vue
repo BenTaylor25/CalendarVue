@@ -3,10 +3,9 @@ import CalendarMain from '../components/CalendarMain.vue';
 </script>
 
 <template>
-  <!-- eslint-disable vue/no-multiple-template-root -->
-
-  <calendar-main />
-
+  <div>
+    <calendar-main />
+  </div>
 </template>
 
 <styles scoped lang="scss">

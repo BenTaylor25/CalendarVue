@@ -3,7 +3,6 @@ import MainPage from './pages/MainPage.vue';
 </script>
 
 <template>
-  <!-- eslint-disable vue/no-multiple-template-root -->
 
   <!-- Router? -->
   <main-page />
