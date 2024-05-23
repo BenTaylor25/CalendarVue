@@ -4,8 +4,13 @@ import CalendarMain from '../components/CalendarMain.vue';
 
 <template>
   <div id="main-page-container">
-    <p>header</p>
+
+    <div id="header">
+      <p>header</p>
+    </div>
+
     <calendar-main />
+
   </div>
 </template>
 
@@ -13,6 +18,12 @@ import CalendarMain from '../components/CalendarMain.vue';
 
 #main-page-container {
   display: grid;
+  grid-template-rows: 10vh 90vh;
+  width: 100vw;
+
+  #header {
+    border: 1px solid yellow;
+  }
 }
 
 </style>
