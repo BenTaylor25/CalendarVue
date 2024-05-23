@@ -3,10 +3,16 @@ import CalendarMain from '../components/CalendarMain.vue';
 </script>
 
 <template>
-  <div>
+  <div id="main-page-container">
+    <p>header</p>
     <calendar-main />
   </div>
 </template>
 
-<styles scoped lang="scss">
-</styles>
+<style scoped lang="scss">
+
+#main-page-container {
+  display: grid;
+}
+
+</style>
