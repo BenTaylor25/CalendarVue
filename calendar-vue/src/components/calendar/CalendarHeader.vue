@@ -10,6 +10,6 @@
 <style scoped lang="scss">
 #calendar-header {
   border: 1px solid blue;
-  height: 10%;
+  height: 12.5%;
 }
 </style>
