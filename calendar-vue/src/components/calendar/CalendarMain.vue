@@ -1,5 +1,4 @@
-<script setup la
-  components: { CalendarDay },ng="ts">
+<script setup lang="ts">
 import CalendarHeader from './CalendarHeader.vue';
 import CalendarDay from './CalendarDay.vue';
 
