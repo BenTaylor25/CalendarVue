@@ -20,6 +20,7 @@ let daysOfWeek = [
     <calendar-day
       v-for="day in daysOfWeek"
       v-bind:key="day"
+      :weekday="day"
     />
   </div>
 </template>
