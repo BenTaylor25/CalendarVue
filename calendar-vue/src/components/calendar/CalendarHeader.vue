@@ -2,7 +2,7 @@
 
 const times: string[] = [];
 
-for (let i = 0; i < 24; i++) {
+for (let i = 0; i <= 24; i++) {
   times.push(`${i}:00`);
 }
 
@@ -17,9 +17,9 @@ for (let i = 0; i < 24; i++) {
 
     <div id="time-bar">
 
-      <span v-for="time in times" class="timestamp">
-        {{ time }}
-      </span>
+      <div v-for="time in times" class="timestamp">
+        <span>{{ time }}</span>
+      </div>
 
     </div>
 
@@ -54,6 +54,10 @@ for (let i = 0; i < 24; i++) {
 
     .timestamp {
       padding: 1rem;
+
+      &:not(:first-child) {
+        border-left: 1px solid gold;
+      }
     }
 
   }
