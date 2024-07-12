@@ -1,4 +1,11 @@
 <script setup lang="ts">
+
+const times: string[] = [];
+
+for (let i = 0; i < 24; i++) {
+  times.push(`${i}:00`);
+}
+
 </script>
 
 <template>
@@ -10,6 +17,10 @@
 
     <div id="time-bar">
 
+      <span v-for="time in times" class="timestamp">
+        {{ time }}
+      </span>
+
     </div>
 
   </div>
@@ -17,6 +28,7 @@
 
 <style scoped lang="scss">
 #calendar-header {
+  display: flex;
   border: 1px solid blue;
   height: 12.5%;
 
@@ -31,6 +43,17 @@
 
     p {
       color: black;
+    }
+
+  }
+
+  #time-bar {
+    display: flex;
+    width: 90%;
+    overflow-x: auto;
+
+    .timestamp {
+      padding: 1rem;
     }
 
   }
