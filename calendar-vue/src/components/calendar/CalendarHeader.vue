@@ -3,7 +3,7 @@
 
 <template>
   <div id="calendar-header">
-    <p>calendar-header</p>
+    <div id="month-control"></div>
   </div>
 </template>
 

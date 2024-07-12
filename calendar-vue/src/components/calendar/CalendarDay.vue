@@ -6,7 +6,7 @@
   <div class="calendar-day">
 
     <div class="weekday">
-        <p>{{ weekday }}</p>
+      <p>{{ weekday }}</p>
     </div>
 
     <div class="time-map">
