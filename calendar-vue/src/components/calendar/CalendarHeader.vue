@@ -51,6 +51,7 @@ for (let i = 0; i <= 24; i++) {
     display: flex;
     width: 90%;
     overflow-x: auto;
+    scrollbar-width: thin;
 
     .timestamp {
       padding: 1rem;
