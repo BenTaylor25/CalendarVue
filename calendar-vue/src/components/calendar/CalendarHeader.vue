@@ -55,6 +55,7 @@ for (let i = 0; i <= 24; i++) {
 
     .timestamp {
       padding: 1rem;
+      width: 3rem;
 
       &:not(:first-child) {
         border-left: 1px solid gold;

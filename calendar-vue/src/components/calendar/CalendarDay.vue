@@ -1,5 +1,11 @@
 <script setup lang="ts">
 
+const times: string[] = [];
+
+for (let i = 0; i <= 24; i++) {
+  times.push(`${i}:00`);
+}
+
 </script>
 
 <template>
@@ -10,7 +16,7 @@
     </div>
 
     <div class="time-map">
-      <p>calendar-day</p>
+      <span v-for="_ in times" class="timestamp"></span>
     </div>
 
   </div>
@@ -41,6 +47,19 @@ export default {
 
     p {
       font-size: 1.25rem;
+    }
+  }
+
+  .time-map {
+    display: flex;
+    width: 90%;
+    overflow-x: hidden;
+
+    .timestamp {
+      padding: 1rem;
+      width: 3rem;
+
+      border-left: 1px solid gold;
     }
   }
 }
