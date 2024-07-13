@@ -49,7 +49,7 @@ for (let i = 1; i <= 24; i++) {
 
   #time-bar {
     display: flex;
-    width: 90%;
+    width: max(90%, calc(100% - 10rem));
     overflow-x: auto;
     scrollbar-width: thin;
 

@@ -52,7 +52,7 @@ export default {
 
   .time-map {
     display: flex;
-    width: 90%;
+    width: max(90%, calc(100% - 10rem));
     overflow-x: auto; // hide once synced
     overflow-y: hidden;
 
