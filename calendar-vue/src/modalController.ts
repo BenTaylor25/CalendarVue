@@ -1,24 +1,60 @@
 
-export function showModalShadow() {
-    const shadowDiv = document.getElementById('modal-shadow');
+function showElementWithId(id: string) {
+    const element = document.getElementById(id);
 
     //#region Error Handling
-    if (shadowDiv === null) {
-        console.error("Failed to showModalShadow(); could not find element with id 'modal-shadow'.");
+    if (element == null) {
+        console.error(`Could not find element with id '${id}'.`);
     }
     //#endregion
 
-    shadowDiv?.classList.add('show');
+    element?.classList.add('show');
 }
 
-export function hideModalShadow() {
-    const shadowDiv = document.getElementById('modal-shadow');
+function hideElementWithId(id: string) {
+    const element = document.getElementById(id);
 
     //#region Error Handling
-    if (shadowDiv == null) {
-        console.error("Failed to hideModalShadow(); could not find element with id 'modal-shadow'.");
+    if (element == null) {
+        console.error(`Could not find element with id '${id}'.`);
     }
     //#endregion
 
-    shadowDiv?.classList.remove('show');
+    element?.classList.remove('show');
+}
+
+
+// Modal Shadow.
+const showModalShadow = () => { showElementWithId('modal-shadow'); }
+const hideModalShadow = () => { hideElementWithId('modal-shadow'); }
+
+
+function showModalWithId(id: string) {
+    showModalShadow();
+    showElementWithId(id);
+}
+
+function hideModalWithId(id: string) {
+    // Edgecase: if multiple modals are open, closing one will remove the background from all.
+    // Shouldn't be a problem for this project.
+    hideModalShadow();
+    hideElementWithId(id);
+}
+
+
+// Zoom Settings
+export const showZoomSettingsModal = () => { showModalWithId('zoom-settings-modal'); }
+export const hideZoomSettingsModal = () => { hideModalWithId('zoom-settings-modal'); }
+
+
+const allModalIds = [
+    "zoom-settings-modal"
+];
+
+export function hideAllModals() {
+    hideModalShadow();
+
+    for (const modalId of allModalIds) {
+        hideElementWithId(modalId);
+    }
 }

@@ -2,6 +2,7 @@
 import MainPage from './pages/MainPage.vue';
 
 import ModalShadow from './components/modals/ModalShadow.vue';
+import ZoomSettingModal from './components/modals/ZoomSettingModal.vue';
 </script>
 
 <template>
@@ -16,6 +17,7 @@ import ModalShadow from './components/modals/ModalShadow.vue';
     for a project of this size.
   -->
   <modal-shadow />
+  <zoom-setting-modal />
 
 </template>
 
