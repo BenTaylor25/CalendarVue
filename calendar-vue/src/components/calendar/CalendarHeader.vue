@@ -40,8 +40,18 @@ function syncroniseScrollingWithDays() {
   }
 }
 
+function scrollToMiddle() {
+  const headerTimeMapDiv = document.getElementById('time-bar') as HTMLDivElement;
+
+  const maxScrollLeft = headerTimeMapDiv.scrollWidth - headerTimeMapDiv.clientWidth;
+
+  const midPoint = maxScrollLeft / 2;
+  headerTimeMapDiv.scrollLeft = midPoint;
+}
+
 onMounted(() => {
   setZoomOnCalendarHeader(DEFAULT_CALENDAR_ZOOM);
+  scrollToMiddle();
 });
 
 </script>
