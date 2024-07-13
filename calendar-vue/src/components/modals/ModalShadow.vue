@@ -17,7 +17,7 @@ import { hideAllModals } from '../../modalController';
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(150,100,100,.8);
+  background-color: rgba(150, 100, 100, .6);
 
   &.show {
     display: flex;
