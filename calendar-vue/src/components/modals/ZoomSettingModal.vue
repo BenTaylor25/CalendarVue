@@ -4,7 +4,7 @@ import { ref, Ref } from 'vue';
 import { MODAL_IDS } from '../../constants/modalConstants';
 import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';
 import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
-import { MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
+import { DEFAULT_CALENDAR_ZOOM, MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
 function updateZoom() {
   setZoomOnCalendarHeader(zoomSettingValue.value);
@@ -31,7 +31,7 @@ function updateZoom() {
 </template>
 
 <script lang="ts">
-const zoomSettingValue: Ref<number> = ref(3);
+const zoomSettingValue: Ref<number> = ref(DEFAULT_CALENDAR_ZOOM);
 </script>
 
 <style lang="scss">
