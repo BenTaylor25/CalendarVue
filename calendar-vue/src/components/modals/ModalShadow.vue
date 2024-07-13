@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { MODAL_SHADOW_ID } from '../../constants/modalConstants';
 import { hideAllModals } from '../../modalController';
-
 </script>
 
 <template>
 
-  <div id="modal-shadow" @click="hideAllModals"></div>
+  <div :id="MODAL_SHADOW_ID" @click="hideAllModals"></div>
 
 </template>
 

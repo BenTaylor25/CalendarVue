@@ -1,3 +1,4 @@
+import { MODAL_SHADOW_ID, MODAL_IDS } from "./constants/modalConstants";
 
 function showElementWithId(id: string) {
     const element = document.getElementById(id);
@@ -25,8 +26,17 @@ function hideElementWithId(id: string) {
 
 
 // Modal Shadow.
-const showModalShadow = () => { showElementWithId('modal-shadow'); }
-const hideModalShadow = () => { hideElementWithId('modal-shadow'); }
+const showModalShadow = () => { showElementWithId(MODAL_SHADOW_ID); }
+const hideModalShadow = () => { hideElementWithId(MODAL_SHADOW_ID); }
+
+
+export function hideAllModals() {
+    hideModalShadow();
+
+    for (const modalId of Object.values(MODAL_IDS)) {
+        hideElementWithId(modalId);
+    }
+}
 
 
 function showModalWithId(id: string) {
@@ -43,18 +53,5 @@ function hideModalWithId(id: string) {
 
 
 // Zoom Settings
-export const showZoomSettingsModal = () => { showModalWithId('zoom-settings-modal'); }
-export const hideZoomSettingsModal = () => { hideModalWithId('zoom-settings-modal'); }
-
-
-const allModalIds = [
-    "zoom-settings-modal"
-];
-
-export function hideAllModals() {
-    hideModalShadow();
-
-    for (const modalId of allModalIds) {
-        hideElementWithId(modalId);
-    }
-}
+export const showZoomSettingsModal = () => { showModalWithId(MODAL_IDS.ZOOM_SETTINGS_MODAL); }
+export const hideZoomSettingsModal = () => { hideModalWithId(MODAL_IDS.ZOOM_SETTINGS_MODAL); }
