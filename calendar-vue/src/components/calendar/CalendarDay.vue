@@ -57,9 +57,11 @@ export default {
 
     .timestamp {
       padding: 1rem;
-      width: 3rem;
+      width: 5rem;
 
-      border-left: 1px solid gold;
+      &:not(:last-child) {
+        border-right: 1px solid gold;
+      }
     }
   }
 }

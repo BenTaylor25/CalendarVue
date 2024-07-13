@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-const times: string[] = [];
+const times: string[] = [""];
 
-for (let i = 0; i <= 24; i++) {
+for (let i = 1; i <= 24; i++) {
   times.push(`${i}:00`);
 }
 
@@ -54,11 +54,21 @@ for (let i = 0; i <= 24; i++) {
     scrollbar-width: thin;
 
     .timestamp {
+      position: relative;
       padding: 1rem;
-      width: 3rem;
+      width: 5rem;
 
-      &:not(:first-child) {
-        border-left: 1px solid gold;
+      &:not(:last-child) {
+        border-right: 1px solid gold;
+      }
+
+      span {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, -50%);
+
+        background-color: black; // temp
       }
     }
 
