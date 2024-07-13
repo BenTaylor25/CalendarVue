@@ -11,6 +11,14 @@ function syncroniseScrollingWithDays() {
   const dayTimeMapDivs = document.getElementsByClassName('calendar-day') as HTMLCollection;
 
   //#region Error Handling
+  if (headerTimeMapDiv == null) {
+    console.error("headerTimeMapDiv not found.");
+  }
+
+  if (dayTimeMapDivs == null) {
+    console.error("dayTimeMapDivs not found.");
+  }
+
   if (dayTimeMapDivs.length == 0) {
     console.error("Scroll detected on Calendar Header but no days were found");
   }
