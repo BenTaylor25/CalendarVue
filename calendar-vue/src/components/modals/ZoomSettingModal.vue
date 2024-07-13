@@ -4,6 +4,7 @@ import { ref, Ref } from 'vue';
 import { MODAL_IDS } from '../../constants/modalConstants';
 import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';
 import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
+import { MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
 function updateZoom() {
   setZoomOnCalendarHeader(zoomSettingValue.value);
@@ -14,9 +15,18 @@ function updateZoom() {
 
 <template>
   <div :id="MODAL_IDS.ZOOM_SETTINGS_MODAL">
+
     <h1>Zoom:</h1>
-    <input type="range" min="1" max="20" v-model="zoomSettingValue" @input="updateZoom" />
+
+    <input
+      type="range"
+      :min="MIN_CALENDAR_ZOOM"
+      :max="MAX_CALENDAR_ZOOM"
+      v-model="zoomSettingValue"
+      @input="updateZoom" />
+
     <p>{{ zoomSettingValue }}</p>
+
   </div>
 </template>
 
