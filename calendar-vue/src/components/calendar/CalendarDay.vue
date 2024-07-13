@@ -53,8 +53,7 @@ export default {
   .time-map {
     display: flex;
     width: max(90%, calc(100% - 10rem));
-    overflow-x: auto; // hide once synced
-    overflow-y: hidden;
+    overflow-x: hidden;
 
     .timestamp {
       padding: 3rem;
