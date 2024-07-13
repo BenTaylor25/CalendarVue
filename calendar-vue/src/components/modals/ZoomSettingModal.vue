@@ -2,18 +2,26 @@
 import { ref, Ref } from 'vue';
 
 import { MODAL_IDS } from '../../constants/modalConstants';
+import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';
+import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
+
+function updateZoom() {
+  setZoomOnCalendarHeader(zoomSettingValue.value);
+  setZoomOnCalendarDay(zoomSettingValue.value);
+}
+
 </script>
 
 <template>
   <div :id="MODAL_IDS.ZOOM_SETTINGS_MODAL">
     <h1>Zoom:</h1>
-    <input type="range" min="1" max="10" v-model="value" />
-    <p>{{ value }}</p>
+    <input type="range" min="1" max="20" v-model="zoomSettingValue" @input="updateZoom" />
+    <p>{{ zoomSettingValue }}</p>
   </div>
 </template>
 
 <script lang="ts">
-const value: Ref<number> = ref(3);
+const zoomSettingValue: Ref<number> = ref(3);
 </script>
 
 <style lang="scss">

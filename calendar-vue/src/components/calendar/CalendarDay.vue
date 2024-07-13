@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
+
 
 const times: string[] = [""];
 
 for (let i = 1; i <= 24; i++) {
   times.push(`${i}:00`);
 }
+
+onMounted(() => {
+  setZoomOnCalendarDay(DEFAULT_CALENDAR_ZOOM);
+});
 
 </script>
 
@@ -23,6 +30,31 @@ for (let i = 1; i <= 24; i++) {
 </template>
 
 <script lang="ts">
+
+export function setZoomOnCalendarDay(zoom: number) {
+  const calendarDayDivs = document.getElementsByClassName('calendar-day');
+
+  //#region Error Handling
+  if (calendarDayDivs.length === 0) {
+    console.error("Failed to find CalendarDay.");
+  }
+  //#endregion
+
+  for (const calendarDayDiv of calendarDayDivs) {
+    const timestampDivs = calendarDayDiv.getElementsByClassName('timestamp');
+
+    //#region Error Handling
+    if (timestampDivs.length === 0) {
+      console.error("No timestamps registered on CalendarDay.");
+    }
+    //#endregion
+
+    for (const timestampDiv of timestampDivs) {
+      (timestampDiv as HTMLDivElement).style.padding = `0 ${zoom}rem`;
+    }
+  }
+}
+
 export default {
   props: {
     weekday: String
@@ -56,7 +88,6 @@ export default {
     overflow-x: hidden;
 
     .timestamp {
-      padding: 3rem;
       width: 5rem;
 
       &:not(:last-child) {
