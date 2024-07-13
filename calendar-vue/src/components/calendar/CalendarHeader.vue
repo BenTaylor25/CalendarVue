@@ -21,7 +21,7 @@ function syncroniseScrollingWithDays() {
 
     //#region Error Handling
     if (timeMapDivs.length != 1) {
-      console.error("Found incorrect number of 'time-map's inside day.")
+      console.error("Found incorrect number of 'time-map's inside day.");
     }
     //#endregion
 
