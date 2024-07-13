@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import CalendarMain from '../components/calendar/CalendarMain.vue';
+import PageHeader from '../components/PageHeader.vue';
 </script>
 
 <template>
   <div id="main-page-container">
-
-    <div id="header">
-      <p>header</p>
-    </div>
-
+    <page-header />
     <calendar-main />
-
   </div>
 </template>
 
