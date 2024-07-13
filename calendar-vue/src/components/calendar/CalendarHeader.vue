@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
 const times: string[] = [""];
 
@@ -38,6 +40,20 @@ function syncroniseScrollingWithDays() {
   }
 }
 
+function scrollToMiddle() {
+  const headerTimeMapDiv = document.getElementById('time-bar') as HTMLDivElement;
+
+  const maxScrollLeft = headerTimeMapDiv.scrollWidth - headerTimeMapDiv.clientWidth;
+
+  const midPoint = maxScrollLeft / 2;
+  headerTimeMapDiv.scrollLeft = midPoint;
+}
+
+onMounted(() => {
+  setZoomOnCalendarHeader(DEFAULT_CALENDAR_ZOOM);
+  scrollToMiddle();
+});
+
 </script>
 
 <template>
@@ -57,6 +73,29 @@ function syncroniseScrollingWithDays() {
 
   </div>
 </template>
+
+<script lang="ts">
+
+export function setZoomOnCalendarHeader(zoom: number) {
+  const headerDiv = document.getElementById('calendar-header');
+  const timestampDivs = headerDiv?.getElementsByClassName('timestamp') ?? [];
+
+  //#region Error Handling
+  if (headerDiv === null) {
+    console.error("Failed to find CalendarHeader.");
+  }
+
+  if (timestampDivs.length === 0) {
+    console.error("No timestamps registered on CalendarHeader.");
+  }
+  //#endregion
+
+  for (const timestampDiv of timestampDivs) {
+    (timestampDiv as HTMLDivElement).style.padding = `0 ${zoom}rem`;
+  }
+}
+
+</script>
 
 <style scoped lang="scss">
 #calendar-header {
@@ -88,7 +127,6 @@ function syncroniseScrollingWithDays() {
 
     .timestamp {
       position: relative;
-      padding: 0 3rem;
       width: 5rem;
       transform: rotateX(180deg);
 
