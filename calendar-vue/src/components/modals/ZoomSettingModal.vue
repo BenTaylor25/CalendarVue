@@ -1,28 +1,42 @@
 <script setup lang="ts">
+import { ref, Ref } from 'vue';
+
 import { MODAL_IDS } from '../../constants/modalConstants';
 </script>
 
 <template>
   <div :id="MODAL_IDS.ZOOM_SETTINGS_MODAL">
-    test
+    <h1>Zoom:</h1>
+    <input type="range" min="1" max="10" v-model="value" />
+    <p>{{ value }}</p>
   </div>
 </template>
+
+<script lang="ts">
+const value: Ref<number> = ref(3);
+</script>
 
 <style lang="scss">
 
 #zoom-settings-modal {
   display: none;
   position: absolute;
-  top: 20%;
-  left: 20%;
-  bottom: 20%;
-  right: 20%;
+  flex-direction: column;
   background-color: bisque;
+  border-radius: 8px;
   justify-content: center;
   align-items: center;
+  top: 40%;
+  left: 40%;
+  bottom: 40%;
+  right: 40%;
 
   &.show {
     display: flex;
+  }
+
+  h1, p {
+    color: black;
   }
 }
 
