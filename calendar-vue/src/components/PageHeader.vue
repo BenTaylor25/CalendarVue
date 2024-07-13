@@ -1,8 +1,5 @@
 <script setup lang="ts">
-
-function openZoomSettingModal() {
-
-}
+import { showModalShadow } from '../modalController';
 
 </script>
 
@@ -11,7 +8,7 @@ function openZoomSettingModal() {
 
     <div id="settings">
 
-      <div id="zoom-setting" @click="openZoomSettingModal">
+      <div id="zoom-setting" @click="showModalShadow">
         <p>Zoom</p>
       </div>
 
