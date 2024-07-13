@@ -55,7 +55,7 @@ for (let i = 1; i <= 24; i++) {
 
     .timestamp {
       position: relative;
-      padding: 1rem;
+      padding: 0 3rem;
       width: 5rem;
 
       &:not(:last-child) {
