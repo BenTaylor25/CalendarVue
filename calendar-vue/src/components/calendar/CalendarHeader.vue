@@ -76,11 +76,13 @@ function syncroniseScrollingWithDays() {
     width: max(90%, calc(100% - 10rem));
     overflow-x: auto;
     scrollbar-width: thin;
+    transform: rotateX(180deg);   // Move scrollbar to the top.
 
     .timestamp {
       position: relative;
       padding: 0 3rem;
       width: 5rem;
+      transform: rotateX(180deg);
 
       &:not(:last-child) {
         border-right: 1px solid gold;
