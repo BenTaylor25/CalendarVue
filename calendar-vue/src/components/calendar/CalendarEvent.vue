@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
-import { CalendarEvent } from '../../models/CalendarEvent';
 
 onMounted(() => {
   setZoomOnCalendarEvents(DEFAULT_CALENDAR_ZOOM);
@@ -16,8 +15,6 @@ onMounted(() => {
 </template>
 
 <script lang="ts">
-
-const events: CalendarEvent[] = [];
 
 export function setZoomOnCalendarEvents(zoom: number) {
   const eventDivs = document.getElementsByClassName('calendar-event');
