@@ -2,6 +2,7 @@
 import { onMounted } from 'vue';
 import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
+import CalendarEvent from './CalendarEvent.vue';
 
 const times: string[] = [""];
 
@@ -24,7 +25,12 @@ onMounted(() => {
 
     <div class="time-map">
       <span v-for="_ in times" class="timestamp"></span>
+
+      <div class="event-holder">
+        <calendar-event />
+      </div>
     </div>
+    
 
   </div>
 </template>
@@ -83,6 +89,7 @@ export default {
   }
 
   .time-map {
+    position: relative;
     display: flex;
     width: max(90%, calc(100% - 10rem));
     overflow-x: hidden;
@@ -93,6 +100,12 @@ export default {
       &:not(:last-child) {
         border-right: 1px solid gold;
       }
+    }
+
+    .event-holder {
+      position: absolute;
+      width: 100%;
+      height: 100%
     }
   }
 }
