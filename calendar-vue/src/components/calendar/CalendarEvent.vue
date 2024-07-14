@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
+
+onMounted(() => {
+  setZoomOnCalendarEvents(DEFAULT_CALENDAR_ZOOM);
+});
 
 </script>
 
@@ -8,12 +14,31 @@
   </div>
 </template>
 
+<script lang="ts">
+
+export function setZoomOnCalendarEvents(zoom: number) {
+  const eventDivs = document.getElementsByClassName('calendar-event');
+
+  // TODO Error Handling
+
+  for (const eventDiv of eventDivs) {
+    let eventStartTime = 1;
+    let eventDuration = 1;
+
+    const leftOffset = eventStartTime * zoom * 2;
+    const width = eventDuration * zoom * 2;
+
+    (eventDiv as HTMLDivElement).style.left = `${leftOffset}rem`;
+    (eventDiv as HTMLDivElement).style.width = `${width}rem`;
+  }
+}
+
+</script>
+
 <style lang="scss">
 .calendar-event {
   position: absolute;
-  width: 10rem;
   height: 5rem;
-  margin-left: 50rem;
   background-color: lime;
 }
 </style>
