@@ -2,7 +2,11 @@
 import { onMounted } from 'vue';
 import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
-import { CalendarEvent } from '../../models/CalendarEvent';
+import CalendarEvent from './CalendarEvent.vue';
+
+import { useEventStore } from '../../stores/CalendarStore';
+
+const eventStore = useEventStore();
 
 const times: string[] = [""];
 
@@ -27,7 +31,7 @@ onMounted(() => {
       <span v-for="_ in times" class="timestamp"></span>
 
       <div class="event-holder">
-        <calendar-event v-for="_ of events" />
+        <calendar-event v-for="_ of eventStore.events" />
       </div>
     </div>
     
@@ -36,8 +40,6 @@ onMounted(() => {
 </template>
 
 <script lang="ts">
-
-const events: CalendarEvent[] = [];
 
 export function setZoomOnCalendarDay(zoom: number) {
   const calendarDayDivs = document.getElementsByClassName('calendar-day');

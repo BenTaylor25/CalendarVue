@@ -1,5 +1,5 @@
 
-export class CalendarEvent {
+export class CalendarEventModel {
     private _name: string;
     private _startTime: Date;
     private _endTime: Date;
