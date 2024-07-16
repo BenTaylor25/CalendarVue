@@ -2,6 +2,10 @@
 import { onMounted } from 'vue';
 import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
+import { useEventStore } from '../../stores/CalendarStore';
+
+const eventStore = useEventStore();
+
 onMounted(() => {
   setZoomOnCalendarEvents(DEFAULT_CALENDAR_ZOOM);
 });
@@ -22,10 +26,13 @@ export function setZoomOnCalendarEvents(zoom: number) {
   // TODO Error Handling
 
   for (const eventDiv of eventDivs) {
-    let eventStartTime = 1;
-    let eventDuration = 1;
 
-    const leftOffset = eventStartTime * zoom * 2;
+    const event = useEventStore().events[0];
+
+    const eventStartTime = event.startTime.getHours();
+    const eventDuration = event.endTime.getHours() - event.startTime.getHours();   // doesn't handle multi-day events
+
+    const leftOffset = eventStartTime * zoom * 2;   // FIX OFFSET CALCULATION
     const width = eventDuration * zoom * 2;
 
     (eventDiv as HTMLDivElement).style.left = `${leftOffset}rem`;

@@ -6,8 +6,8 @@ export const useEventStore = defineStore('events', {
         events: [
             new CalendarEventModel(
                 "test",
-                new Date(2024, 7, 16, 10, 0, 0),
-                new Date(2024, 7, 16, 11, 0, 0)
+                new Date(2024, 7, 16, 20, 0, 0, 0),
+                new Date(2024, 7, 16, 22, 0, 0, 0)
             )
         ] as CalendarEventModel[]
     })
