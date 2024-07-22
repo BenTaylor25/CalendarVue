@@ -7,8 +7,6 @@ import CalendarEvent from './CalendarEvent.vue';
 import { useEventStore } from '../../stores/CalendarStore';
 import { daysOfWeek } from './CalendarMain.vue';
 
-const eventStore = useEventStore();
-
 const times: string[] = [""];
 
 for (let i = 1; i <= 24; i++) {

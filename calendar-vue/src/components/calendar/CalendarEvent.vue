@@ -4,8 +4,6 @@ import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
 import { useEventStore } from '../../stores/CalendarStore';
 
-const eventStore = useEventStore();
-
 onMounted(() => {
   setZoomOnCalendarEvents(DEFAULT_CALENDAR_ZOOM);
 });
