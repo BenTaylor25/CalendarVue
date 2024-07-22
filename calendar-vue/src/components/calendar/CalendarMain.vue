@@ -2,15 +2,6 @@
 import CalendarHeader from './CalendarHeader.vue';
 import CalendarDay from './CalendarDay.vue';
 
-let daysOfWeek = [
-  "Mon",
-  "Tue",
-  "Wed",
-  "Thu",
-  "Fri",
-  "Sat",
-  "Sun"
-];
 </script>
 
 <template>
@@ -24,6 +15,18 @@ let daysOfWeek = [
     />
   </div>
 </template>
+
+<script lang="ts">
+export let daysOfWeek = [
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+  "Sat",
+  "Sun"
+];
+</script>
 
 <style scoped lang="scss">
 #calendar-main {

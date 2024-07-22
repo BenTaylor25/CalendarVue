@@ -5,6 +5,7 @@ import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 import CalendarEvent from './CalendarEvent.vue';
 
 import { useEventStore } from '../../stores/CalendarStore';
+import { daysOfWeek } from './CalendarMain.vue';
 
 const eventStore = useEventStore();
 
@@ -31,7 +32,7 @@ onMounted(() => {
       <span v-for="_ in times" class="timestamp"></span>
 
       <div class="event-holder">
-        <calendar-event v-for="_ of eventStore.events" />
+        <calendar-event v-for="_ of getTodaysEvents()" />
       </div>
     </div>
     
@@ -40,6 +41,27 @@ onMounted(() => {
 </template>
 
 <script lang="ts">
+export default {
+  props: {
+    weekday: String
+  },
+  methods: {
+    getTodaysEvents() {
+      // THIS FILTER IS WRONG; REQUIRES PROPER IMPLEMENTATION.
+      return useEventStore().events.filter(event => {
+        const isInvalid = !this.weekday ||
+          !daysOfWeek.includes(this.weekday);
+        if (isInvalid) {
+          return false;
+        }
+
+        const dayMatches = event.startTime.getDate() % 7 == daysOfWeek.indexOf(this.weekday);
+
+        return dayMatches;
+      });
+    }
+  }
+}
 
 export function setZoomOnCalendarDay(zoom: number) {
   const calendarDayDivs = document.getElementsByClassName('calendar-day');
@@ -62,12 +84,6 @@ export function setZoomOnCalendarDay(zoom: number) {
     for (const timestampDiv of timestampDivs) {
       (timestampDiv as HTMLDivElement).style.padding = `0 ${zoom}rem`;
     }
-  }
-}
-
-export default {
-  props: {
-    weekday: String
   }
 }
 </script>
