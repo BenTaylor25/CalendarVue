@@ -3,6 +3,7 @@ import { onMounted } from 'vue';
 import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
 import { useEventStore } from '../../stores/CalendarStore';
+import { CalendarEventModel } from '../../models/CalendarEventModel';
 
 onMounted(() => {
   setZoomOnCalendarEvents(DEFAULT_CALENDAR_ZOOM);
@@ -12,11 +13,16 @@ onMounted(() => {
 
 <template>
   <div class="calendar-event">
-    <p>test</p>
+    <p>{{calendarEventModel?.name}}</p>
   </div>
 </template>
 
 <script lang="ts">
+export default {
+  props: {
+    calendarEventModel: CalendarEventModel
+  }
+}
 
 export function setZoomOnCalendarEvents(zoom: number) {
   const eventDivs = document.getElementsByClassName('calendar-event');
@@ -45,5 +51,9 @@ export function setZoomOnCalendarEvents(zoom: number) {
   position: absolute;
   height: 5rem;
   background-color: lime;
+
+  p {
+    color: black;
+  }
 }
 </style>

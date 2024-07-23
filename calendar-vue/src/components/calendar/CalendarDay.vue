@@ -6,6 +6,7 @@ import CalendarEvent from './CalendarEvent.vue';
 
 import { useEventStore } from '../../stores/CalendarStore';
 import { daysOfWeek } from './CalendarMain.vue';
+import { CalendarEventModel } from '../../models/CalendarEventModel';
 
 const times: string[] = [""];
 
@@ -30,7 +31,9 @@ onMounted(() => {
       <span v-for="_ in times" class="timestamp"></span>
 
       <div class="event-holder">
-        <calendar-event v-for="_ of getTodaysEvents()" />
+        <calendar-event
+          v-for="calendarEventModel of getTodaysEvents()"
+          :calendarEventModel="calendarEventModel" />
       </div>
     </div>
     
@@ -44,9 +47,9 @@ export default {
     weekday: String
   },
   methods: {
-    getTodaysEvents() {
+    getTodaysEvents(): CalendarEventModel[] {
       // THIS FILTER IS WRONG; REQUIRES PROPER IMPLEMENTATION.
-      return useEventStore().events.filter(event => {
+      return (useEventStore().events as CalendarEventModel[]).filter(event => {
         const isInvalid = !this.weekday ||
           !daysOfWeek.includes(this.weekday);
         if (isInvalid) {
