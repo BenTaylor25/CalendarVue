@@ -36,10 +36,12 @@ export function setZoomOnCalendarEvents(zoom: number) {
     const eventStartTime = event.startTime.getHours();
     const eventDuration = event.endTime.getHours() - event.startTime.getHours();   // doesn't handle multi-day events
 
-    const leftOffset = eventStartTime * zoom * 2;   // FIX OFFSET CALCULATION
-    const width = eventDuration * zoom * 2;
+    const leftOffsetRem = eventStartTime * zoom * 2;
+    const leftOffsetPx = eventStartTime;
 
-    (eventDiv as HTMLDivElement).style.left = `${leftOffset}rem`;
+    const width = eventDuration * zoom;
+
+    (eventDiv as HTMLDivElement).style.left = `calc(${leftOffsetRem}rem + ${leftOffsetPx}px)`;
     (eventDiv as HTMLDivElement).style.width = `${width}rem`;
   }
 }
