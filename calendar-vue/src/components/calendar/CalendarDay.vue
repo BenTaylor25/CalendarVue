@@ -7,6 +7,7 @@ import CalendarEvent from './CalendarEvent.vue';
 import { useEventStore } from '../../stores/CalendarStore';
 import { daysOfWeek } from './CalendarMain.vue';
 import { CalendarEventModel } from '../../models/CalendarEventModel';
+import { calcEventStyle } from '../../helpers/DynCalendarEventOffset';
 
 const times: string[] = [""];
 
@@ -33,7 +34,9 @@ onMounted(() => {
       <div class="event-holder">
         <calendar-event
           v-for="calendarEventModel of getTodaysEvents()"
-          :calendarEventModel="calendarEventModel" />
+          :calendarEventModel="calendarEventModel"
+          :style="calcEventStyle(calendarEventModel)"
+        />
       </div>
     </div>
     

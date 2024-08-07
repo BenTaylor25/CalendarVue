@@ -4,13 +4,11 @@ import { ref, Ref } from 'vue';
 import { MODAL_IDS } from '../../constants/modalConstants';
 import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';
 import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
-import { setZoomOnCalendarEvents } from '../calendar/CalendarEvent.vue';
 import { DEFAULT_CALENDAR_ZOOM, MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
 function updateZoom() {
   setZoomOnCalendarHeader(zoomSettingValue.value);
   setZoomOnCalendarDay(zoomSettingValue.value);
-  setZoomOnCalendarEvents(zoomSettingValue.value);
 }
 
 </script>
