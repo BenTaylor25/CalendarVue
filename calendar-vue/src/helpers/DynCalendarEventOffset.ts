@@ -1,3 +1,5 @@
+import { StyleValue } from "vue";
+
 import { CalendarEventModel } from "../models/CalendarEventModel";
 import { useZoomStore } from "../stores/DisplayZoomStore";
 
@@ -23,9 +25,9 @@ export function calcEventWidth(event: CalendarEventModel): string {
     return `calc(${widthRem}rem + ${widthPx}px)`;
 }
 
-export function calcEventStyle(event: CalendarEventModel): object {
+export function calcEventStyle(event: CalendarEventModel): StyleValue {
     return {
         left: calcEventLeftAlignment(event),
         width: calcEventWidth(event)
-    };
+    } as StyleValue;
 }

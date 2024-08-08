@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
+import { useZoomStore } from '../../stores/DisplayZoomStore';
 
 const times: string[] = [""];
 
@@ -50,7 +50,7 @@ function scrollToMiddle() {
 }
 
 onMounted(() => {
-  setZoomOnCalendarHeader(DEFAULT_CALENDAR_ZOOM);
+  setZoomOnCalendarHeader();
   scrollToMiddle();
 });
 
@@ -76,7 +76,9 @@ onMounted(() => {
 
 <script lang="ts">
 
-export function setZoomOnCalendarHeader(zoom: number) {
+export function setZoomOnCalendarHeader() {
+  const zoom = useZoomStore().zoom;
+
   const headerDiv = document.getElementById('calendar-header');
   const timestampDivs = headerDiv?.getElementsByClassName('timestamp') ?? [];
 

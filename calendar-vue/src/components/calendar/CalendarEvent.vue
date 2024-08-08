@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { CalendarEventModel } from '../../models/CalendarEventModel';
-
+import { calcEventStyle } from '../../helpers/DynCalendarEventOffset';
 </script>
 
 <template>
   <div
     class="calendar-event"
-    :style="style"
+    :style="calcEventStyle($props.calendarEventModel)"
   >
     <p>{{calendarEventModel.name}}</p>
   </div>
@@ -18,10 +18,6 @@ export default {
     calendarEventModel: {
       type: CalendarEventModel,
       required: true
-    },
-    style: {
-      type: Object,
-      requied: true
     }
   }
 }

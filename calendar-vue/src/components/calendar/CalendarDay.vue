@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
 import CalendarEvent from './CalendarEvent.vue';
 
 import { useEventStore } from '../../stores/CalendarStore';
 import { daysOfWeek } from './CalendarMain.vue';
 import { CalendarEventModel } from '../../models/CalendarEventModel';
-import { calcEventStyle } from '../../helpers/DynCalendarEventOffset';
+import { useZoomStore } from '../../stores/DisplayZoomStore';
 
 const times: string[] = [""];
 
@@ -16,7 +15,7 @@ for (let i = 1; i <= 24; i++) {
 }
 
 onMounted(() => {
-  setZoomOnCalendarDay(DEFAULT_CALENDAR_ZOOM);
+  setZoomOnCalendarDay();
 });
 
 </script>
@@ -35,7 +34,6 @@ onMounted(() => {
         <calendar-event
           v-for="calendarEventModel of getTodaysEvents()"
           :calendarEventModel="calendarEventModel"
-          :style="calcEventStyle(calendarEventModel)"
         />
       </div>
     </div>
@@ -67,7 +65,9 @@ export default {
   }
 }
 
-export function setZoomOnCalendarDay(zoom: number) {
+export function setZoomOnCalendarDay() {
+  const zoom = useZoomStore().zoom;
+
   const calendarDayDivs = document.getElementsByClassName('calendar-day');
 
   //#region Error Handling
