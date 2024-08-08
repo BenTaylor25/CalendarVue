@@ -20,6 +20,7 @@ function updateZoom() {
     <input
       type="range"
       :min="MIN_CALENDAR_ZOOM"
+      step="0.125"
       :max="MAX_CALENDAR_ZOOM"
       v-model="useZoomStore().zoom"
       @input="updateZoom" />
