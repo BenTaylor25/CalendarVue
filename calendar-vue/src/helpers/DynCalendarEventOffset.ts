@@ -51,10 +51,6 @@ function smallZoomScaleMultiplier(): number {
         multiplier = actual / expected;
     }
 
-    console.log(`actual ${actual}`);
-    console.log(`expected ${expected}`);
-    console.log(`multiplier ${multiplier}`);
-
     return multiplier
 }
 
