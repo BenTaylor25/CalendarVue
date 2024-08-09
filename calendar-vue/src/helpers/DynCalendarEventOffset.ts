@@ -2,44 +2,60 @@ import { StyleValue } from "vue";
 
 import { CalendarEventModel } from "../models/CalendarEventModel";
 import { useZoomStore } from "../stores/DisplayZoomStore";
+import { remToPx } from "./htmlUnits";
 
-function calcTimestapFullscreenExpansion(): number {
-    const timestamps = document.getElementsByClassName('timestamp');
-
-    if (timestamps.length === 0) {
-        console.error('no timestamps found');
-        return 0;
-    }
-
-    const timestamp = timestamps[0] as HTMLDivElement;
-
-    console.log(timestamp.getBoundingClientRect().width)
-
-    console.log("INDIVIDUAL TIMESTAMP: " + window.getComputedStyle(timestamp).width);
-    return Number.parseFloat(window.getComputedStyle(timestamp).width);
-}
-
-function expectedTimemapWidth(): number {
+/**
+ * Using the size of each hour, calculate how
+ * wide the calendar time area should be.
+ *
+ * The actual width will usually be smaller,
+ * but that's okay because it'll have a
+ * horizontal scroll bar.
+ * In the case that the actual width is
+ * greater than the expected width
+ * (i.e. when the zoom is very small)
+ * the Calendar Events will need to be scaled
+ * accordingly because the time bar is set
+ * to stretch to size if it's too small.
+ */
+function expectedTimeBarWidthPx(): number {
     const numberOfBoxes = 25;
+    const zoom = useZoomStore().zoom;
 
-    const eachTimestampGrewBy = calcTimestapFullscreenExpansion();
-
-    const totalExpansion = eachTimestampGrewBy * numberOfBoxes;
-
-    return actualTimemapWidth() - totalExpansion;
+    const expectedWidthPx = numberOfBoxes * 2 * zoom * remToPx();
+    return expectedWidthPx
 }
 
-function actualTimemapWidth(): number {
-    const timemaps = document.getElementsByClassName('time-map');
+/**
+ * Look at the time bar to see what this width
+ * actually is.
+ */
+function actualTimeBarWidthPx(): number {
+    const timeBar = document.getElementById('time-bar');
 
-    if (timemaps.length === 0) {
-        console.error('no timemaps found');
+    if (timeBar) {
+        return timeBar.offsetWidth;
+    } else {
+        console.error("Couldn't find time-bar");
         return 0;
     }
+}
 
-    const timemap = timemaps[0] as HTMLDivElement;
+function smallZoomScaleMultiplier(): number {
+    const actual = actualTimeBarWidthPx();
+    const expected = expectedTimeBarWidthPx();
 
-    return timemap.scrollWidth;
+    let multiplier = 1;
+
+    if (actual > expected) {
+        multiplier = actual / expected;
+    }
+
+    console.log(`actual ${actual}`);
+    console.log(`expected ${expected}`);
+    console.log(`multiplier ${multiplier}`);
+
+    return multiplier
 }
 
 export function calcEventLeftAlignment(event: CalendarEventModel): string {
@@ -47,13 +63,12 @@ export function calcEventLeftAlignment(event: CalendarEventModel): string {
 
     const zoom = useZoomStore().zoom;
 
-    console.log("actual: "+ actualTimemapWidth())
-    console.log("expected: "+ expectedTimemapWidth())
-    const lowZoomMultiplier = actualTimemapWidth() / expectedTimemapWidth();
-    console.log("multiplier: "+ lowZoomMultiplier)
+    const leftOffsetRem = eventStartTime * zoom * 2 * smallZoomScaleMultiplier();
+    let leftOffsetPx = eventStartTime;
 
-    const leftOffsetRem = eventStartTime * zoom * 2 * lowZoomMultiplier;
-    const leftOffsetPx = eventStartTime;
+    if (smallZoomScaleMultiplier() !== 1) {
+        leftOffsetPx = 0;
+    }
 
     return `calc(${leftOffsetRem}rem + ${leftOffsetPx}px)`;
 }
@@ -63,8 +78,12 @@ export function calcEventWidth(event: CalendarEventModel): string {
 
     const zoom = useZoomStore().zoom;
 
-    const widthRem = eventDuration * zoom * 2;
-    const widthPx = eventDuration;
+    const widthRem = eventDuration * zoom * 2 * smallZoomScaleMultiplier();
+    let widthPx = eventDuration;
+
+    if (smallZoomScaleMultiplier() !== 1) {
+        widthPx = 0;
+    }
 
     return `calc(${widthRem}rem + ${widthPx}px)`;
 }
