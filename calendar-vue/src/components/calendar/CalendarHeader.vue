@@ -132,7 +132,7 @@ export function setZoomOnCalendarHeader() {
       width: 5rem;
       transform: rotateX(180deg);
 
-      &:not(:last-child) {
+      &:not(:last-of-type) {
         border-right: 1px solid gold;
       }
 

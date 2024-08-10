@@ -121,7 +121,7 @@ export function setZoomOnCalendarDay() {
     .timestamp {
       width: 5rem;
 
-      &:not(:last-child) {
+      &:not(:last-of-type) {
         border-right: 1px solid gold;
       }
     }
