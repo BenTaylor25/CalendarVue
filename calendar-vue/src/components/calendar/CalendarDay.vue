@@ -2,10 +2,9 @@
 import { onMounted } from 'vue';
 
 import CalendarEvent from './CalendarEvent.vue';
-
-import { useEventStore } from '../../stores/CalendarStore';
 import { daysOfWeek } from './CalendarMain.vue';
 import { CalendarEventModel } from '../../models/CalendarEventModel';
+import { useEventStore } from '../../stores/CalendarStore';
 import { useZoomStore } from '../../stores/DisplayZoomStore';
 
 const times: string[] = [""];
