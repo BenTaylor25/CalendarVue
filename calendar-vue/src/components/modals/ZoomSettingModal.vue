@@ -4,6 +4,7 @@ import { MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsCo
 import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';
 import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
 import { useZoomStore } from '../../stores/DisplayZoomStore';
+import { hideZoomSettingsModal } from '../../modalController';
 
 function updateZoom() {
   setZoomOnCalendarHeader();
@@ -12,20 +13,31 @@ function updateZoom() {
 </script>
 
 <template>
-  <div :id="MODAL_IDS.ZOOM_SETTINGS_MODAL">
+  <div
+    :id="MODAL_IDS.ZOOM_SETTINGS_MODAL"
+    class="modal-shadow"
+    @click="hideZoomSettingsModal()"
+  >
 
-    <h1>Zoom:</h1>
+    <div
+      id="zoom-settings-modal-content"
+      @click.stop
+    >
 
-    <input
-      type="range"
-      :min="MIN_CALENDAR_ZOOM"
-      step="0.125"
-      :max="MAX_CALENDAR_ZOOM"
-      v-model="useZoomStore().zoom"
-      @input="updateZoom" />
+      <h1>Zoom:</h1>
 
-    <p>{{ useZoomStore().zoom }}</p>
+      <input
+        type="range"
+        :min="MIN_CALENDAR_ZOOM"
+        :max="MAX_CALENDAR_ZOOM"
+        step="0.125"
+        v-model="useZoomStore().zoom"
+        @input="updateZoom"
+      />
 
+      <p>{{ useZoomStore().zoom }}</p>
+
+    </div>
   </div>
 </template>
 
@@ -34,8 +46,7 @@ function updateZoom() {
 
 <style lang="scss">
 
-#zoom-settings-modal {
-  display: none;
+#zoom-settings-modal-content {
   position: absolute;
   flex-direction: column;
   background-color: bisque;
@@ -46,6 +57,7 @@ function updateZoom() {
   left: 40%;
   bottom: 40%;
   right: 40%;
+  min-height: 10rem;
 
   &.show {
     display: flex;
