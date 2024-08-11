@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import { MODAL_IDS } from '../../constants/modalConstants';
+import { MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';
 import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
-import { MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 import { useZoomStore } from '../../stores/DisplayZoomStore';
 
 function updateZoom() {
   setZoomOnCalendarHeader();
   setZoomOnCalendarDay();
 }
-
 </script>
 
 <template>
