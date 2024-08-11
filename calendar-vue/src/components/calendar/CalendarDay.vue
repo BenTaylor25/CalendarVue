@@ -29,7 +29,7 @@ onMounted(() => {
     <div class="time-map">
       <span v-for="_ in times" class="timestamp"></span>
 
-      <div class="event-holder">
+      <div class="event-holder" @click="createNewEventClick">
         <calendar-event
           v-for="calendarEventModel of getTodaysEvents()"
           :calendarEventModel="calendarEventModel"
@@ -87,6 +87,10 @@ export function setZoomOnCalendarDay() {
       (timestampDiv as HTMLDivElement).style.padding = `0 ${zoom}rem`;
     }
   }
+}
+
+function createNewEventClick() {
+  // TODO: Open New Event Modal.
 }
 </script>
 
