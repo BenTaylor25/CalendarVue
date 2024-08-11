@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+
 import { CalendarEventModel } from "../models/CalendarEventModel";
 
 export const useEventStore = defineStore('events', {
