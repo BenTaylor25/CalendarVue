@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
-
 import { MODAL_IDS } from '../../constants/modalConstants';
+import { MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';
 import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
-import { DEFAULT_CALENDAR_ZOOM, MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
+import { useZoomStore } from '../../stores/DisplayZoomStore';
 
 function updateZoom() {
-  setZoomOnCalendarHeader(zoomSettingValue.value);
-  setZoomOnCalendarDay(zoomSettingValue.value);
+  setZoomOnCalendarHeader();
+  setZoomOnCalendarDay();
 }
-
 </script>
 
 <template>
@@ -21,17 +19,17 @@ function updateZoom() {
     <input
       type="range"
       :min="MIN_CALENDAR_ZOOM"
+      step="0.125"
       :max="MAX_CALENDAR_ZOOM"
-      v-model="zoomSettingValue"
+      v-model="useZoomStore().zoom"
       @input="updateZoom" />
 
-    <p>{{ zoomSettingValue }}</p>
+    <p>{{ useZoomStore().zoom }}</p>
 
   </div>
 </template>
 
 <script lang="ts">
-const zoomSettingValue: Ref<number> = ref(DEFAULT_CALENDAR_ZOOM);
 </script>
 
 <style lang="scss">

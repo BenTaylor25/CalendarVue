@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { DEFAULT_CALENDAR_ZOOM } from '../../constants/settingsConstants';
 
+import CalendarEvent from './CalendarEvent.vue';
+import { daysOfWeek } from './CalendarMain.vue';
+import { CalendarEventModel } from '../../models/CalendarEventModel';
+import { useEventStore } from '../../stores/CalendarStore';
+import { useZoomStore } from '../../stores/DisplayZoomStore';
 
 const times: string[] = [""];
 
@@ -10,7 +14,7 @@ for (let i = 1; i <= 24; i++) {
 }
 
 onMounted(() => {
-  setZoomOnCalendarDay(DEFAULT_CALENDAR_ZOOM);
+  setZoomOnCalendarDay();
 });
 
 </script>
@@ -24,14 +28,44 @@ onMounted(() => {
 
     <div class="time-map">
       <span v-for="_ in times" class="timestamp"></span>
+
+      <div class="event-holder">
+        <calendar-event
+          v-for="calendarEventModel of getTodaysEvents()"
+          :calendarEventModel="calendarEventModel"
+        />
+      </div>
     </div>
 
   </div>
 </template>
 
 <script lang="ts">
+export default {
+  props: {
+    weekday: String
+  },
+  methods: {
+    getTodaysEvents(): CalendarEventModel[] {
+      // THIS FILTER IS WRONG; REQUIRES PROPER IMPLEMENTATION.
+      return (useEventStore().events as CalendarEventModel[]).filter(event => {
+        const isInvalid = !this.weekday ||
+          !daysOfWeek.includes(this.weekday);
+        if (isInvalid) {
+          return false;
+        }
 
-export function setZoomOnCalendarDay(zoom: number) {
+        const dayMatches = event.startTime.getDate() % 7 == daysOfWeek.indexOf(this.weekday);
+
+        return dayMatches;
+      });
+    }
+  }
+}
+
+export function setZoomOnCalendarDay() {
+  const zoom = useZoomStore().zoom;
+
   const calendarDayDivs = document.getElementsByClassName('calendar-day');
 
   //#region Error Handling
@@ -52,12 +86,6 @@ export function setZoomOnCalendarDay(zoom: number) {
     for (const timestampDiv of timestampDivs) {
       (timestampDiv as HTMLDivElement).style.padding = `0 ${zoom}rem`;
     }
-  }
-}
-
-export default {
-  props: {
-    weekday: String
   }
 }
 </script>
@@ -83,6 +111,7 @@ export default {
   }
 
   .time-map {
+    position: relative;
     display: flex;
     width: max(90%, calc(100% - 10rem));
     overflow-x: hidden;
@@ -90,9 +119,15 @@ export default {
     .timestamp {
       width: 5rem;
 
-      &:not(:last-child) {
+      &:not(:last-of-type) {
         border-right: 1px solid gold;
       }
+    }
+
+    .event-holder {
+      position: absolute;
+      width: 100%;
+      height: 100%
     }
   }
 }
