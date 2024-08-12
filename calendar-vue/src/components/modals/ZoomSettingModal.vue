@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { MODAL_IDS } from '../../constants/modalConstants';
 import { MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
-import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';
-import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
-import { useZoomStore } from '../../stores/DisplayZoomStore';
+import ModalShadow from './ModalShadow.vue';
 import { hideZoomSettingsModal } from '../../modalController';
+import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
+import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';
+import { useZoomStore } from '../../stores/DisplayZoomStore';
 
 function updateZoom() {
   setZoomOnCalendarHeader();
@@ -13,9 +14,8 @@ function updateZoom() {
 </script>
 
 <template>
-  <div
+  <modal-shadow
     :id="MODAL_IDS.ZOOM_SETTINGS_MODAL"
-    class="modal-shadow"
     @click="hideZoomSettingsModal()"
   >
 
@@ -38,7 +38,7 @@ function updateZoom() {
       <p>{{ useZoomStore().zoom }}</p>
 
     </div>
-  </div>
+  </modal-shadow>
 </template>
 
 <script lang="ts">
