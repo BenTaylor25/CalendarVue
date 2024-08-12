@@ -30,6 +30,24 @@ export function hideAllModals() {
     }
 }
 
-// Zoom Settings
-export const showZoomSettingsModal = () => { showElementWithId(MODAL_IDS.ZOOM_SETTINGS_MODAL); }
-export const hideZoomSettingsModal = () => { hideElementWithId(MODAL_IDS.ZOOM_SETTINGS_MODAL); }
+
+// INDIVIDUAL MODALS
+// -----------------
+
+// Zoom Settings.
+export const showZoomSettingsModal = () => {
+    showElementWithId(MODAL_IDS.ZOOM_SETTINGS_MODAL);
+}
+
+export const hideZoomSettingsModal = () => {
+    hideElementWithId(MODAL_IDS.ZOOM_SETTINGS_MODAL);
+}
+
+// New Event.
+export const showNewEventModal = () => {
+    showElementWithId(MODAL_IDS.NEW_EVENT_MODAL);
+}
+
+export const hideNewEventModal = () => {
+    hideElementWithId(MODAL_IDS.NEW_EVENT_MODAL);
+}

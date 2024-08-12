@@ -2,6 +2,7 @@
 import MainPage from './pages/MainPage.vue';
 
 import ZoomSettingModal from './components/modals/ZoomSettingModal.vue';
+import NewEventModal from './components/modals/NewEventModal.vue';
 </script>
 
 <template>
@@ -16,6 +17,7 @@ import ZoomSettingModal from './components/modals/ZoomSettingModal.vue';
     for a project of this size.
   -->
   <zoom-setting-modal />
+  <new-event-modal />
 
 </template>
 
