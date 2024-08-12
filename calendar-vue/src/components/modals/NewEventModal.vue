@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
 import { hideNewEventModal } from '../../modalController.ts';
+import ModalShadow from './ModalShadow.vue';
 </script>
 
 <template>
-  <div
+  <modal-shadow
     :id="MODAL_IDS.NEW_EVENT_MODAL"
-    class="modal-shadow"
     @click="hideNewEventModal()"
   >
 
@@ -21,7 +21,7 @@ import { hideNewEventModal } from '../../modalController.ts';
 
     </div>
 
-  </div>
+  </modal-shadow>
 </template>
 
 <script lang="ts">
