@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
 import { hideNewEventModal } from '../../modalController.ts';
 import ModalShadow from './ModalShadow.vue';
@@ -17,7 +19,17 @@ import ModalShadow from './ModalShadow.vue';
 
       <h1>New Event</h1>
 
-      <p>foo</p>
+      <form @submit.prevent="createNewEventIfValid()">
+
+        <p>Event Name</p>
+        <input
+          type="text"
+          v-model="newEventName"
+        />
+
+        <button type="submit">Submit</button>
+
+      </form>
 
     </div>
 
@@ -25,6 +37,35 @@ import ModalShadow from './ModalShadow.vue';
 </template>
 
 <script lang="ts">
+
+let newEventName = ref('');
+
+function newEventFormIsValid(): boolean {
+  const nameIsValid =
+    newEventName !== undefined &&
+    newEventName.value !== '';
+
+  const eventIsValid =
+    nameIsValid;
+
+  return eventIsValid;
+}
+
+function createNewEventIfValid() {
+  if (!newEventFormIsValid()) {
+    // Display Error.
+    return;
+  }
+
+  console.log(newEventName.value);
+  // TODO: Create new event in store.
+  clearForm();
+}
+
+function clearForm() {
+  newEventName.value = '';
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -36,10 +77,10 @@ import ModalShadow from './ModalShadow.vue';
   border-radius: 8px;
   justify-content: center;
   align-items: center;
-  top: 40%;
-  left: 40%;
-  bottom: 40%;
-  right: 40%;
+  top: 20%;
+  left: 30%;
+  bottom: 20%;
+  right: 30%;
   min-height: 10rem;
 
   &.show {
@@ -48,6 +89,21 @@ import ModalShadow from './ModalShadow.vue';
 
   h1, p {
     color: black;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    p {
+      text-align: left;
+      margin-bottom: 0;
+    }
+
+    input {
+      margin-bottom: 1rem;
+    }
   }
 }
 
