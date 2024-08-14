@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
 import { hideNewEventModal } from '../../modalController.ts';
 import ModalShadow from './ModalShadow.vue';
+import { newEventFormIsValid } from '../../validation/newEventFormValidation.ts';
 </script>
 
 <template>
@@ -55,19 +56,12 @@ const newEventName = ref('');
 const newEventStartDateTime = ref('');
 const newEventEndDateTime = ref('');
 
-function newEventFormIsValid(): boolean {
-  const nameIsValid =
-    newEventName !== undefined &&
-    newEventName.value !== '';
-
-  const eventIsValid =
-    nameIsValid;
-
-  return eventIsValid;
-}
-
 function createNewEventIfValid() {
-  if (!newEventFormIsValid()) {
+  if (!newEventFormIsValid(
+    newEventName.value,
+    newEventStartDateTime.value,
+    newEventEndDateTime.value
+  )) {
     // Display Error.
     return;
   }
@@ -79,6 +73,8 @@ function createNewEventIfValid() {
 
 function clearForm() {
   newEventName.value = '';
+  newEventStartDateTime.value = '';
+  newEventEndDateTime.value = '';
 }
 
 </script>
