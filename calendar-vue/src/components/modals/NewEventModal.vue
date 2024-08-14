@@ -27,6 +27,19 @@ import ModalShadow from './ModalShadow.vue';
           v-model="newEventName"
         />
 
+        <!-- TODO: p should be label -->
+        <p>Start Date and Time</p>
+        <input
+          type="datetime-local"
+          v-model="newEventStartDateTime"
+        />
+
+        <p>End Date and Time</p>
+        <input
+          type="datetime-local"
+          v-model="newEventEndDateTime"
+        />
+
         <button type="submit">Submit</button>
 
       </form>
@@ -38,7 +51,9 @@ import ModalShadow from './ModalShadow.vue';
 
 <script lang="ts">
 
-let newEventName = ref('');
+const newEventName = ref('');
+const newEventStartDateTime = ref('');
+const newEventEndDateTime = ref('');
 
 function newEventFormIsValid(): boolean {
   const nameIsValid =
