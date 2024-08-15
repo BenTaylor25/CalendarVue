@@ -4,7 +4,9 @@ import { ref } from 'vue';
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
 import { hideNewEventModal } from '../../modalController.ts';
 import ModalShadow from './ModalShadow.vue';
-import { newEventFormIsValid } from '../../validation/newEventFormValidation.ts';
+import { dateFromFormatString, newEventFormIsValid } from '../../validation/newEventFormValidation.ts';
+import { useEventStore } from '../../stores/CalendarStore.ts';
+import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
 </script>
 
 <template>
@@ -32,13 +34,13 @@ import { newEventFormIsValid } from '../../validation/newEventFormValidation.ts'
         <p>Start Date and Time</p>
         <input
           type="datetime-local"
-          v-model="newEventStartDateTime"
+          v-model="newEventStartDateTimeStr"
         />
 
         <p>End Date and Time</p>
         <input
           type="datetime-local"
-          v-model="newEventEndDateTime"
+          v-model="newEventEndDateTimeStr"
         />
 
         <button type="submit">Submit</button>
@@ -53,28 +55,45 @@ import { newEventFormIsValid } from '../../validation/newEventFormValidation.ts'
 <script lang="ts">
 
 const newEventName = ref('');
-const newEventStartDateTime = ref('');
-const newEventEndDateTime = ref('');
+const newEventStartDateTimeStr = ref('');
+const newEventEndDateTimeStr = ref('');
 
 function createNewEventIfValid() {
   if (!newEventFormIsValid(
     newEventName.value,
-    newEventStartDateTime.value,
-    newEventEndDateTime.value
+    newEventStartDateTimeStr.value,
+    newEventEndDateTimeStr.value
   )) {
     // Display Error.
     return;
   }
 
-  console.log(newEventName.value);
-  // TODO: Create new event in store.
+  const startTime = dateFromFormatString(newEventStartDateTimeStr.value);
+  const endTime = dateFromFormatString(newEventEndDateTimeStr.value);
+
+  //#region Error Handling
+  if (startTime === null || endTime == null) {
+    console.error("Null start or end time passed new event form validation.")
+    console.info(`startTime: '${startTime}'.`);
+    console.info(`endTime: '${endTime}'.`);
+    return;
+  }
+  //#endregion
+
+  const eventStore = useEventStore()
+  eventStore.addEvent(new CalendarEventModel(
+    newEventName.value,
+    startTime,
+    endTime
+  ));
+
   clearForm();
 }
 
 function clearForm() {
   newEventName.value = '';
-  newEventStartDateTime.value = '';
-  newEventEndDateTime.value = '';
+  newEventStartDateTimeStr.value = '';
+  newEventEndDateTimeStr.value = '';
 }
 
 </script>

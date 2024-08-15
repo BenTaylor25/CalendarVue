@@ -9,17 +9,13 @@ export function newEventFormIsValid(
         name !== undefined &&
         name !== '';
 
-    // Timestamps will be NaN if timeStr is invalid.
-    const startTimeTimestamp = Date.parse(startTimeStr);
-    const endTimeTimestamp = Date.parse(endTimeStr);
+    const startTime = dateFromFormatString(startTimeStr);
+    const endTime = dateFromFormatString(endTimeStr);
 
     const startAndEndDateTimesAreValid =
-        !isNaN(startTimeTimestamp) &&
-        !isNaN(endTimeTimestamp) &&
-        startTimeBeforeEndTime(
-            new Date(startTimeTimestamp),
-            new Date(endTimeTimestamp)
-        );
+        startTime !== null &&
+        endTime !== null &&
+        startTime < endTime;
 
     const eventIsValid =
         nameIsValid &&
@@ -28,9 +24,13 @@ export function newEventFormIsValid(
     return eventIsValid;
 }
 
-function startTimeBeforeEndTime(
-    startTime: Date,
-    endTime: Date
-): boolean {
-    return startTime < endTime;
+export function dateFromFormatString(formatStr: string): Date | null {
+    const timestamp = Date.parse(formatStr);
+
+    // Timestamps will be NaN if timeStr is invalid.
+    if (isNaN(timestamp)) {
+        return null;
+    }
+
+    return new Date(timestamp);
 }
