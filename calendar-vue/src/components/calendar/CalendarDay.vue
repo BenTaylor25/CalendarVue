@@ -34,6 +34,7 @@ onMounted(() => {
         <calendar-event
           v-for="calendarEventModel of getTodaysEvents()"
           :calendarEventModel="calendarEventModel"
+          @click.stop
         />
       </div>
     </div>
