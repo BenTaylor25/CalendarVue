@@ -3,6 +3,7 @@ import MainPage from './pages/MainPage.vue';
 
 import ZoomSettingModal from './components/modals/ZoomSettingModal.vue';
 import NewEventModal from './components/modals/NewEventModal.vue';
+import { hideAllModals } from './modalController';
 </script>
 
 <template>
@@ -20,6 +21,15 @@ import NewEventModal from './components/modals/NewEventModal.vue';
   <new-event-modal />
 
 </template>
+
+<script lang="ts">
+document.querySelector('body')
+  ?.addEventListener('keyup', (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      hideAllModals();
+    }
+  });
+</script>
 
 <style scoped lang="scss">
 
