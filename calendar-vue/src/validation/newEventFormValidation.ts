@@ -1,9 +1,14 @@
 
+export type NewEventFormValidationResult = {
+    success: boolean,
+    errorMessage: string
+}
+
 export function newEventFormIsValid(
     name: string,
     startTimeStr: string,
     endTimeStr: string
-): boolean {
+): NewEventFormValidationResult {
 
     const nameIsValid =
         name !== undefined &&
@@ -21,7 +26,15 @@ export function newEventFormIsValid(
         nameIsValid &&
         startAndEndDateTimesAreValid;
 
-    return eventIsValid;
+    return {
+        success: eventIsValid,
+        errorMessage: generateErrorMessage(
+            eventIsValid,
+            nameIsValid,
+            startTime,
+            endTime
+        )
+    };
 }
 
 export function dateFromFormatString(formatStr: string): Date | null {
@@ -33,4 +46,35 @@ export function dateFromFormatString(formatStr: string): Date | null {
     }
 
     return new Date(timestamp);
+}
+
+function generateErrorMessage(
+    eventIsValid: boolean,
+    nameIsValid: boolean,
+    startTime: Date | null,
+    endTime: Date | null
+): string {
+    if (eventIsValid) {
+        return '';
+    }
+
+    let errorMessage = '';
+
+    if (!nameIsValid) {
+        errorMessage += 'Name invalid.\n';
+    }
+
+    if (!startTime) {
+        errorMessage += 'Start time invalid.\n';
+    }
+
+    if (!endTime) {
+        errorMessage += 'End time invalid.\n';
+    }
+
+    if (startTime && endTime && startTime >= endTime) {
+        errorMessage += 'End time is before start time.\n';
+    }
+
+    return errorMessage;
 }

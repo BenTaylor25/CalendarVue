@@ -47,6 +47,8 @@ import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
 
       </form>
 
+      <p id="form-error-message">{{ formErrorMessage }}</p>
+
     </div>
 
   </modal-shadow>
@@ -58,13 +60,19 @@ const newEventName = ref('');
 const newEventStartDateTimeStr = ref('');
 const newEventEndDateTimeStr = ref('');
 
+let formErrorMessage = ref('');
+
 function createNewEventIfValid() {
-  if (!newEventFormIsValid(
+
+  const result = newEventFormIsValid(
     newEventName.value,
     newEventStartDateTimeStr.value,
     newEventEndDateTimeStr.value
-  )) {
-    // Display Error.
+  );
+
+  if (!result.success) {
+    formErrorMessage.value = result.errorMessage;
+    showFormErrorMessage();
     return;
   }
 
@@ -94,6 +102,23 @@ function clearForm() {
   newEventName.value = '';
   newEventStartDateTimeStr.value = '';
   newEventEndDateTimeStr.value = '';
+  hideFormErrorMessage();
+}
+
+function showFormErrorMessage() {
+  const formErrorMessageDOM = document.getElementById('form-error-message');
+
+  if (formErrorMessageDOM) {
+    formErrorMessageDOM.classList.add('show');
+  }
+}
+
+function hideFormErrorMessage() {
+const formErrorMessageDOM = document.getElementById('form-error-message');
+
+  if (formErrorMessageDOM) {
+    formErrorMessageDOM.classList.remove('show');
+  }
 }
 
 </script>
@@ -133,6 +158,16 @@ function clearForm() {
 
     input {
       margin-bottom: 1rem;
+    }
+  }
+
+  p#form-error-message {
+    display: none;
+    color: red;
+    font-weight: bold;
+
+    &.show {
+      display: block;
     }
   }
 }
