@@ -25,26 +25,33 @@ import ModalShadow from './ModalShadow.vue';
 
       <form @submit.prevent="createNewEventIfValid()">
 
-        <p>Event Name</p>
+        <label for="new-event-name">Event Name</label>
         <input
+          id="new-event-name"
           type="text"
           v-model="newEventName"
         />
 
-        <!-- TODO: p should be label -->
-        <p>Start Date and Time</p>
+        <label for="new-event-start-time">Start Date and Time</label>
         <input
+          id="new-event-start-time"
           type="datetime-local"
           v-model="newEventStartDateTimeStr"
         />
 
-        <p>End Date and Time</p>
+        <label for="new-event-end-time">End Date and Time</label>
         <input
+          id="new-event-end-time"
           type="datetime-local"
           v-model="newEventEndDateTimeStr"
         />
 
-        <button type="submit">Submit</button>
+        <button
+          id="submit-new-event-form"
+          type="submit"
+        >
+          Submit
+        </button>
 
       </form>
 
@@ -140,7 +147,7 @@ function hideFormErrorMessage() {
     display: flex;
   }
 
-  h1, p {
+  h1, label {
     color: black;
   }
 
@@ -149,13 +156,18 @@ function hideFormErrorMessage() {
     flex-direction: column;
     padding: 1rem;
 
-    p {
+    label {
       text-align: left;
+      margin-top: 1rem;
       margin-bottom: 0;
     }
 
     input {
       margin-bottom: 1rem;
+    }
+
+    button#submit-new-event-form {
+      margin-top: 2rem;
     }
   }
 
