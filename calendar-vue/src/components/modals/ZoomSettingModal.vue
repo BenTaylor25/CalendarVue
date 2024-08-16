@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import ModalShadow from './ModalShadow.vue';
+
 import { MODAL_IDS } from '../../constants/modalConstants';
 import { MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
-import ModalShadow from './ModalShadow.vue';
 import { hideZoomSettingsModal } from '../../modalController';
 import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
 import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';
@@ -45,7 +46,6 @@ function updateZoom() {
 </script>
 
 <style lang="scss">
-
 #zoom-settings-modal-content {
   position: absolute;
   flex-direction: column;
@@ -67,5 +67,4 @@ function updateZoom() {
     color: black;
   }
 }
-
 </style>
