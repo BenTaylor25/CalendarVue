@@ -9,7 +9,6 @@ export function newEventFormIsValid(
     startTimeStr: string,
     endTimeStr: string
 ): NewEventFormValidationResult {
-
     const nameIsValid =
         name !== undefined &&
         name !== '';
@@ -40,7 +39,7 @@ export function newEventFormIsValid(
 export function dateFromFormatString(formatStr: string): Date | null {
     const timestamp = Date.parse(formatStr);
 
-    // Timestamps will be NaN if timeStr is invalid.
+    // Timestamp will be NaN if timeStr is invalid.
     if (isNaN(timestamp)) {
         return null;
     }
@@ -61,19 +60,19 @@ function generateErrorMessage(
     let errorMessage = '';
 
     if (!nameIsValid) {
-        errorMessage += 'Name invalid.\n';
+        errorMessage += 'Name invalid. ';
     }
 
     if (!startTime) {
-        errorMessage += 'Start time invalid.\n';
+        errorMessage += 'Start time invalid. ';
     }
 
     if (!endTime) {
-        errorMessage += 'End time invalid.\n';
+        errorMessage += 'End time invalid. ';
     }
 
     if (startTime && endTime && startTime >= endTime) {
-        errorMessage += 'End time is before start time.\n';
+        errorMessage += 'End time is before start time. ';
     }
 
     return errorMessage;
