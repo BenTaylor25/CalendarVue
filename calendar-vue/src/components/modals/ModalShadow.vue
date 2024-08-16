@@ -1,16 +1,30 @@
 <script setup lang="ts">
-import { MODAL_SHADOW_ID } from '../../constants/modalConstants';
-import { hideAllModals } from '../../modalController';
+
 </script>
 
 <template>
-
-  <div :id="MODAL_SHADOW_ID" @click="hideAllModals"></div>
-
+  <div
+    :id
+    class="modal-shadow"
+    v-bind="$attrs"
+  >
+    <slot></slot>
+  </div>
 </template>
 
-<style lang="scss">
-#modal-shadow {
+<script lang="ts">
+export default {
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  }
+}
+</script>
+
+<style scoped lang="scss">
+.modal-shadow {
   display: none;
   position: absolute;
   top: 0;

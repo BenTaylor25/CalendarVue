@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import MainPage from './pages/MainPage.vue';
 
-import ModalShadow from './components/modals/ModalShadow.vue';
 import ZoomSettingModal from './components/modals/ZoomSettingModal.vue';
+import NewEventModal from './components/modals/NewEventModal.vue';
+import { hideAllModals } from './modalController';
 </script>
 
 <template>
@@ -16,10 +17,19 @@ import ZoomSettingModal from './components/modals/ZoomSettingModal.vue';
     but this is easy and should be fairly clean
     for a project of this size.
   -->
-  <modal-shadow />
   <zoom-setting-modal />
+  <new-event-modal />
 
 </template>
+
+<script lang="ts">
+document.querySelector('body')
+  ?.addEventListener('keyup', (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      hideAllModals();
+    }
+  });
+</script>
 
 <style scoped lang="scss">
 

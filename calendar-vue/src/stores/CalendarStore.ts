@@ -16,5 +16,10 @@ export const useEventStore = defineStore('events', {
                 new Date(2024, 7, 2, 16, 0, 0, 0)
             )
         ] as CalendarEventModel[]
-    })
+    }),
+    actions: {
+        addEvent(newEvent: CalendarEventModel) {
+            this.events.push(newEvent);
+        }
+    }
 });

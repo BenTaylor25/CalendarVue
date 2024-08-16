@@ -36,7 +36,7 @@ function actualTimeBarWidthPx(): number {
     if (timeBar) {
         return timeBar.offsetWidth;
     } else {
-        console.error("Couldn't find time-bar");
+        console.warn("Couldn't find time-bar.");
         return 0;
     }
 }

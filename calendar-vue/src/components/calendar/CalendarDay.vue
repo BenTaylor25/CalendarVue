@@ -4,6 +4,7 @@ import { onMounted } from 'vue';
 import CalendarEvent from './CalendarEvent.vue';
 import { daysOfWeek } from './CalendarMain.vue';
 import { CalendarEventModel } from '../../models/CalendarEventModel';
+import { showNewEventModal } from '../../modalController.ts';
 import { useEventStore } from '../../stores/CalendarStore';
 import { useZoomStore } from '../../stores/DisplayZoomStore';
 
@@ -26,13 +27,14 @@ onMounted(() => {
       <p>{{ weekday }}</p>
     </div>
 
-    <div class="time-map">
+    <div class="time-map" @click="createNewEventClick">
       <span v-for="_ in times" class="timestamp"></span>
 
       <div class="event-holder">
         <calendar-event
           v-for="calendarEventModel of getTodaysEvents()"
           :calendarEventModel="calendarEventModel"
+          @click.stop
         />
       </div>
     </div>
@@ -87,6 +89,10 @@ export function setZoomOnCalendarDay() {
       (timestampDiv as HTMLDivElement).style.padding = `0 ${zoom}rem`;
     }
   }
+}
+
+function createNewEventClick() {
+  showNewEventModal();
 }
 </script>
 
