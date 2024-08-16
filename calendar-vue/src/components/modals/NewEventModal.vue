@@ -2,11 +2,12 @@
 import { ref } from 'vue';
 
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
+import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
 import { hideNewEventModal } from '../../modalController.ts';
-import ModalShadow from './ModalShadow.vue';
 import { dateFromFormatString, newEventFormIsValid } from '../../validation/newEventFormValidation.ts';
 import { useEventStore } from '../../stores/CalendarStore.ts';
-import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
+
+import ModalShadow from './ModalShadow.vue';
 </script>
 
 <template>
