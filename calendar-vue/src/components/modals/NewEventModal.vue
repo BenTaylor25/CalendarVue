@@ -56,7 +56,6 @@ import ModalShadow from './ModalShadow.vue';
 </template>
 
 <script lang="ts">
-
 const newEventName = ref('');
 const newEventStartDateTimeStr = ref('');
 const newEventEndDateTimeStr = ref('');
@@ -64,7 +63,6 @@ const newEventEndDateTimeStr = ref('');
 let formErrorMessage = ref('');
 
 function createNewEventIfValid() {
-
   const result = newEventFormIsValid(
     newEventName.value,
     newEventStartDateTimeStr.value,
@@ -82,14 +80,14 @@ function createNewEventIfValid() {
 
   //#region Error Handling
   if (startTime === null || endTime == null) {
-    console.error("Null start or end time passed new event form validation.")
+    console.error("Null start or end time passed new event form validation.");
     console.info(`startTime: '${startTime}'.`);
     console.info(`endTime: '${endTime}'.`);
     return;
   }
   //#endregion
 
-  const eventStore = useEventStore()
+  const eventStore = useEventStore();
   eventStore.addEvent(new CalendarEventModel(
     newEventName.value,
     startTime,
@@ -103,6 +101,7 @@ function clearForm() {
   newEventName.value = '';
   newEventStartDateTimeStr.value = '';
   newEventEndDateTimeStr.value = '';
+
   hideFormErrorMessage();
 }
 
@@ -115,17 +114,15 @@ function showFormErrorMessage() {
 }
 
 function hideFormErrorMessage() {
-const formErrorMessageDOM = document.getElementById('form-error-message');
+  const formErrorMessageDOM = document.getElementById('form-error-message');
 
   if (formErrorMessageDOM) {
     formErrorMessageDOM.classList.remove('show');
   }
 }
-
 </script>
 
 <style scoped lang="scss">
-
 #new-event-modal-content {
   position: absolute;
   flex-direction: column;
@@ -172,5 +169,4 @@ const formErrorMessageDOM = document.getElementById('form-error-message');
     }
   }
 }
-
 </style>
