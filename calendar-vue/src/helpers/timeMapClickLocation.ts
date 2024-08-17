@@ -1,12 +1,8 @@
-import { useZoomStore } from "../stores/DisplayZoomStore";
-
 const HOUR_INCREMENT = 0.5;
 
 export function detectTimeMapClickLocation(
     clickPosition: number
 ): Date | null {
-    const zoomStore = useZoomStore();
-
     const bodyDOM = document.querySelector('body');
     const timeMapDivs = document.getElementsByClassName('time-map');
     const timestampDivs = document.getElementsByClassName('timestamp');
@@ -40,8 +36,6 @@ export function detectTimeMapClickLocation(
     }
     //#endregion
 
-    const zoom = zoomStore.zoom;
-
     const timeMapLeftOffset = bodyWidth - timeMapWidth;
     const clickTimeMapPosition = clickPosition - timeMapLeftOffset;
     const clickTimeMapPositionWithScroll = clickTimeMapPosition + scrollProgress;
@@ -50,11 +44,6 @@ export function detectTimeMapClickLocation(
     const roundedHours = roundHours(hours);
 
     const startTime = timeFromHours(roundedHours);
-
-    // console.log(clickTimeMapPosition);
-    // console.log(clickTimeMapPositionWithScroll);
-    // console.log(hours);
-    console.log(startTime);
 
     return startTime;
 }
