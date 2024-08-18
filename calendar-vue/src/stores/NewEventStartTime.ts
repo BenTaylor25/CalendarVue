@@ -11,7 +11,7 @@ const useNewEventStartTimePrivateStore =
         startTimeKnown: false,
         time: null as Date | null
     })
-})
+});
 
 export const useNewEventStartTimeStore =
     defineStore('newEventStartTime', {

@@ -94,10 +94,7 @@ export function setZoomOnCalendarDay() {
 }
 
 function createNewEventClick(event: MouseEvent) {
-
-  const startHour = detectTimeMapClickLocation(
-    event.x
-  );
+  const startHour = detectTimeMapClickLocation(event.x);
 
   if (startHour) {
     useNewEventStartTimeStore().setStartTime(startHour);

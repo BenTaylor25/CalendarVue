@@ -1,5 +1,5 @@
-import { refreshModal } from "./components/modals/NewEventModal.vue";
 import { MODAL_IDS } from "./constants/modalConstants";
+import { refreshModal } from "./components/modals/NewEventModal.vue";
 
 function showElementWithId(id: string) {
     const element = document.getElementById(id);
