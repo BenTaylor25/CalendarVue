@@ -8,6 +8,7 @@ import { showNewEventModal } from '../../modalController.ts';
 import { detectTimeMapClickLocation } from '../../helpers/timeMapClickLocation.ts';
 import { useEventStore } from '../../stores/CalendarStore';
 import { useZoomStore } from '../../stores/DisplayZoomStore';
+import { useNewEventStartTimeStore } from '../../stores/NewEventStartTime.ts';
 
 const times: string[] = [""];
 
@@ -92,11 +93,15 @@ export function setZoomOnCalendarDay() {
   }
 }
 
-function createNewEventClick(event: PointerEvent) {
+function createNewEventClick(event: MouseEvent) {
 
   const startHour = detectTimeMapClickLocation(
     event.x
-  )
+  );
+
+  if (startHour) {
+    useNewEventStartTimeStore().setStartTime(startHour);
+  }
 
   showNewEventModal();
 }
