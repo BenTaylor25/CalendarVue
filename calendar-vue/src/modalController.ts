@@ -1,4 +1,5 @@
 import { MODAL_IDS } from "./constants/modalConstants";
+import { refreshModal } from "./components/modals/NewEventModal.vue";
 
 function showElementWithId(id: string) {
     const element = document.getElementById(id);
@@ -46,6 +47,7 @@ export const hideZoomSettingsModal = () => {
 // New Event.
 export const showNewEventModal = () => {
     showElementWithId(MODAL_IDS.NEW_EVENT_MODAL);
+    refreshModal();
 }
 
 export const hideNewEventModal = () => {

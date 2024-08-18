@@ -5,8 +5,10 @@ import CalendarEvent from './CalendarEvent.vue';
 import { daysOfWeek } from './CalendarMain.vue';
 import { CalendarEventModel } from '../../models/CalendarEventModel';
 import { showNewEventModal } from '../../modalController.ts';
+import { detectTimeMapClickLocation } from '../../helpers/timeMapClickLocation.ts';
 import { useEventStore } from '../../stores/CalendarStore';
 import { useZoomStore } from '../../stores/DisplayZoomStore';
+import { useNewEventStartTimeStore } from '../../stores/NewEventStartTime.ts';
 
 const times: string[] = [""];
 
@@ -91,7 +93,13 @@ export function setZoomOnCalendarDay() {
   }
 }
 
-function createNewEventClick() {
+function createNewEventClick(event: MouseEvent) {
+  const startHour = detectTimeMapClickLocation(event.x);
+
+  if (startHour) {
+    useNewEventStartTimeStore().setStartTime(startHour);
+  }
+
   showNewEventModal();
 }
 </script>

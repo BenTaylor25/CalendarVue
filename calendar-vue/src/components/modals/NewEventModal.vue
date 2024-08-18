@@ -5,7 +5,9 @@ import { MODAL_IDS } from '../../constants/modalConstants.ts';
 import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
 import { hideNewEventModal } from '../../modalController.ts';
 import { dateFromFormatString, newEventFormIsValid } from '../../validation/newEventFormValidation.ts';
+import { dateToString } from '../../helpers/dateStringFormatting.ts';
 import { useEventStore } from '../../stores/CalendarStore.ts';
+import { useNewEventStartTimeStore } from '../../stores/NewEventStartTime.ts';
 
 import ModalShadow from './ModalShadow.vue';
 </script>
@@ -125,6 +127,32 @@ function hideFormErrorMessage() {
 
   if (formErrorMessageDOM) {
     formErrorMessageDOM.classList.remove('show');
+  }
+}
+
+export function refreshModal() {
+  const startTimeStore = useNewEventStartTimeStore();
+  const startTimeResult = startTimeStore.getStartTime();
+
+  
+  if (startTimeResult.isKnown) {
+    //#region Error Handling
+    if (startTimeResult.time == null) {
+      console.error("New Event Start Time store 'isKnown' is true but 'time' is null.");
+      return;
+    }
+    //#endregion
+
+    const oneHourInMs = 60 * 60 * 1000;
+
+    const startTime = startTimeResult.time;
+    const endTime = new Date(startTime.getTime() + oneHourInMs);
+
+    newEventStartDateTimeStr.value = dateToString(startTime);
+    newEventEndDateTimeStr.value = dateToString(endTime);
+  } else {
+    newEventStartDateTimeStr.value = '';
+    newEventEndDateTimeStr.value = '';
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CalendarEventModel } from '../../models/CalendarEventModel';
-import { calcEventStyle } from '../../helpers/DynCalendarEventOffset';
+import { calcEventStyle } from '../../helpers/dynCalendarEventOffset';
 </script>
 
 <template>
