@@ -2,6 +2,7 @@
 
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
 import { hideEditEventModal } from '../../modalController.ts';
+import { useEventStore } from '../../stores/CalendarStore.ts';
 
 import ModalShadow from './ModalShadow.vue';
 </script>
@@ -17,6 +18,8 @@ import ModalShadow from './ModalShadow.vue';
     @click.stop
   >
     <h1>Edit Event</h1>
+
+    <p>Name: {{ useEventStore().selectedEvent?.name }}</p>
 
   </div>
 

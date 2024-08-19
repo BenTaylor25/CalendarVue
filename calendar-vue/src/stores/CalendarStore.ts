@@ -15,7 +15,8 @@ export const useEventStore = defineStore('events', {
                 new Date(2024, 7, 2, 12, 0, 0, 0),
                 new Date(2024, 7, 2, 16, 0, 0, 0)
             )
-        ] as CalendarEventModel[]
+        ] as CalendarEventModel[],
+        selectedEvent: null as CalendarEventModel | null
     }),
     actions: {
         addEvent(newEvent: CalendarEventModel) {

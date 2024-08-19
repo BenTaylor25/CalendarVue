@@ -2,6 +2,7 @@
 import { CalendarEventModel } from '../../models/CalendarEventModel';
 import { calcEventStyle } from '../../helpers/dynCalendarEventOffset';
 import { showEditEventModal } from '../../modalController.ts';
+import { useEventStore } from '../../stores/CalendarStore.ts';
 </script>
 
 <template>
@@ -24,6 +25,9 @@ export default {
   },
   methods: {
     eventClicked() {
+      const calendarStore = useEventStore();
+      calendarStore.selectedEvent = this.calendarEventModel;
+
       showEditEventModal();
     }
   }
