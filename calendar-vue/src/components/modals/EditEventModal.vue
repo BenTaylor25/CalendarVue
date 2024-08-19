@@ -27,6 +27,16 @@ import ModalShadow from './ModalShadow.vue';
 </template>
 
 <script lang="ts">
+export default {
+  methods: {
+    closeModal() {
+      hideEditEventModal();
+
+      const eventStore = useEventStore();
+      eventStore.selectedEvent = null;
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
