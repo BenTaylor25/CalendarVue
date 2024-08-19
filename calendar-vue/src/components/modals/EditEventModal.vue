@@ -19,7 +19,16 @@ import ModalShadow from './ModalShadow.vue';
   >
     <h1>Edit Event</h1>
 
-    <p>Name: {{ useEventStore().selectedEvent?.name }}</p>
+    <form @submit.prevent>
+
+      <label for="event-name">Event Name</label>
+      <input
+        id="event-name"
+        type="text"
+        v-model="name"
+      />
+
+    </form>
 
   </div>
 
@@ -28,6 +37,47 @@ import ModalShadow from './ModalShadow.vue';
 
 <script lang="ts">
 export default {
+  computed: {
+    name: {
+      get: () => {
+        const eventStore = useEventStore();
+        return eventStore.selectedEvent?.name ?? "Could not find event.";
+      },
+      set: (name: string) => {
+        const eventStore = useEventStore();
+
+        if (eventStore.selectedEvent) {
+          eventStore.selectedEvent.name = name;
+        }
+      }
+    },
+    startTime: {
+      get: () => {
+        const eventStore = useEventStore();
+        return eventStore.selectedEvent?.startTime;
+      },
+      set: (startTime: Date) => {
+        const eventStore = useEventStore();
+
+        if (eventStore.selectedEvent) {
+          eventStore.selectedEvent.startTime = startTime;
+        }
+      }
+    },
+    endTime: {
+      get: () => {
+        const eventStore = useEventStore();
+        return eventStore.selectedEvent?.endTime;
+      },
+      set: (endTime: Date) => {
+        const eventStore = useEventStore();
+
+        if (eventStore.selectedEvent) {
+          eventStore.selectedEvent.endTime = endTime;
+        }
+      }
+    }
+  },
   methods: {
     closeModal() {
       hideEditEventModal();
