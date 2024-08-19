@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
+import { dateFromFormatString } from '../../validation/newEventFormValidation.ts';
+import { dateToString } from '../../helpers/dateStringFormatting.ts';
 import { hideEditEventModal } from '../../modalController.ts';
 import { useEventStore } from '../../stores/CalendarStore.ts';
 
@@ -19,14 +22,21 @@ import ModalShadow from './ModalShadow.vue';
   >
     <h1>Edit Event</h1>
 
-    <form @submit.prevent>
+    <form @submit.prevent="confirmChanges()">
 
       <label for="event-name">Event Name</label>
       <input
         id="event-name"
         type="text"
-        v-model="name"
+        v-model="eventName"
       />
+
+      <button
+        id="submit-new-event-form"
+        type="submit"
+      >
+        Submit
+      </button>
 
     </form>
 
@@ -36,54 +46,39 @@ import ModalShadow from './ModalShadow.vue';
 </template>
 
 <script lang="ts">
+const eventName = ref('');
+const eventStartDateTimeStr = ref('');
+const eventEndDateTimeStr = ref('');
+
+export function refreshEditEventModal() {
+  const eventStore = useEventStore();
+
+  if (eventStore.selectedEvent) {
+    eventName.value = eventStore.selectedEvent.name;
+    eventStartDateTimeStr.value =
+      dateToString(eventStore.selectedEvent.startTime);
+    eventEndDateTimeStr.value = dateToString(eventStore.selectedEvent.endTime);
+  }
+}
+
 export default {
-  computed: {
-    name: {
-      get: () => {
-        const eventStore = useEventStore();
-        return eventStore.selectedEvent?.name ?? "Could not find event.";
-      },
-      set: (name: string) => {
-        const eventStore = useEventStore();
-
-        if (eventStore.selectedEvent) {
-          eventStore.selectedEvent.name = name;
-        }
-      }
-    },
-    startTime: {
-      get: () => {
-        const eventStore = useEventStore();
-        return eventStore.selectedEvent?.startTime;
-      },
-      set: (startTime: Date) => {
-        const eventStore = useEventStore();
-
-        if (eventStore.selectedEvent) {
-          eventStore.selectedEvent.startTime = startTime;
-        }
-      }
-    },
-    endTime: {
-      get: () => {
-        const eventStore = useEventStore();
-        return eventStore.selectedEvent?.endTime;
-      },
-      set: (endTime: Date) => {
-        const eventStore = useEventStore();
-
-        if (eventStore.selectedEvent) {
-          eventStore.selectedEvent.endTime = endTime;
-        }
-      }
-    }
-  },
   methods: {
     closeModal() {
       hideEditEventModal();
 
       const eventStore = useEventStore();
       eventStore.selectedEvent = null;
+    },
+    confirmChanges() {
+      const eventStore = useEventStore();
+
+      if (eventStore.selectedEvent) {
+        eventStore.selectedEvent.name = eventName.value;
+        eventStore.selectedEvent.startTime =
+          dateFromFormatString(eventStartDateTimeStr.value);
+        eventStore.selectedEvent.endTime =
+          dateFromFormatString(eventEndDateTimeStr.value);
+      }
     }
   }
 }

@@ -1,5 +1,7 @@
 import { MODAL_IDS } from "./constants/modalConstants";
+
 import { refreshModal } from "./components/modals/NewEventModal.vue";
+import { refreshEditEventModal } from "./components/modals/EditEventModal.vue";
 
 function showElementWithId(id: string) {
     const element = document.getElementById(id);
@@ -57,6 +59,7 @@ export const hideNewEventModal = () => {
 // Edit Event.
 export const showEditEventModal = () => {
     showElementWithId(MODAL_IDS.EDIT_EVENT_MODAL);
+    refreshEditEventModal();
 }
 
 export const hideEditEventModal = () => {

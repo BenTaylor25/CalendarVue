@@ -9,7 +9,7 @@ import { useEventStore } from '../../stores/CalendarStore.ts';
   <div
     class="calendar-event"
     :style="calcEventStyle($props.calendarEventModel)"
-    @click="eventClicked()"
+    @click.stop="eventClicked()"
   >
     <p>{{calendarEventModel.name}}</p>
   </div>
