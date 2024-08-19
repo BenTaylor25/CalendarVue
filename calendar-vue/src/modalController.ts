@@ -53,3 +53,12 @@ export const showNewEventModal = () => {
 export const hideNewEventModal = () => {
     hideElementWithId(MODAL_IDS.NEW_EVENT_MODAL);
 }
+
+// Edit Event.
+export const showEditEventModal = () => {
+    showElementWithId(MODAL_IDS.EDIT_EVENT_MODAL);
+}
+
+export const hideEditEventModal = () => {
+    hideElementWithId(MODAL_IDS.EDIT_EVENT_MODAL);
+}
