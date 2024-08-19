@@ -13,7 +13,7 @@ import ModalShadow from './ModalShadow.vue';
 <template>
   <modal-shadow
     :id="MODAL_IDS.EDIT_EVENT_MODAL"
-    @click="hideEditEventModal()"
+    @click="closeModal()"
   >
 
   <div
@@ -61,13 +61,49 @@ export function refreshEditEventModal() {
   }
 }
 
+function hasUnsavedChanges(): bool {
+  const eventStore = useEventStore();
+
+  //#region Error Handling
+  if (!eventStore.selectedEvent) {
+    return false;
+  }
+  //#endregion
+
+
+  const a = 
+    eventStore.selectedEvent.name != eventName.value
+
+  const b = 
+    eventStore.selectedEvent.startTime !=
+      dateFromFormatString(eventStartDateTimeStr.value)
+
+  const c =
+    eventStore.selectedEvent.endTime !=
+      dateFromFormatString(eventEndDateTimeStr.value);
+
+  console.log(a)
+  console.log(b)
+  console.log(c)
+  console.log(a || b || c)
+  return a || b || c;
+}
+
 export default {
   methods: {
     closeModal() {
-      hideEditEventModal();
+      console.log(hasUnsavedChanges())
 
-      const eventStore = useEventStore();
-      eventStore.selectedEvent = null;
+      const shouldCloseModal =
+        !hasUnsavedChanges() ||
+        window.confirm("You have unsaved changes, are you sure you want to cancel?");
+
+      if (shouldCloseModal) {
+        hideEditEventModal();
+
+        const eventStore = useEventStore();
+        eventStore.selectedEvent = null;
+      }
     },
     confirmChanges() {
       const eventStore = useEventStore();
