@@ -31,6 +31,20 @@ import ModalShadow from './ModalShadow.vue';
         v-model="eventName"
       />
 
+      <label for="new-event-start-time">Start Date and Time</label>
+        <input
+          id="new-event-start-time"
+          type="datetime-local"
+          v-model="eventStartDateTimeStr"
+        />
+
+      <label for="new-event-end-time">End Date and Time</label>
+        <input
+          id="new-event-end-time"
+          type="datetime-local"
+          v-model="eventEndDateTimeStr"
+        />
+
       <button
         id="submit-new-event-form"
         type="submit"
@@ -70,30 +84,26 @@ function hasUnsavedChanges(): boolean {
   }
   //#endregion
 
+  const nameHasChanged =
+    eventStore.selectedEvent.name != eventName.value;
 
-  const a = 
-    eventStore.selectedEvent.name != eventName.value
-
-  const b = 
+  const startTimeHasChanged =
     eventStore.selectedEvent.startTime !=
-      dateFromFormatString(eventStartDateTimeStr.value)
+      dateFromFormatString(eventStartDateTimeStr.value);
 
-  const c =
+  const endTimeHasChanged =
     eventStore.selectedEvent.endTime !=
       dateFromFormatString(eventEndDateTimeStr.value);
 
-  console.log(a)
-  console.log(b)
-  console.log(c)
-  console.log(a || b || c)
-  return a || b || c;
+  // Dates aren't handled properly yet, so start and end time are going
+  // to flag that they have been changed even if they haven't.
+
+  return nameHasChanged || startTimeHasChanged || endTimeHasChanged;
 }
 
 export default {
   methods: {
     closeModal() {
-      console.log(hasUnsavedChanges())
-
       const shouldCloseModal =
         !hasUnsavedChanges() ||
         window.confirm("You have unsaved changes, are you sure you want to cancel?");
