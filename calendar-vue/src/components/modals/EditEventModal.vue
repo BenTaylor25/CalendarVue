@@ -61,7 +61,7 @@ export function refreshEditEventModal() {
   }
 }
 
-function hasUnsavedChanges(): bool {
+function hasUnsavedChanges(): boolean {
   const eventStore = useEventStore();
 
   //#region Error Handling
@@ -106,14 +106,24 @@ export default {
       }
     },
     confirmChanges() {
+      const newStartTimeDate =
+        dateFromFormatString(eventStartDateTimeStr.value);
+      const newEndTimeDate =
+        dateFromFormatString(eventEndDateTimeStr.value);
+
+      //#region Error Handling
+      if (newStartTimeDate == null || newEndTimeDate == null) {
+        console.error()
+        return;
+      }
+      //#endregion
+
       const eventStore = useEventStore();
 
       if (eventStore.selectedEvent) {
         eventStore.selectedEvent.name = eventName.value;
-        eventStore.selectedEvent.startTime =
-          dateFromFormatString(eventStartDateTimeStr.value);
-        eventStore.selectedEvent.endTime =
-          dateFromFormatString(eventEndDateTimeStr.value);
+        eventStore.selectedEvent.startTime = newStartTimeDate;
+        eventStore.selectedEvent.endTime = newEndTimeDate;
       }
     }
   }
