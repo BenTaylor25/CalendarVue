@@ -88,15 +88,12 @@ function hasUnsavedChanges(): boolean {
     eventStore.selectedEvent.name != eventName.value;
 
   const startTimeHasChanged =
-    eventStore.selectedEvent.startTime !=
-      dateFromFormatString(eventStartDateTimeStr.value);
+    eventStore.selectedEvent.startTime.getTime() !=
+      dateFromFormatString(eventStartDateTimeStr.value)?.getTime();
 
   const endTimeHasChanged =
-    eventStore.selectedEvent.endTime !=
-      dateFromFormatString(eventEndDateTimeStr.value);
-
-  // Dates aren't handled properly yet, so start and end time are going
-  // to flag that they have been changed even if they haven't.
+    eventStore.selectedEvent.endTime.getTime() !=
+      dateFromFormatString(eventEndDateTimeStr.value)?.getTime();
 
   return nameHasChanged || startTimeHasChanged || endTimeHasChanged;
 }
@@ -130,11 +127,17 @@ export default {
 
       const eventStore = useEventStore();
 
+      console.log(eventStore.selectedEvent?.startTime)
+      console.log(newStartTimeDate)
+
       if (eventStore.selectedEvent) {
         eventStore.selectedEvent.name = eventName.value;
         eventStore.selectedEvent.startTime = newStartTimeDate;
         eventStore.selectedEvent.endTime = newEndTimeDate;
       }
+
+      console.log(eventStore.selectedEvent?.startTime)
+      console.log('---')
 
       this.closeModal();
     }
