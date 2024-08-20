@@ -46,7 +46,7 @@ import ModalShadow from './ModalShadow.vue';
         />
 
       <button
-        id="submit-new-event-form"
+        id="submit-confirm-changes-form"
         type="submit"
       >
         Submit
@@ -135,6 +135,8 @@ export default {
         eventStore.selectedEvent.startTime = newStartTimeDate;
         eventStore.selectedEvent.endTime = newEndTimeDate;
       }
+
+      this.closeModal();
     }
   }
 }
@@ -160,6 +162,26 @@ export default {
 
   h1, label {
     color: black;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    label {
+      text-align: left;
+      margin-top: 1rem;
+      margin-bottom: 0;
+    }
+
+    input {
+      margin-bottom: 1rem;
+    }
+
+    button#submit-confirm-changes-form {
+      margin-top: 2rem;
+    }
   }
 }
 </style>
