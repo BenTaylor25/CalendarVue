@@ -7,6 +7,7 @@ export const useEventStore = defineStore('events', {
         events: [
             new CalendarEventModel(
                 "monday test",
+                // This is 7th AUGUST because JavaScript is stupid.
                 new Date(2024, 7, 7, 10, 0, 0, 0),
                 new Date(2024, 7, 7, 12, 0, 0, 0)
             ),

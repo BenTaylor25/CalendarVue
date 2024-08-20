@@ -127,17 +127,11 @@ export default {
 
       const eventStore = useEventStore();
 
-      console.log(eventStore.selectedEvent?.startTime)
-      console.log(newStartTimeDate)
-
       if (eventStore.selectedEvent) {
         eventStore.selectedEvent.name = eventName.value;
         eventStore.selectedEvent.startTime = newStartTimeDate;
         eventStore.selectedEvent.endTime = newEndTimeDate;
       }
-
-      console.log(eventStore.selectedEvent?.startTime)
-      console.log('---')
 
       this.closeModal();
     }
