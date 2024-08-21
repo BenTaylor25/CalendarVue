@@ -38,7 +38,8 @@ export function detectTimeMapClickLocation(
 
     const timeMapLeftOffset = bodyWidth - timeMapWidth;
     const clickTimeMapPosition = clickPosition - timeMapLeftOffset;
-    const clickTimeMapPositionWithScroll = clickTimeMapPosition + scrollProgress;
+    const clickTimeMapPositionWithScroll =
+        clickTimeMapPosition + scrollProgress;
 
     const hours = clickTimeMapPositionWithScroll / oneHourWidth;
     const roundedHours = roundHours(hours);

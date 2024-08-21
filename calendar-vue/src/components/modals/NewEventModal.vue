@@ -4,10 +4,15 @@ import { ref } from 'vue';
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
 import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
 import { hideNewEventModal } from '../../modalController.ts';
-import { dateFromFormatString, newEventFormIsValid } from '../../validation/newEventFormValidation.ts';
+import {
+  dateFromFormatString,
+  newEventFormIsValid
+} from '../../validation/newEventFormValidation.ts';
 import { dateToString } from '../../helpers/dateStringFormatting.ts';
 import { useEventStore } from '../../stores/CalendarStore.ts';
-import { useNewEventStartTimeStore } from '../../stores/NewEventStartTime.ts';
+import {
+  useNewEventStartTimeStore
+} from '../../stores/NewEventStartTime.ts';
 
 import ModalShadow from './ModalShadow.vue';
 </script>
@@ -89,7 +94,9 @@ function createNewEventIfValid() {
 
   //#region Error Handling
   if (startTime === null || endTime == null) {
-    console.error("Null start or end time passed new event form validation.");
+    console.error(
+      "Null start or end time passed new event form validation."
+    );
     console.info(`startTime: '${startTime}'.`);
     console.info(`endTime: '${endTime}'.`);
     return;
@@ -116,7 +123,8 @@ function clearForm() {
 }
 
 function showFormErrorMessage() {
-  const formErrorMessageDOM = document.getElementById('form-error-message');
+  const formErrorMessageDOM =
+    document.getElementById('form-error-message');
 
   if (formErrorMessageDOM) {
     formErrorMessageDOM.classList.add('show');
@@ -124,7 +132,8 @@ function showFormErrorMessage() {
 }
 
 function hideFormErrorMessage() {
-  const formErrorMessageDOM = document.getElementById('form-error-message');
+  const formErrorMessageDOM =
+    document.getElementById('form-error-message');
 
   if (formErrorMessageDOM) {
     formErrorMessageDOM.classList.remove('show');

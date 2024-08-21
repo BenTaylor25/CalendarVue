@@ -2,7 +2,9 @@
 import { ref } from 'vue';
 
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
-import { dateFromFormatString } from '../../validation/newEventFormValidation.ts';
+import {
+  dateFromFormatString
+} from '../../validation/newEventFormValidation.ts';
 import { dateToString } from '../../helpers/dateStringFormatting.ts';
 import { hideEditEventModal } from '../../modalController.ts';
 import { useEventStore } from '../../stores/CalendarStore.ts';
@@ -71,7 +73,8 @@ export function refreshEditEventModal() {
     eventName.value = eventStore.selectedEvent.name;
     eventStartDateTimeStr.value =
       dateToString(eventStore.selectedEvent.startTime);
-    eventEndDateTimeStr.value = dateToString(eventStore.selectedEvent.endTime);
+    eventEndDateTimeStr.value =
+      dateToString(eventStore.selectedEvent.endTime);
   }
 }
 
@@ -101,9 +104,12 @@ function hasUnsavedChanges(): boolean {
 export default {
   methods: {
     closeModal() {
+      const confirmPrompt = "You have unsaved changes, " +
+        "are you sure you want to cancel?";
+
       const shouldCloseModal =
         !hasUnsavedChanges() ||
-        window.confirm("You have unsaved changes, are you sure you want to cancel?");
+        window.confirm(confirmPrompt);
 
       if (shouldCloseModal) {
         hideEditEventModal();
