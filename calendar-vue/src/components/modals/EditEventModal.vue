@@ -32,18 +32,18 @@ import ModalShadow from './ModalShadow.vue';
       />
 
       <label for="new-event-start-time">Start Date and Time</label>
-        <input
-          id="new-event-start-time"
-          type="datetime-local"
-          v-model="eventStartDateTimeStr"
-        />
+      <input
+        id="new-event-start-time"
+        type="datetime-local"
+        v-model="eventStartDateTimeStr"
+      />
 
       <label for="new-event-end-time">End Date and Time</label>
-        <input
-          id="new-event-end-time"
-          type="datetime-local"
-          v-model="eventEndDateTimeStr"
-        />
+      <input
+        id="new-event-end-time"
+        type="datetime-local"
+        v-model="eventEndDateTimeStr"
+      />
 
       <button
         id="submit-confirm-changes-form"
