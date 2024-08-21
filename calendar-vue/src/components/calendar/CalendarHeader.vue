@@ -10,8 +10,10 @@ for (let i = 1; i <= 24; i++) {
 }
 
 function syncroniseScrollingWithDays() {
-  const headerTimeMapDiv = document.getElementById('time-bar') as HTMLDivElement;
-  const dayTimeMapDivs = document.getElementsByClassName('calendar-day') as HTMLCollection;
+  const headerTimeMapDiv =
+    document.getElementById('time-bar') as HTMLDivElement;
+  const dayTimeMapDivs =
+    document.getElementsByClassName('calendar-day') as HTMLCollection;
 
   //#region Error Handling
   if (headerTimeMapDiv == null) {
@@ -23,7 +25,9 @@ function syncroniseScrollingWithDays() {
   }
 
   if (dayTimeMapDivs.length == 0) {
-    console.error("Scroll detected on Calendar Header but no days were found");
+    console.error(
+      "Scroll detected on Calendar Header but no days were found"
+    );
   }
   //#endregion
 
@@ -42,9 +46,11 @@ function syncroniseScrollingWithDays() {
 }
 
 function scrollToMiddle() {
-  const headerTimeMapDiv = document.getElementById('time-bar') as HTMLDivElement;
+  const headerTimeMapDiv =
+    document.getElementById('time-bar') as HTMLDivElement;
 
-  const maxScrollLeft = headerTimeMapDiv.scrollWidth - headerTimeMapDiv.clientWidth;
+  const maxScrollLeft =
+    headerTimeMapDiv.scrollWidth - headerTimeMapDiv.clientWidth;
 
   const midPoint = maxScrollLeft / 2;
   headerTimeMapDiv.scrollLeft = midPoint;
@@ -81,7 +87,8 @@ export function setZoomOnCalendarHeader() {
   const zoom = useZoomStore().zoom;
 
   const headerDiv = document.getElementById('calendar-header');
-  const timestampDivs = headerDiv?.getElementsByClassName('timestamp') ?? [];
+  const timestampDivs =
+    headerDiv?.getElementsByClassName('timestamp') ?? [];
 
   //#region Error Handling
   if (headerDiv === null) {

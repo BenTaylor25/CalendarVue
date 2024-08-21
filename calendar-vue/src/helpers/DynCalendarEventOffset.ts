@@ -59,7 +59,8 @@ export function calcEventLeftAlignment(event: CalendarEventModel): string {
 
     const zoom = useZoomStore().zoom;
 
-    const leftOffsetRem = eventStartTime * zoom * 2 * smallZoomScaleMultiplier();
+    const leftOffsetRem =
+        eventStartTime * zoom * 2 * smallZoomScaleMultiplier();
     let leftOffsetPx = eventStartTime;
 
     if (smallZoomScaleMultiplier() !== 1) {
@@ -70,7 +71,9 @@ export function calcEventLeftAlignment(event: CalendarEventModel): string {
 }
 
 export function calcEventWidth(event: CalendarEventModel): string {
-    const eventDuration = event.endTime.getHours() - event.startTime.getHours();   // doesn't handle multi-day events
+    const eventDuration =
+        event.endTime.getHours() - event.startTime.getHours();
+        // doesn't handle multi-day events
 
     const zoom = useZoomStore().zoom;
 

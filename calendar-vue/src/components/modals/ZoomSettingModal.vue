@@ -2,7 +2,10 @@
 import ModalShadow from './ModalShadow.vue';
 
 import { MODAL_IDS } from '../../constants/modalConstants';
-import { MAX_CALENDAR_ZOOM, MIN_CALENDAR_ZOOM } from '../../constants/settingsConstants';
+import {
+  MAX_CALENDAR_ZOOM,
+  MIN_CALENDAR_ZOOM
+} from '../../constants/settingsConstants';
 import { hideZoomSettingsModal } from '../../modalController';
 import { setZoomOnCalendarDay } from '../calendar/CalendarDay.vue';
 import { setZoomOnCalendarHeader } from '../calendar/CalendarHeader.vue';

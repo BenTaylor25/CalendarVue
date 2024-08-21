@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import MainPage from './pages/MainPage.vue';
 
+import { hideAllModals } from './modalController';
+
 import ZoomSettingModal from './components/modals/ZoomSettingModal.vue';
 import NewEventModal from './components/modals/NewEventModal.vue';
-import { hideAllModals } from './modalController';
+import EditEventModal from './components/modals/EditEventModal.vue';
 </script>
 
 <template>
@@ -19,6 +21,7 @@ import { hideAllModals } from './modalController';
   -->
   <zoom-setting-modal />
   <new-event-modal />
+  <edit-event-modal />
 
 </template>
 

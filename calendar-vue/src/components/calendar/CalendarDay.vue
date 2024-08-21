@@ -53,8 +53,11 @@ export default {
     getTodaysEvents(): CalendarEventModel[] {
       // THIS FILTER IS WRONG; REQUIRES PROPER IMPLEMENTATION.
       return (useEventStore().events as CalendarEventModel[]).filter(event => {
-        const isInvalid = !this.weekday ||
+        const isInvalid =
+          !event ||
+          !this.weekday ||
           !daysOfWeek.includes(this.weekday);
+
         if (isInvalid) {
           return false;
         }

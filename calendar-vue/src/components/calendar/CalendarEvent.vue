@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { CalendarEventModel } from '../../models/CalendarEventModel';
 import { calcEventStyle } from '../../helpers/dynCalendarEventOffset';
+import { showEditEventModal } from '../../modalController.ts';
+import { useEventStore } from '../../stores/CalendarStore.ts';
 </script>
 
 <template>
   <div
     class="calendar-event"
     :style="calcEventStyle($props.calendarEventModel)"
+    @click.stop="eventClicked()"
   >
     <p>{{calendarEventModel.name}}</p>
   </div>
@@ -18,6 +21,14 @@ export default {
     calendarEventModel: {
       type: CalendarEventModel,
       required: true
+    }
+  },
+  methods: {
+    eventClicked() {
+      const calendarStore = useEventStore();
+      calendarStore.selectedEvent = this.calendarEventModel;
+
+      showEditEventModal();
     }
   }
 }
