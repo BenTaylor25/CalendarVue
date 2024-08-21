@@ -140,7 +140,7 @@ function hideFormErrorMessage() {
   }
 }
 
-export function refreshModal() {
+export function refreshNewEventModal() {
   const startTimeStore = useNewEventStartTimeStore();
   const startTimeResult = startTimeStore.getStartTime();
 
