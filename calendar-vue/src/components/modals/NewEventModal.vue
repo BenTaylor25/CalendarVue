@@ -104,6 +104,7 @@ function createNewEventIfValid() {
   ));
 
   clearForm();
+  hideNewEventModal();
 }
 
 function clearForm() {
