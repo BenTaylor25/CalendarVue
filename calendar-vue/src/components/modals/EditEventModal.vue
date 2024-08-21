@@ -120,7 +120,7 @@ export default {
 
       //#region Error Handling
       if (newStartTimeDate == null || newEndTimeDate == null) {
-        console.error()
+        console.error("Attempted to update event date to null value.");
         return;
       }
       //#endregion
