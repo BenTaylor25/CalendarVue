@@ -22,6 +22,23 @@ export const useEventStore = defineStore('events', {
     actions: {
         addEvent(newEvent: CalendarEventModel) {
             this.events.push(newEvent);
+        },
+        deleteSelectedEvent() {
+            //#region Error Handling
+            if (!this.selectedEvent) {
+                return;
+            }
+            //#endregion
+
+            const idx = this.events.indexOf(this.selectedEvent);
+
+            //#region Error Handling
+            if (idx === -1) {
+                return;
+            }
+            //#endregion
+
+            this.events.splice(idx, 1);
         }
     }
 });

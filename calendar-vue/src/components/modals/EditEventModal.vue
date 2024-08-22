@@ -56,6 +56,13 @@ import ModalShadow from './ModalShadow.vue';
 
     </form>
 
+    <button
+      id="delete-event-button"
+      @click="deleteButtonPressed()"
+    >
+      Delete Event
+    </button>
+
   </div>
 
   </modal-shadow>
@@ -140,6 +147,17 @@ export default {
       }
 
       this.closeModal();
+    },
+    deleteButtonPressed() {
+      const shouldDelete = confirm(
+        "Are you sure you want to delete this event?"
+      );
+
+      if (shouldDelete) {
+        const eventStore = useEventStore();
+        eventStore.deleteSelectedEvent();
+        hideEditEventModal();
+      }
     }
   }
 }
@@ -185,6 +203,12 @@ export default {
     button#submit-confirm-changes-form {
       margin-top: 2rem;
     }
+  }
+
+  button#delete-event-button {
+    margin-top: 2rem;
+    background-color: red;
+    border-color: red;
   }
 }
 </style>
