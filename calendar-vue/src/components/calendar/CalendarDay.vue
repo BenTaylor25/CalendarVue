@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-import CalendarEvent from './CalendarEvent.vue';
-import { daysOfWeek } from './CalendarMain.vue';
+import { daysOfWeek } from '../../helpers/dateCalculator.ts';
 import { CalendarEventModel } from '../../models/CalendarEventModel';
 import { showNewEventModal } from '../../modalController.ts';
 import { detectTimeMapClickLocation } from '../../helpers/timeMapClickLocation.ts';
+import { getShortWeekday, getShortDateStr } from '../../helpers/dateCalculator.ts';
 import { useEventStore } from '../../stores/CalendarStore';
 import { useZoomStore } from '../../stores/DisplayZoomStore';
 import { useNewEventStartTimeStore } from '../../stores/NewEventStartTime.ts';
+
+import CalendarEvent from './CalendarEvent.vue';
 
 const times: string[] = [""];
 
@@ -26,7 +28,8 @@ onMounted(() => {
   <div class="calendar-day">
 
     <div class="weekday">
-      <p>{{ weekday }}</p>
+      <p class="weekday-str">{{ getShortWeekday(date) }}</p>
+      <p class="date-str">{{ getShortDateStr(date) }}</p>
     </div>
 
     <div class="time-map" @click="createNewEventClick">
@@ -47,7 +50,7 @@ onMounted(() => {
 <script lang="ts">
 export default {
   props: {
-    weekday: String
+    date: Date
   },
   methods: {
     getTodaysEvents(): CalendarEventModel[] {
@@ -115,6 +118,7 @@ function createNewEventClick(event: MouseEvent) {
 
   .weekday {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -123,8 +127,17 @@ function createNewEventClick(event: MouseEvent) {
     background-color: blueviolet; // temp
 
     p {
-      font-size: 1.25rem;
+      margin: 0;
+
+      &.weekday-str {
+        font-size: 1.25rem;
+      }
+
+      &.date-str {
+        font-size: 1rem;
+      }
     }
+
   }
 
   .time-map {

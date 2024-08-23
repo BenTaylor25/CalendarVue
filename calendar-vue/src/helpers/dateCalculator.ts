@@ -18,3 +18,32 @@ export function getMondayThisWeek(): Date {
 
     return monday;
 }
+
+export const daysOfWeek = [
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+  "Sat",
+  "Sun"
+];
+
+export function getShortWeekday(date: Date) {
+    let day = date.getDay();
+
+    // Shift from Sunday start to Monday start.
+    day -= 1;
+    if (day < 0) {
+        day = 6;
+    }
+
+    return daysOfWeek[day];
+}
+
+export function getShortDateStr(date: Date) {
+    // JavaScript months (and months only) are 0-indexed.
+    const month = date.getMonth() + 1;
+
+    return `${date.getDate()}/${month}/${date.getFullYear()}`;
+}

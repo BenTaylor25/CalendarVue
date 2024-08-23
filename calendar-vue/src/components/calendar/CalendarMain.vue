@@ -14,21 +14,12 @@ const dateStore = useDateStore();
     <calendar-day
       v-for="day in dateStore.visibleDays"
       v-bind:key="day"
-      :weekday="day"
+      :date="day"
     />
   </div>
 </template>
 
 <script lang="ts">
-export let daysOfWeek = [
-  "Mon",
-  "Tue",
-  "Wed",
-  "Thu",
-  "Fri",
-  "Sat",
-  "Sun"
-];
 </script>
 
 <style scoped lang="scss">
