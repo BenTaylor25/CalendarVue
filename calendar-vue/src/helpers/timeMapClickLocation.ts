@@ -1,6 +1,7 @@
 const HOUR_INCREMENT = 0.5;
 
 export function detectTimeMapClickLocation(
+    untimedDate: Date,
     clickPosition: number
 ): Date | null {
     const bodyDOM = document.querySelector('body');
@@ -44,7 +45,7 @@ export function detectTimeMapClickLocation(
     const hours = clickTimeMapPositionWithScroll / oneHourWidth;
     const roundedHours = roundHours(hours);
 
-    const startTime = timeFromHours(roundedHours);
+    const startTime = timeFromHours(untimedDate, roundedHours);
 
     return startTime;
 }
@@ -53,16 +54,17 @@ function roundHours(hours: number): number {
     return Math.round(hours / HOUR_INCREMENT) * HOUR_INCREMENT;
 }
 
-function timeFromHours(hours: number): Date {
-
-    // I don't know the year/month/day.
+function timeFromHours(untimedDate: Date, hours: number): Date {
+    const year = untimedDate.getFullYear();
+    const month = untimedDate.getMonth();
+    const date = untimedDate.getDate();
 
     const fullHours = Math.floor(hours);
 
     const minutes = (hours - fullHours) * 60;
     const fullMinutes = Math.round(minutes);
 
-    const time = new Date(2024, 8, 17, fullHours, fullMinutes, 0, 0);
+    const time = new Date(year, month, date, fullHours, fullMinutes, 0, 0);
 
     return time;
 }

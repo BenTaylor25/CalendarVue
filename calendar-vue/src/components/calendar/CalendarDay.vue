@@ -69,6 +69,15 @@ export default {
 
         return dayMatches;
       });
+    },
+    createNewEventClick(event: MouseEvent) {
+      const startHour = detectTimeMapClickLocation(this.date, event.x);
+
+      if (startHour) {
+        useNewEventStartTimeStore().setStartTime(startHour);
+      }
+
+      showNewEventModal();
     }
   }
 }
@@ -97,16 +106,6 @@ export function setZoomOnCalendarDay() {
       (timestampDiv as HTMLDivElement).style.padding = `0 ${zoom}rem`;
     }
   }
-}
-
-function createNewEventClick(event: MouseEvent) {
-  const startHour = detectTimeMapClickLocation(event.x);
-
-  if (startHour) {
-    useNewEventStartTimeStore().setStartTime(startHour);
-  }
-
-  showNewEventModal();
 }
 </script>
 
