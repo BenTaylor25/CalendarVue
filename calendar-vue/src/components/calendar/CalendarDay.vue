@@ -56,16 +56,13 @@ export default {
     getTodaysEvents(): CalendarEventModel[] {
       // THIS FILTER IS WRONG; REQUIRES PROPER IMPLEMENTATION.
       return (useEventStore().events as CalendarEventModel[]).filter(event => {
-        const isInvalid =
-          !event ||
-          !this.weekday ||
-          !daysOfWeek.includes(this.weekday);
+        const isInvalid = true;
 
         if (isInvalid) {
           return false;
         }
 
-        const dayMatches = event.startTime.getDate() % 7 == daysOfWeek.indexOf(this.weekday);
+        const dayMatches = false;
 
         return dayMatches;
       });
