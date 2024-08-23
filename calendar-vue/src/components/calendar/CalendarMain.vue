@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { useDateStore } from '../../stores/DateStore.ts';
+
 import CalendarHeader from './CalendarHeader.vue';
 import CalendarDay from './CalendarDay.vue';
 
+const dateStore = useDateStore();
 </script>
 
 <template>
@@ -9,7 +12,7 @@ import CalendarDay from './CalendarDay.vue';
     <calendar-header />
 
     <calendar-day
-      v-for="day in daysOfWeek"
+      v-for="day in dateStore.visibleDays"
       v-bind:key="day"
       :weekday="day"
     />
