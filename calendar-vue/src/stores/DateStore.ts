@@ -13,7 +13,7 @@ export const useDateStore = defineStore('dates', {
             for (let _ = 0; _ < 6; _++) {
                 const previousDay = days[days.length - 1];
 
-                const newDay = new Date();
+                const newDay = new Date(previousDay);
                 newDay.setDate(previousDay.getDate() + 1);
 
                 days.push(newDay);
@@ -24,16 +24,14 @@ export const useDateStore = defineStore('dates', {
     },
     actions: {
         scrollUp() {
-            const newTopOfScreenDay = new Date();
+            const newTopOfScreenDay = new Date(this.topOfScreenDate);
             newTopOfScreenDay.setDate(this.topOfScreenDate.getDate() - 1);
-            console.log(newTopOfScreenDay)
 
             this.topOfScreenDate = newTopOfScreenDay;
         },
         scrollDown() {
-            const newTopOfScreenDay = new Date();
+            const newTopOfScreenDay = new Date(this.topOfScreenDate);
             newTopOfScreenDay.setDate(this.topOfScreenDate.getDate() + 1);
-            console.log(newTopOfScreenDay)
 
             this.topOfScreenDate = newTopOfScreenDay;
         }

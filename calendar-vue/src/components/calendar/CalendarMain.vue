@@ -24,10 +24,10 @@ const dateStore = useDateStore();
 export default {
   methods: {
     scrollThroughDates(event: WheelEvent) {
+      const dateStore = useDateStore();
+
       const shouldScrollUp = event.deltaY < -10;
       const shouldScrollDown = event.deltaY > 10;
-
-      const dateStore = useDateStore();
 
       if (shouldScrollUp) {
         dateStore.scrollUp();
