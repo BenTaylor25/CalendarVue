@@ -15,11 +15,28 @@ const dateStore = useDateStore();
       v-for="day in dateStore.visibleDays"
       v-bind:key="day"
       :date="day"
+      @wheel="scrollThroughDates"
     />
   </div>
 </template>
 
 <script lang="ts">
+export default {
+  methods: {
+    scrollThroughDates(event: WheelEvent) {
+      const shouldScrollUp = event.deltaY < -10;
+      const shouldScrollDown = event.deltaY > 10;
+
+      const dateStore = useDateStore();
+
+      if (shouldScrollUp) {
+        dateStore.scrollUp();
+      } else if (shouldScrollDown) {
+        dateStore.scrollDown();
+      }
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

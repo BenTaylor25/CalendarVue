@@ -21,5 +21,21 @@ export const useDateStore = defineStore('dates', {
 
             return days;
         }
+    },
+    actions: {
+        scrollUp() {
+            const newTopOfScreenDay = new Date();
+            newTopOfScreenDay.setDate(this.topOfScreenDate.getDate() - 1);
+            console.log(newTopOfScreenDay)
+
+            this.topOfScreenDate = newTopOfScreenDay;
+        },
+        scrollDown() {
+            const newTopOfScreenDay = new Date();
+            newTopOfScreenDay.setDate(this.topOfScreenDate.getDate() + 1);
+            console.log(newTopOfScreenDay)
+
+            this.topOfScreenDate = newTopOfScreenDay;
+        }
     }
 });
