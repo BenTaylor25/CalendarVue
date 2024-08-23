@@ -6,13 +6,13 @@ export const useEventStore = defineStore('events', {
     state: () => ({
         events: [
             new CalendarEventModel(
-                "monday test",
+                "wed 7 aug 24 test",
                 // This is 7th AUGUST because JavaScript is stupid.
                 new Date(2024, 7, 7, 10, 0, 0, 0),
                 new Date(2024, 7, 7, 12, 0, 0, 0)
             ),
             new CalendarEventModel(
-                "wednesday test",
+                "fri 2 aug 2024 test",
                 new Date(2024, 7, 2, 12, 0, 0, 0),
                 new Date(2024, 7, 2, 16, 0, 0, 0)
             )
