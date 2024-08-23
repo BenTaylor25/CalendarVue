@@ -39,6 +39,22 @@ export const useEventStore = defineStore('events', {
             //#endregion
 
             this.events.splice(idx, 1);
+        },
+        getEventsForDate(date: Date): CalendarEventModel[] {
+            const eventsForDate = [] as CalendarEventModel[];
+
+            // Todo: Refactor to handle multi-day events.
+            for (const event of this.events) {
+                if (
+                    event.startTime.getFullYear() === date.getFullYear() &&
+                    event.startTime.getMonth() === date.getMonth() &&
+                    event.endTime.getDate() === date.getDate()
+                ) {
+                    eventsForDate.push(event as CalendarEventModel);
+                }
+            }
+
+            return eventsForDate;
         }
     }
 });

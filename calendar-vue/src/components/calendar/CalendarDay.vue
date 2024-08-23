@@ -54,18 +54,8 @@ export default {
   },
   methods: {
     getTodaysEvents(): CalendarEventModel[] {
-      // THIS FILTER IS WRONG; REQUIRES PROPER IMPLEMENTATION.
-      return (useEventStore().events as CalendarEventModel[]).filter(event => {
-        const isInvalid = true;
-
-        if (isInvalid) {
-          return false;
-        }
-
-        const dayMatches = false;
-
-        return dayMatches;
-      });
+      const eventStore = useEventStore();
+      return eventStore.getEventsForDate(this.date);
     },
     createNewEventClick(event: MouseEvent) {
       const startHour = detectTimeMapClickLocation(this.date, event.x);
