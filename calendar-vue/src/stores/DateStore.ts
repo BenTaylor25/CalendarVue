@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 
 import { getMondayThisWeek } from "../helpers/dateCalculator";
+import { syncroniseScrollingWithDays } from "../components/calendar/CalendarHeader.vue";
 
 export const useDateStore = defineStore('dates', {
     state: () => ({
@@ -28,12 +29,14 @@ export const useDateStore = defineStore('dates', {
             newTopOfScreenDay.setDate(this.topOfScreenDate.getDate() - 1);
 
             this.topOfScreenDate = newTopOfScreenDay;
+            syncroniseScrollingWithDays();
         },
         scrollDown() {
             const newTopOfScreenDay = new Date(this.topOfScreenDate);
             newTopOfScreenDay.setDate(this.topOfScreenDate.getDate() + 1);
 
             this.topOfScreenDate = newTopOfScreenDay;
+            syncroniseScrollingWithDays();
         }
     }
 });

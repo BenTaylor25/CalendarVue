@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { syncroniseScrollingWithDays } from './CalendarHeader.vue';
 import { useDateStore } from '../../stores/DateStore.ts';
 
 import CalendarHeader from './CalendarHeader.vue';
@@ -34,6 +35,13 @@ export default {
       } else if (shouldScrollDown) {
         dateStore.scrollDown();
       }
+
+      // State changes get sent to the virtual DOM first and are
+      // updated in batches. `nextTick()` has the callback
+      // wait a small amount of time before executing.
+      this.$nextTick(() => {
+        syncroniseScrollingWithDays();
+      });
     }
   }
 }
