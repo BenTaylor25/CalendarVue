@@ -24,7 +24,7 @@ export function getMondayThisWeek(): Date {
     return monday;
 }
 
-export const daysOfWeek = [
+const daysOfWeek = [
   "Mon",
   "Tue",
   "Wed",
