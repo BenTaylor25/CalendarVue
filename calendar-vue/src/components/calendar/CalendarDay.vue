@@ -87,7 +87,8 @@ export function setZoomOnCalendarDay() {
   //#endregion
 
   for (const calendarDayDiv of calendarDayDivs) {
-    const timestampDivs = calendarDayDiv.getElementsByClassName('timestamp');
+    const timestampDivs =
+      calendarDayDiv.getElementsByClassName('timestamp');
 
     //#region Error Handling
     if (timestampDivs.length === 0) {
