@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-import CalendarEvent from './CalendarEvent.vue';
-import { daysOfWeek } from './CalendarMain.vue';
-import { CalendarEventModel } from '../../models/CalendarEventModel';
+import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
 import { showNewEventModal } from '../../modalController.ts';
-import { detectTimeMapClickLocation } from '../../helpers/timeMapClickLocation.ts';
+import {
+  detectTimeMapClickLocation
+} from '../../helpers/timeMapClickLocation.ts';
+import {
+  getShortWeekday,
+  getShortDateStr
+} from '../../helpers/dateCalculator.ts';
 import { useEventStore } from '../../stores/CalendarStore';
 import { useZoomStore } from '../../stores/DisplayZoomStore';
-import { useNewEventStartTimeStore } from '../../stores/NewEventStartTime.ts';
+import {
+  useNewEventStartTimeStore
+} from '../../stores/NewEventStartTime.ts';
+
+import CalendarEvent from './CalendarEvent.vue';
 
 const times: string[] = [""];
 
@@ -26,7 +34,8 @@ onMounted(() => {
   <div class="calendar-day">
 
     <div class="weekday">
-      <p>{{ weekday }}</p>
+      <p class="weekday-str">{{ getShortWeekday(date) }}</p>
+      <p class="date-str">{{ getShortDateStr(date) }}</p>
     </div>
 
     <div class="time-map" @click="createNewEventClick">
@@ -47,25 +56,21 @@ onMounted(() => {
 <script lang="ts">
 export default {
   props: {
-    weekday: String
+    date: Date
   },
   methods: {
     getTodaysEvents(): CalendarEventModel[] {
-      // THIS FILTER IS WRONG; REQUIRES PROPER IMPLEMENTATION.
-      return (useEventStore().events as CalendarEventModel[]).filter(event => {
-        const isInvalid =
-          !event ||
-          !this.weekday ||
-          !daysOfWeek.includes(this.weekday);
+      const eventStore = useEventStore();
+      return eventStore.getEventsForDate(this.date);
+    },
+    createNewEventClick(event: MouseEvent) {
+      const startHour = detectTimeMapClickLocation(this.date, event.x);
 
-        if (isInvalid) {
-          return false;
-        }
+      if (startHour) {
+        useNewEventStartTimeStore().setStartTime(startHour);
+      }
 
-        const dayMatches = event.startTime.getDate() % 7 == daysOfWeek.indexOf(this.weekday);
-
-        return dayMatches;
-      });
+      showNewEventModal();
     }
   }
 }
@@ -82,7 +87,8 @@ export function setZoomOnCalendarDay() {
   //#endregion
 
   for (const calendarDayDiv of calendarDayDivs) {
-    const timestampDivs = calendarDayDiv.getElementsByClassName('timestamp');
+    const timestampDivs =
+      calendarDayDiv.getElementsByClassName('timestamp');
 
     //#region Error Handling
     if (timestampDivs.length === 0) {
@@ -95,16 +101,6 @@ export function setZoomOnCalendarDay() {
     }
   }
 }
-
-function createNewEventClick(event: MouseEvent) {
-  const startHour = detectTimeMapClickLocation(event.x);
-
-  if (startHour) {
-    useNewEventStartTimeStore().setStartTime(startHour);
-  }
-
-  showNewEventModal();
-}
 </script>
 
 <style scoped lang="scss">
@@ -115,6 +111,7 @@ function createNewEventClick(event: MouseEvent) {
 
   .weekday {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -123,8 +120,17 @@ function createNewEventClick(event: MouseEvent) {
     background-color: blueviolet; // temp
 
     p {
-      font-size: 1.25rem;
+      margin: 0;
+
+      &.weekday-str {
+        font-size: 1.25rem;
+      }
+
+      &.date-str {
+        font-size: 1rem;
+      }
     }
+
   }
 
   .time-map {

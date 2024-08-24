@@ -6,13 +6,13 @@ export const useEventStore = defineStore('events', {
     state: () => ({
         events: [
             new CalendarEventModel(
-                "monday test",
+                "wed 7 aug 24 test",
                 // This is 7th AUGUST because JavaScript is stupid.
                 new Date(2024, 7, 7, 10, 0, 0, 0),
                 new Date(2024, 7, 7, 12, 0, 0, 0)
             ),
             new CalendarEventModel(
-                "wednesday test",
+                "fri 2 aug 2024 test",
                 new Date(2024, 7, 2, 12, 0, 0, 0),
                 new Date(2024, 7, 2, 16, 0, 0, 0)
             )
@@ -39,6 +39,22 @@ export const useEventStore = defineStore('events', {
             //#endregion
 
             this.events.splice(idx, 1);
+        },
+        getEventsForDate(date: Date): CalendarEventModel[] {
+            const eventsForDate = [] as CalendarEventModel[];
+
+            // Todo: Refactor to handle multi-day events.
+            for (const event of this.events) {
+                if (
+                    event.startTime.getFullYear() === date.getFullYear() &&
+                    event.startTime.getMonth() === date.getMonth() &&
+                    event.endTime.getDate() === date.getDate()
+                ) {
+                    eventsForDate.push(event as CalendarEventModel);
+                }
+            }
+
+            return eventsForDate;
         }
     }
 });

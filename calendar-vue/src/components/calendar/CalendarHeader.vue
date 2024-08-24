@@ -9,42 +9,6 @@ for (let i = 1; i <= 24; i++) {
   times.push(`${i}:00`);
 }
 
-function syncroniseScrollingWithDays() {
-  const headerTimeMapDiv =
-    document.getElementById('time-bar') as HTMLDivElement;
-  const dayTimeMapDivs =
-    document.getElementsByClassName('calendar-day') as HTMLCollection;
-
-  //#region Error Handling
-  if (headerTimeMapDiv == null) {
-    console.error("headerTimeMapDiv not found.");
-  }
-
-  if (dayTimeMapDivs == null) {
-    console.error("dayTimeMapDivs not found.");
-  }
-
-  if (dayTimeMapDivs.length == 0) {
-    console.error(
-      "Scroll detected on Calendar Header but no days were found"
-    );
-  }
-  //#endregion
-
-  for (const dayTimeMapDiv of dayTimeMapDivs) {
-    const timeMapDivs = dayTimeMapDiv.getElementsByClassName('time-map');
-
-    //#region Error Handling
-    if (timeMapDivs.length != 1) {
-      console.error("Found incorrect number of 'time-map's inside day.");
-    }
-    //#endregion
-
-    const timeMapDiv = timeMapDivs[0];
-    timeMapDiv.scrollLeft = headerTimeMapDiv.scrollLeft;
-  }
-}
-
 function scrollToMiddle() {
   const headerTimeMapDiv =
     document.getElementById('time-bar') as HTMLDivElement;
@@ -102,6 +66,42 @@ export function setZoomOnCalendarHeader() {
 
   for (const timestampDiv of timestampDivs) {
     (timestampDiv as HTMLDivElement).style.padding = `0 ${zoom}rem`;
+  }
+}
+
+export function syncroniseScrollingWithDays() {
+  const headerTimeMapDiv =
+    document.getElementById('time-bar') as HTMLDivElement;
+  const dayTimeMapDivs =
+    document.getElementsByClassName('calendar-day') as HTMLCollection;
+
+  //#region Error Handling
+  if (headerTimeMapDiv == null) {
+    console.error("headerTimeMapDiv not found.");
+  }
+
+  if (dayTimeMapDivs == null) {
+    console.error("dayTimeMapDivs not found.");
+  }
+
+  if (dayTimeMapDivs.length == 0) {
+    console.error(
+      "Scroll detected on Calendar Header but no days were found"
+    );
+  }
+  //#endregion
+
+  for (const dayTimeMapDiv of dayTimeMapDivs) {
+    const timeMapDivs = dayTimeMapDiv.getElementsByClassName('time-map');
+
+    //#region Error Handling
+    if (timeMapDivs.length != 1) {
+      console.error("Found incorrect number of 'time-map's inside day.");
+    }
+    //#endregion
+
+    const timeMapDiv = timeMapDivs[0];
+    timeMapDiv.scrollLeft = headerTimeMapDiv.scrollLeft;
   }
 }
 
