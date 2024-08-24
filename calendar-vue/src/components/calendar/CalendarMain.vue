@@ -22,13 +22,15 @@ const dateStore = useDateStore();
 </template>
 
 <script lang="ts">
+const SCROLL_DELTA_THRESHOLD = 10;
+
 export default {
   methods: {
     scrollThroughDates(event: WheelEvent) {
       const dateStore = useDateStore();
 
-      const shouldScrollUp = event.deltaY < -10;
-      const shouldScrollDown = event.deltaY > 10;
+      const shouldScrollUp = event.deltaY < -SCROLL_DELTA_THRESHOLD;
+      const shouldScrollDown = event.deltaY > SCROLL_DELTA_THRESHOLD;
 
       if (shouldScrollUp) {
         dateStore.scrollUp();
