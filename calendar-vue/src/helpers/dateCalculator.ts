@@ -24,7 +24,7 @@ export function getMondayThisWeek(): Date {
     return monday;
 }
 
-const daysOfWeek = [
+const WEEKDAYS = [
   "Mon",
   "Tue",
   "Wed",
@@ -43,7 +43,7 @@ export function getShortWeekday(date: Date) {
         day = 6;
     }
 
-    return daysOfWeek[day];
+    return WEEKDAYS[day];
 }
 
 export function getShortDateStr(date: Date) {
