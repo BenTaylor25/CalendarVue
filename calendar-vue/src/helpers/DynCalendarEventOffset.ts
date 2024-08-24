@@ -55,7 +55,7 @@ function smallZoomScaleMultiplier(): number {
 }
 
 export function calcEventLeftAlignment(event: CalendarEventModel): string {
-    const eventStartTime = event.startTime.getHours();
+    const eventStartTime = hoursWithDecimalMinutes(event.startTime);
 
     const zoom = useZoomStore().zoom;
 
@@ -72,7 +72,8 @@ export function calcEventLeftAlignment(event: CalendarEventModel): string {
 
 export function calcEventWidth(event: CalendarEventModel): string {
     const eventDuration =
-        event.endTime.getHours() - event.startTime.getHours();
+        hoursWithDecimalMinutes(event.endTime) -
+        hoursWithDecimalMinutes(event.startTime);
         // doesn't handle multi-day events
 
     const zoom = useZoomStore().zoom;
@@ -92,4 +93,13 @@ export function calcEventStyle(event: CalendarEventModel): StyleValue {
         left: calcEventLeftAlignment(event),
         width: calcEventWidth(event)
     } as StyleValue;
+}
+
+function hoursWithDecimalMinutes(date: Date): number {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    const minutesRounded = Math.round(minutes / 15) * 15;
+
+    return hours + (minutesRounded / 60);
 }
