@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-import { daysOfWeek } from '../../helpers/dateCalculator.ts';
-import { CalendarEventModel } from '../../models/CalendarEventModel';
+import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
 import { showNewEventModal } from '../../modalController.ts';
-import { detectTimeMapClickLocation } from '../../helpers/timeMapClickLocation.ts';
-import { getShortWeekday, getShortDateStr } from '../../helpers/dateCalculator.ts';
+import {
+  detectTimeMapClickLocation
+} from '../../helpers/timeMapClickLocation.ts';
+import {
+  getShortWeekday,
+  getShortDateStr
+} from '../../helpers/dateCalculator.ts';
 import { useEventStore } from '../../stores/CalendarStore';
 import { useZoomStore } from '../../stores/DisplayZoomStore';
-import { useNewEventStartTimeStore } from '../../stores/NewEventStartTime.ts';
+import {
+  useNewEventStartTimeStore
+} from '../../stores/NewEventStartTime.ts';
 
 import CalendarEvent from './CalendarEvent.vue';
 
