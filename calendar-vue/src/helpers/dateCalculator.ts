@@ -5,16 +5,21 @@ export function getMondayThisWeek(): Date {
     // 0: Sunday
     // 1: Monday
     // ...
-    const weekdayIdx = today.getDay();
+    // 6: Saturday
+    let weekdayIdx = today.getDay();
 
-    let offset = 1 - weekdayIdx;
-
+    // 1: Monday
+    // ...
+    // 6: Saturday
+    // 7: Sunday
     if (weekdayIdx === 0) {
-        offset = -6;
+        weekdayIdx = 7;
     }
 
-    const monday = new Date();
-    monday.setDate(today.getDate() + offset);
+    const offsetToMonday = 1 - weekdayIdx;
+
+    const monday = new Date(today);
+    monday.setDate(today.getDate() + offsetToMonday);
 
     return monday;
 }
