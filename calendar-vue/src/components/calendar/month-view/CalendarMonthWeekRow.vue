@@ -1,20 +1,28 @@
 <script setup lang="ts">
+import { PropType } from 'vue';
+
 import CalendarMonthDay from './CalendarMonthDay.vue';
 </script>
 
 <template>
   <div class="month-week-row">
-    <calendar-month-day class="mon" />
-    <calendar-month-day class="tue" />
-    <calendar-month-day class="wed" />
-    <calendar-month-day class="thu" />
-    <calendar-month-day class="fri" />
-    <calendar-month-day class="sat" />
-    <calendar-month-day class="sun" />
+    <calendar-month-day
+      v-for="day in days"
+      :key="day.toDateString()"
+      :day="day"
+    />
   </div>
 </template>
 
 <script lang="ts">
+export default {
+  props: {
+    days: {
+      type: Array as PropType<Date[]>,
+      required: true
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
