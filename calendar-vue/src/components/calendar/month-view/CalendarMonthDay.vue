@@ -3,7 +3,13 @@ import { PropType } from 'vue';
 </script>
 
 <template>
-  <div class="month-day" @click="dayClicked()" />
+
+  <div
+    class="month-day"
+    :class="disabledCheck()"
+    @click="dayClicked()"
+  />
+
 </template>
 
 <script lang="ts">
@@ -17,6 +23,9 @@ export default {
   methods: {
     dayClicked() {
       console.log(`${this.day?.toDateString() ?? 'null' } was clicked`);
+    },
+    disabledCheck(): string {
+      return this.day === null ? 'disabled' : '';
     }
   }
 }
@@ -28,8 +37,12 @@ export default {
   height: 100%;
   border: 1px dotted gray;
 
-  &:hover {
+  &:not(.disabled):hover {
     background-color: green;
+  }
+
+  &.disabled {
+    border: none;
   }
 }
 </style>
