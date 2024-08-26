@@ -6,7 +6,7 @@ import { PropType } from 'vue';
 
   <div
     class="month-day"
-    :class="disabledCheck()"
+    :class="styleClassesCheck()"
     @click="dayClicked()"
   />
 
@@ -26,8 +26,21 @@ export default {
         console.log(`${this.day?.toDateString() ?? 'null' } was clicked`);
       }
     },
+    styleClassesCheck(): string {
+      return `${this.disabledCheck()} ${this.todayCheck()}`;
+    },
     disabledCheck(): string {
       return this.day === null ? 'disabled' : '';
+    },
+    todayCheck(): string {
+      const today = new Date();
+
+      const dayIsToday =
+        today.getFullYear() === this.day?.getFullYear() &&
+        today.getMonth() === this.day?.getMonth() &&
+        today.getDate() === this.day?.getDate();
+
+      return dayIsToday ? 'today' : '';
     }
   }
 }
@@ -46,6 +59,10 @@ export default {
 
   &.disabled {
     border: none;
+  }
+
+  &:not(.disabled).today {
+    border-color: yellow;
   }
 }
 </style>
