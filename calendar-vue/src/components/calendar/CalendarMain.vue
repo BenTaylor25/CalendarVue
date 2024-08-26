@@ -14,7 +14,7 @@ const dateStore = useDateStore();
 
     <calendar-day
       v-for="day in dateStore.visibleDays"
-      v-bind:key="day"
+      :key="day.toDateString()"
       :date="day"
       @wheel="scrollThroughDates"
     />
