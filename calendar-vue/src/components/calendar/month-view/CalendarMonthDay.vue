@@ -37,7 +37,8 @@ export default {
 .month-day {
   width: calc(100% / 7);
   height: 100%;
-  border: 1px dotted gray;
+  border: 1px solid gray;
+  border-radius: 50%;
 
   &:not(.disabled):hover {
     background-color: green;
