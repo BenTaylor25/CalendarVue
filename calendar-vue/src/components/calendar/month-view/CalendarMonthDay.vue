@@ -53,16 +53,19 @@ export default {
   border: 1px solid gray;
   border-radius: 50%;
 
-  &:not(.disabled):hover {
-    background-color: green;
-  }
-
   &.disabled {
     border: none;
   }
-
-  &:not(.disabled).today {
-    border-color: yellow;
+  
+  &:not(.disabled) {
+    &:hover {
+      background-color: green;
+    }
+    
+    &.today {
+      border-color: yellow;
+    }
   }
+
 }
 </style>
