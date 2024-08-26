@@ -31,8 +31,9 @@ export default {
   width: 100%;
   height: 15%;
 
-  .fri {
-    margin-right: 10%;
+  // Seperate weekdays from weekend.
+  :nth-child(5) {
+    margin-right: 6%;
   }
 }
 </style>

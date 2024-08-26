@@ -22,7 +22,9 @@ export default {
   },
   methods: {
     dayClicked() {
-      console.log(`${this.day?.toDateString() ?? 'null' } was clicked`);
+      if (this.day) {
+        console.log(`${this.day?.toDateString() ?? 'null' } was clicked`);
+      }
     },
     disabledCheck(): string {
       return this.day === null ? 'disabled' : '';
