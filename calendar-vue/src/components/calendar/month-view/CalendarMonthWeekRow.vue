@@ -7,8 +7,8 @@ import CalendarMonthDay from './CalendarMonthDay.vue';
 <template>
   <div class="month-week-row">
     <calendar-month-day
-      v-for="day in days"
-      :key="day.toDateString()"
+      v-for="(day, index) in days"
+      :key="day?.toDateString() ?? index"
       :day="day"
     />
   </div>
@@ -18,7 +18,7 @@ import CalendarMonthDay from './CalendarMonthDay.vue';
 export default {
   props: {
     days: {
-      type: Array as PropType<Date[]>,
+      type: Array as PropType<Array<Date | null>>,
       required: true
     }
   }

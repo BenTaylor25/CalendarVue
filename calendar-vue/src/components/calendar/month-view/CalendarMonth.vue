@@ -6,8 +6,8 @@ import CalendarMonthWeekRow from './CalendarMonthWeekRow.vue';
 <template>
   <div id="month-view">
     <calendar-month-week-row
-      v-for="days in weeks"
-      :key="days[0].toDateString()"
+      v-for="(days, index) in weeks"
+      :key="days[0]?.toDateString() ?? index"
       :days="days"
     />
   </div>
@@ -23,9 +23,9 @@ const weeks = [
     new Date(2024, 7, 29),
     new Date(2024, 7, 30),
     new Date(2024, 7, 31),
-    new Date(2024, 8, 1)
+    null
   ]
-] as Date[][];
+] as Array<Array<Date | null>>;
 
 </script>
 

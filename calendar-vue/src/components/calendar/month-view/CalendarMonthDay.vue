@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import { PropType } from 'vue';
 </script>
 
 <template>
@@ -10,13 +10,13 @@
 export default {
   props: {
     day: {
-      type: Date,
+      type: [Date, null] as unknown as PropType<Date | null>,
       required: true
     }
   },
   methods: {
     dayClicked() {
-      console.log(`${this.day.toDateString()} was clicked`);
+      console.log(`${this.day?.toDateString() ?? 'null' } was clicked`);
     }
   }
 }
