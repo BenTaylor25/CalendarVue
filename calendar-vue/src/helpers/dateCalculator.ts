@@ -73,3 +73,21 @@ export function getFirstDayOfMonth(month: Date): WeekdayAndDate {
         date: firstDateOfMonth
     }
 }
+
+export function getLastDayOfMonth(month: Date): WeekdayAndDate {
+    const dayNextMonth = new Date(month);
+    dayNextMonth.setMonth(dayNextMonth.getMonth() + 1);
+
+    const firstDayOfNextMonth = getFirstDayOfMonth(dayNextMonth);
+
+    const lastDayThisMonth = new Date(firstDayOfNextMonth.date);
+    lastDayThisMonth.setDate(lastDayThisMonth.getDate() - 1);
+
+    const weekday = getShortWeekday(lastDayThisMonth);
+
+    return {
+        weekday,
+        weekdayIdx: WEEKDAYS.indexOf(weekday),
+        date: lastDayThisMonth
+    }
+}

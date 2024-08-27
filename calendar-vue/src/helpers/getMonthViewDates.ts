@@ -1,5 +1,5 @@
 import { useDateStore } from "../stores/DateStore";
-import { getFirstDayOfMonth, getMondayOfWeek } from "./dateCalculator";
+import { getFirstDayOfMonth, getLastDayOfMonth, getMondayOfWeek } from "./dateCalculator";
 
 /*
 Using the topOfScreenDate from the DateStore, I want to get an array
@@ -81,15 +81,32 @@ function getThisMonthWeeks(startingDate: Date): Array<Array<Date | null>> {
 }
 
 function getPrevMonthWeek(startingDate: Date): Array<Date | null> {
-    const week = [] as Array<Date | null>;
+    // Is there an edgecase here for when startingDate is the 31st of a month?
+    const dayLastMonth = new Date(startingDate);
+    dayLastMonth.setMonth(dayLastMonth.getMonth() - 1);
 
+    const lastDayLastMonth = getLastDayOfMonth(dayLastMonth);
+
+    const week = getDaysThisWeek(lastDayLastMonth.date, {
+        sameMonthOnly: true,
+        shouldPad: true,
+        padRight: true
+    })
 
     return week;
 }
 
 function getNextMonthWeek(startingDate: Date): Array<Date | null> {
-    const week = [] as Array<Date | null>;
+    const dayNextMonth = new Date(startingDate);
+    dayNextMonth.setMonth(dayNextMonth.getMonth() + 1);
 
+    const firstDayNextMonth = getFirstDayOfMonth(dayNextMonth);
+
+    const week = getDaysThisWeek(firstDayNextMonth.date, {
+        sameMonthOnly: true,
+        shouldPad: true,
+        padRight: false
+    });
 
     return week;
 }
