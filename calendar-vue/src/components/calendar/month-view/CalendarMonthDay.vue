@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
+import { useDateStore } from '../../../stores/DateStore';
 </script>
 
 <template>
@@ -27,10 +28,34 @@ export default {
       }
     },
     styleClassesCheck(): string {
-      return `${this.disabledCheck()} ${this.todayCheck()}`;
+      const disabled = this.disabledCheck();
+      const selected = this.selectedCheck();
+      const today = this.todayCheck();
+
+      return `${disabled} ${selected} ${today}`;
     },
     disabledCheck(): string {
       return this.day === null ? 'disabled' : '';
+    },
+    selectedCheck(): string {
+      const dateStore = useDateStore();
+      const selectedDay = dateStore.topOfScreenDate;
+
+      //#region Error Handling
+      if (
+        selectedDay === null ||
+        this.day === null
+      ) {
+        return '';
+      }
+      //#endregion
+
+      const dayIsSelected =
+        selectedDay.getFullYear() === this.day.getFullYear() &&
+        selectedDay.getMonth() === this.day.getMonth() &&
+        selectedDay.getDate() === this.day.getDate();
+
+      return dayIsSelected ? 'selected' : '';
     },
     todayCheck(): string {
       const today = new Date();
@@ -61,7 +86,11 @@ export default {
     &:hover {
       background-color: green;
     }
-    
+
+    &:not(:hover).selected {
+      background-color: darkgreen;
+    }
+
     &.today {
       border-color: yellow;
     }
