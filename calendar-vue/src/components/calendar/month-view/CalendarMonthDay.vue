@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
 import { useDateStore } from '../../../stores/DateStore';
+import { syncroniseScrollingWithDays } from '../CalendarHeader.vue';
 </script>
 
 <template>
@@ -24,7 +25,15 @@ export default {
   methods: {
     dayClicked() {
       if (this.day) {
-        console.log(`${this.day?.toDateString() ?? 'null' } was clicked`);
+        const dateStore = useDateStore();
+        dateStore.topOfScreenDate = this.day;
+        
+        // State changes get sent to the virtual DOM first and are
+        // updated in batches. `nextTick()` has the callback
+        // wait a small amount of time before executing.
+        this.$nextTick(() => {
+          syncroniseScrollingWithDays();
+        });
       }
     },
     styleClassesCheck(): string {
@@ -92,6 +101,5 @@ export default {
       border-color: yellow;
     }
   }
-
 }
 </style>
