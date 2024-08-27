@@ -42,10 +42,7 @@ export default {
       const selectedDay = dateStore.topOfScreenDate;
 
       //#region Error Handling
-      if (
-        selectedDay === null ||
-        this.day === null
-      ) {
+      if (selectedDay === null || this.day === null) {
         return '';
       }
       //#endregion
