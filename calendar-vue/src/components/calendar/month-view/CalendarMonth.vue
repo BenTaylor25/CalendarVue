@@ -16,66 +16,6 @@ import CalendarMonthWeekRow from './CalendarMonthWeekRow.vue';
 </template>
 
 <script lang="ts">
-
-// const weeks = [
-//   [
-//     new Date(2024, 7, 26),
-//     new Date(2024, 7, 27),
-//     new Date(2024, 7, 28),
-//     null,
-//     null,
-//     null,
-//     null
-//   ],
-//   [
-//     null,
-//     null,
-//     null,
-//     new Date(2024, 7, 29),
-//     new Date(2024, 7, 30),
-//     new Date(2024, 7, 31),
-//     new Date(2024, 8, 1)
-//   ],
-//   [
-//     new Date(2024, 7, 26),
-//     new Date(2024, 7, 27),
-//     new Date(2024, 7, 28),
-//     new Date(2024, 7, 29),
-//     new Date(2024, 7, 30),
-//     new Date(2024, 7, 31),
-//     new Date(2024, 8, 1)
-//   ],
-//   [
-//     new Date(2024, 7, 26),
-//     new Date(2024, 7, 27),
-//     new Date(2024, 7, 28),
-//     new Date(2024, 7, 29),
-//     new Date(2024, 7, 30),
-//     new Date(2024, 7, 31),
-//     new Date(2024, 8, 1)
-//   ],
-//   [
-//     new Date(2024, 7, 26),
-//     new Date(2024, 7, 27),
-//     new Date(2024, 7, 28),
-//     new Date(2024, 7, 29),
-//     new Date(2024, 7, 30),
-//     new Date(2024, 7, 31),
-//     null
-//   ],
-//   [
-//     null,
-//     null,
-//     null,
-//     null,
-//     null,
-//     null,
-//     new Date(2024, 8, 1)
-//   ]
-// ] as Array<Array<Date | null>>;
-
-// const weeks = getMonthViewDates();
-
 </script>
 
 <style scoped lang="scss">
