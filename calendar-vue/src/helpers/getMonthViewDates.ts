@@ -81,9 +81,11 @@ function getThisMonthWeeks(startingDate: Date): Array<Array<Date | null>> {
 }
 
 function getPrevMonthWeek(startingDate: Date): Array<Date | null> {
-    // Is there an edgecase here for when startingDate is the 31st of a month?
-    const dayLastMonth = new Date(startingDate);
-    dayLastMonth.setMonth(dayLastMonth.getMonth() - 1);
+    const dayLastMonth = new Date(
+        startingDate.getFullYear(),
+        startingDate.getMonth() - 1,
+        15
+    );
 
     const lastDayLastMonth = getLastDayOfMonth(dayLastMonth);
 
@@ -97,12 +99,13 @@ function getPrevMonthWeek(startingDate: Date): Array<Date | null> {
 }
 
 function getNextMonthWeek(startingDate: Date): Array<Date | null> {
-    const dayNextMonth = new Date(startingDate);
-    dayNextMonth.setMonth(dayNextMonth.getMonth() + 1);
+    const firstDayNextMonth = new Date(
+        startingDate.getFullYear(),
+        startingDate.getMonth() + 1,
+        1
+    );
 
-    const firstDayNextMonth = getFirstDayOfMonth(dayNextMonth);
-
-    const week = getDaysThisWeek(firstDayNextMonth.date, {
+    const week = getDaysThisWeek(firstDayNextMonth, {
         sameMonthOnly: true,
         shouldPad: true,
         padRight: false
