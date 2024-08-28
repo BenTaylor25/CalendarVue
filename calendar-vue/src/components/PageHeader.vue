@@ -29,7 +29,7 @@ import { showZoomSettingsModal } from '../modalController.ts';
 
     * {
       height: 50%;
-      background: blue;
+      background: green;
       padding: 0.1rem 0.3rem;
       cursor: pointer;
     }
