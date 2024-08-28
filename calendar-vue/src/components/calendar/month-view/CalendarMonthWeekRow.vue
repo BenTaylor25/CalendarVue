@@ -10,6 +10,7 @@ import CalendarMonthDay from './CalendarMonthDay.vue';
       v-for="(day, index) in days"
       :key="day?.toDateString() ?? index"
       :day="day"
+      :isFirstOrLast="isFirstOrLast"
     />
   </div>
 </template>
@@ -20,6 +21,11 @@ export default {
     days: {
       type: Array as PropType<Array<Date | null>>,
       required: true
+    },
+    isFirstOrLast: {
+      type: Boolean,
+      default: false,
+      required: false
     }
   }
 }

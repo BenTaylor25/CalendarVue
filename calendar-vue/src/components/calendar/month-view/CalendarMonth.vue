@@ -11,6 +11,7 @@ import CalendarMonthWeekRow from './CalendarMonthWeekRow.vue';
       v-for="(days, index) in getMonthViewDates()"
       :key="days[0]?.toDateString() ?? index"
       :days="days"
+      :isFirstOrLast="index === 0 || index === days.length - 1"
     />
   </div>
 </template>

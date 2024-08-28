@@ -20,6 +20,11 @@ export default {
     day: {
       type: [Date, null] as unknown as PropType<Date | null>,
       required: true
+    },
+    isFirstOrLast: {
+      type: Boolean,
+      default: false,
+      required: false
     }
   },
   methods: {
@@ -41,7 +46,9 @@ export default {
       const selected = this.selectedCheck();
       const today = this.todayCheck();
 
-      return `${disabled} ${selected} ${today}`;
+      const firstOrLast = this.isFirstOrLast ? 'first-or-last' : '';
+
+      return `${disabled} ${selected} ${today} ${firstOrLast}`;
     },
     disabledCheck(): string {
       return this.day === null ? 'disabled' : '';
@@ -81,7 +88,7 @@ export default {
 .month-day {
   width: calc(100% / 7);
   height: 100%;
-  border: 1px solid gray;
+  border: 1px solid lightgray;
   border-radius: 50%;
 
   &.disabled {
@@ -99,6 +106,10 @@ export default {
 
     &.today {
       border-color: yellow;
+    }
+
+    &.first-or-last {
+      border-color: gray;
     }
   }
 }
