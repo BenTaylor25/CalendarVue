@@ -88,7 +88,7 @@ export default {
 .month-day {
   width: calc(100% / 7);
   height: 100%;
-  border: 1px solid lightgray;
+  border: 1px solid bisque;
   border-radius: 50%;
 
   &.disabled {
@@ -105,7 +105,8 @@ export default {
     }
 
     &.today {
-      border-color: yellow;
+      // border-color: yellow;
+      border: 1px solid cyan;
     }
 
     &.first-or-last {
