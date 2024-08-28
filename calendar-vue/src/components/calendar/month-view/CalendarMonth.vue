@@ -11,12 +11,20 @@ import CalendarMonthWeekRow from './CalendarMonthWeekRow.vue';
       v-for="(days, index) in getMonthViewDates()"
       :key="days[0]?.toDateString() ?? index"
       :days="days"
-      :isFirstOrLast="index === 0 || index === days.length - 1"
+      :isFirstOrLast="isFirstOrLastRow(index)"
     />
   </div>
 </template>
 
 <script lang="ts">
+export default {
+  methods: {
+    isFirstOrLastRow(index: number) {
+      const rowCount = getMonthViewDates().length;
+      return index === 0 || index === rowCount - 1;
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
