@@ -99,7 +99,7 @@ function getPrevMonthWeek(startingDate: Date): Array<Date | null> {
         sameMonthOnly: true,
         shouldPad: true,
         padRight: true
-    })
+    });
 
     return week;
 }
