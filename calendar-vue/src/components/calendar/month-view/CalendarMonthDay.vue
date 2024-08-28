@@ -105,8 +105,7 @@ export default {
     }
 
     &.today {
-      // border-color: yellow;
-      border: 1px solid cyan;
+      border-color: cyan;
     }
 
     &.first-or-last {
