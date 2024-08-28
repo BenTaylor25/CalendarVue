@@ -1,12 +1,14 @@
 
 export function getMondayThisWeek(): Date {
-    const today = new Date();
+    return getMondayOfWeek(new Date());
+}
 
+export function getMondayOfWeek(date: Date): Date {
     // 0: Sunday
     // 1: Monday
     // ...
     // 6: Saturday
-    let weekdayIdx = today.getDay();
+    let weekdayIdx = date.getDay();
 
     // 1: Monday
     // ...
@@ -18,8 +20,8 @@ export function getMondayThisWeek(): Date {
 
     const offsetToMonday = 1 - weekdayIdx;
 
-    const monday = new Date(today);
-    monday.setDate(today.getDate() + offsetToMonday);
+    const monday = new Date(date);
+    monday.setDate(date.getDate() + offsetToMonday);
 
     return monday;
 }
@@ -51,4 +53,41 @@ export function getShortDateStr(date: Date) {
     const month = date.getMonth() + 1;
 
     return `${date.getDate()}/${month}/${date.getFullYear()}`;
+}
+
+export interface WeekdayAndDate {
+    weekday: string,
+    weekdayIdx: number,
+    date: Date
+}
+
+export function getFirstDayOfMonth(month: Date): WeekdayAndDate {
+    const firstDateOfMonth = new Date(month);
+    firstDateOfMonth.setDate(1);
+
+    const weekday = getShortWeekday(firstDateOfMonth);
+
+    return {
+        weekday,
+        weekdayIdx: WEEKDAYS.indexOf(weekday),
+        date: firstDateOfMonth
+    }
+}
+
+export function getLastDayOfMonth(month: Date): WeekdayAndDate {
+    const firstDayOfMonth = getFirstDayOfMonth(month);
+
+    const firstDayOfNextMonth = new Date(firstDayOfMonth.date);
+    firstDayOfNextMonth.setMonth(firstDayOfNextMonth.getMonth() + 1);
+
+    const lastDayOfThisMonth = new Date(firstDayOfNextMonth);
+    lastDayOfThisMonth.setDate(lastDayOfThisMonth.getDate() - 1);
+
+    const weekday = getShortWeekday(lastDayOfThisMonth);
+
+    return {
+        weekday,
+        weekdayIdx: WEEKDAYS.indexOf(weekday),
+        date: lastDayOfThisMonth
+    }
 }

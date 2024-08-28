@@ -10,8 +10,8 @@ import {
   getShortWeekday,
   getShortDateStr
 } from '../../helpers/dateCalculator.ts';
-import { useEventStore } from '../../stores/CalendarStore';
-import { useZoomStore } from '../../stores/DisplayZoomStore';
+import { useEventStore } from '../../stores/CalendarStore.ts';
+import { useZoomStore } from '../../stores/DisplayZoomStore.ts';
 import {
   useNewEventStartTimeStore
 } from '../../stores/NewEventStartTime.ts';
@@ -56,7 +56,10 @@ onMounted(() => {
 <script lang="ts">
 export default {
   props: {
-    date: Date
+    date: {
+      type: Date,
+      required: true
+    }
   },
   methods: {
     getTodaysEvents(): CalendarEventModel[] {

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-import { useZoomStore } from '../../stores/DisplayZoomStore';
+import { useZoomStore } from '../../stores/DisplayZoomStore.ts';
+
+import CalendarMonth from './month-view/CalendarMonth.vue'
 
 const times: string[] = [""];
 
@@ -31,7 +33,7 @@ onMounted(() => {
   <div id="calendar-header">
 
     <div id="month-control">
-      <p>month</p>
+      <calendar-month />
     </div>
 
     <div id="time-bar" @scroll="syncroniseScrollingWithDays">

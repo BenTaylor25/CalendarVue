@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CalendarEventModel } from '../../models/CalendarEventModel';
-import { calcEventStyle } from '../../helpers/dynCalendarEventOffset';
+import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
+import { calcEventStyle } from '../../helpers/dynCalendarEventOffset.ts';
 import { showEditEventModal } from '../../modalController.ts';
 import { useEventStore } from '../../stores/CalendarStore.ts';
 </script>

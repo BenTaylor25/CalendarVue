@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { showZoomSettingsModal } from '../modalController';
+import { showZoomSettingsModal } from '../modalController.ts';
 
 </script>
 
