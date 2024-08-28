@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-import { useZoomStore } from '../../stores/DisplayZoomStore';
+import { useZoomStore } from '../../stores/DisplayZoomStore.ts';
 
 import CalendarMonth from './month-view/CalendarMonth.vue'
 

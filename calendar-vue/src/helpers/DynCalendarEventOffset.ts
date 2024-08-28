@@ -1,8 +1,8 @@
 import { StyleValue } from "vue";
 
-import { CalendarEventModel } from "../models/CalendarEventModel";
-import { useZoomStore } from "../stores/DisplayZoomStore";
-import { remToPx } from "./htmlUnits";
+import { CalendarEventModel } from "../models/CalendarEventModel.ts";
+import { useZoomStore } from "../stores/DisplayZoomStore.ts";
+import { remToPx } from "./htmlUnits.ts";
 
 /**
  * Using the size of each hour, calculate how

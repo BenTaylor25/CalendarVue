@@ -1,7 +1,9 @@
 import { defineStore } from "pinia";
 
-import { getMondayThisWeek } from "../helpers/dateCalculator";
-import { syncroniseScrollingWithDays } from "../components/calendar/CalendarHeader.vue";
+import { getMondayThisWeek } from "../helpers/dateCalculator.ts";
+import {
+    syncroniseScrollingWithDays
+} from "../components/calendar/CalendarHeader.vue";
 
 export const useDateStore = defineStore('dates', {
     state: () => ({

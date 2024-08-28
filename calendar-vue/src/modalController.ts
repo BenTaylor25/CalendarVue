@@ -1,7 +1,11 @@
-import { MODAL_IDS } from "./constants/modalConstants";
+import { MODAL_IDS } from "./constants/modalConstants.ts";
 
-import { refreshNewEventModal } from "./components/modals/NewEventModal.vue";
-import { refreshEditEventModal } from "./components/modals/EditEventModal.vue";
+import {
+    refreshNewEventModal
+} from "./components/modals/NewEventModal.vue";
+import {
+    refreshEditEventModal
+} from "./components/modals/EditEventModal.vue";
 
 function showElementWithId(id: string) {
     const element = document.getElementById(id);

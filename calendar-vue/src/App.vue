@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { hideAllModals } from './modalController.ts';
+
 import MainPage from './pages/MainPage.vue';
-
-import { hideAllModals } from './modalController';
-
 import ZoomSettingModal from './components/modals/ZoomSettingModal.vue';
 import NewEventModal from './components/modals/NewEventModal.vue';
 import EditEventModal from './components/modals/EditEventModal.vue';

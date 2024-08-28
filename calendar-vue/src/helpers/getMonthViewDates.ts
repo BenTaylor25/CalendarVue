@@ -1,5 +1,9 @@
-import { useDateStore } from "../stores/DateStore";
-import { getFirstDayOfMonth, getLastDayOfMonth, getMondayOfWeek } from "./dateCalculator";
+import { useDateStore } from "../stores/DateStore.ts";
+import {
+    getFirstDayOfMonth,
+    getLastDayOfMonth,
+    getMondayOfWeek
+} from "./dateCalculator.ts";
 
 /*
 Using the topOfScreenDate from the DateStore, I want to get an array

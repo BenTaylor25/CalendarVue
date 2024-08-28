@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
-import { useDateStore } from '../../../stores/DateStore';
+
+import { useDateStore } from '../../../stores/DateStore.ts';
 import { syncroniseScrollingWithDays } from '../CalendarHeader.vue';
 </script>
 
