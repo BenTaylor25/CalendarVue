@@ -147,7 +147,9 @@ function getDaysThisWeek(
             days.push(day);
         }
 
+        // Unlink pointer so you don't mutate pushed values.
         day = new Date(day);
+
         day.setDate(day.getDate() + 1);
     }
 
