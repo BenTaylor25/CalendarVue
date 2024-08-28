@@ -56,7 +56,10 @@ onMounted(() => {
 <script lang="ts">
 export default {
   props: {
-    date: Date
+    date: {
+      type: Date,
+      required: true
+    }
   },
   methods: {
     getTodaysEvents(): CalendarEventModel[] {
