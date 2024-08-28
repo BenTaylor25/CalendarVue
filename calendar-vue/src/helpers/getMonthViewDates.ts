@@ -53,6 +53,7 @@ export function getMonthViewDates() {
 function getThisMonthWeeks(startingDate: Date): Array<Array<Date | null>> {
     const weeks = [] as Array<Array<Date | null>>;
 
+    // First week - might not start on Monday.
     const firstOfMonth = getFirstDayOfMonth(startingDate);
 
     const firstWeek = getDaysThisWeek(firstOfMonth.date, {
@@ -63,6 +64,7 @@ function getThisMonthWeeks(startingDate: Date): Array<Array<Date | null>> {
 
     weeks.push(firstWeek);
 
+    // Remaining weeks - will always start on Monday.
     const EighthOfMonth = new Date(firstOfMonth.date);
     EighthOfMonth.setDate(EighthOfMonth.getDate() + 7);
     const mondayOfSecondWeek = getMondayOfWeek(EighthOfMonth);
