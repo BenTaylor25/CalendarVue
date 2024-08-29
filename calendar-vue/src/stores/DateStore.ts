@@ -39,6 +39,12 @@ export const useDateStore = defineStore('dates', {
 
             this.topOfScreenDate = newTopOfScreenDay;
             syncroniseScrollingWithDays();
+        },
+        jumpToToday() {
+            const today = new Date();
+
+            this.topOfScreenDate = today;
+            syncroniseScrollingWithDays();
         }
     }
 });

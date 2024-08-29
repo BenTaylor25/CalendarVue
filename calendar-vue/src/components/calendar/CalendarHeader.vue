@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, nextTick } from 'vue';
 
 import { useZoomStore } from '../../stores/DisplayZoomStore.ts';
 
@@ -72,39 +72,47 @@ export function setZoomOnCalendarHeader() {
 }
 
 export function syncroniseScrollingWithDays() {
-  const headerTimeMapDiv =
-    document.getElementById('time-bar') as HTMLDivElement;
-  const dayTimeMapDivs =
-    document.getElementsByClassName('calendar-day') as HTMLCollection;
-
-  //#region Error Handling
-  if (headerTimeMapDiv == null) {
-    console.error("headerTimeMapDiv not found.");
-  }
-
-  if (dayTimeMapDivs == null) {
-    console.error("dayTimeMapDivs not found.");
-  }
-
-  if (dayTimeMapDivs.length == 0) {
-    console.error(
-      "Scroll detected on Calendar Header but no days were found"
-    );
-  }
-  //#endregion
-
-  for (const dayTimeMapDiv of dayTimeMapDivs) {
-    const timeMapDivs = dayTimeMapDiv.getElementsByClassName('time-map');
+  // State changes get sent to the virtual DOM first and are
+  // updated in batches. `nextTick()` has the callback
+  // wait a small amount of time before executing.
+  // Since `syncroniseScrollingWithDays()` is usually called
+  // after an update to the calendar state, it makes more sense
+  // to centralise the `nextTick()`.
+  nextTick(() => {
+    const headerTimeMapDiv =
+      document.getElementById('time-bar') as HTMLDivElement;
+    const dayTimeMapDivs =
+      document.getElementsByClassName('calendar-day') as HTMLCollection;
 
     //#region Error Handling
-    if (timeMapDivs.length != 1) {
-      console.error("Found incorrect number of 'time-map's inside day.");
+    if (headerTimeMapDiv == null) {
+      console.error("headerTimeMapDiv not found.");
+    }
+
+    if (dayTimeMapDivs == null) {
+      console.error("dayTimeMapDivs not found.");
+    }
+
+    if (dayTimeMapDivs.length == 0) {
+      console.error(
+        "Scroll detected on Calendar Header but no days were found"
+      );
     }
     //#endregion
 
-    const timeMapDiv = timeMapDivs[0];
-    timeMapDiv.scrollLeft = headerTimeMapDiv.scrollLeft;
-  }
+    for (const dayTimeMapDiv of dayTimeMapDivs) {
+      const timeMapDivs = dayTimeMapDiv.getElementsByClassName('time-map');
+
+      //#region Error Handling
+      if (timeMapDivs.length != 1) {
+        console.error("Found incorrect number of 'time-map's inside day.");
+      }
+      //#endregion
+
+      const timeMapDiv = timeMapDivs[0];
+      timeMapDiv.scrollLeft = headerTimeMapDiv.scrollLeft;
+    }
+  });
 }
 
 </script>
