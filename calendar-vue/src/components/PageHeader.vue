@@ -1,10 +1,20 @@
 <script setup lang="ts">
 import { showZoomSettingsModal } from '../modalController.ts';
+import { useDateStore } from '../stores/DateStore.ts';
 
+const dateStore = useDateStore();
 </script>
 
 <template>
   <div id="header">
+
+    <div id="controls">
+
+      <div id="today" @click="dateStore.jumpToToday()">
+        <p>Today</p>
+      </div>
+
+    </div>
 
     <div id="settings">
 
@@ -22,7 +32,18 @@ import { showZoomSettingsModal } from '../modalController.ts';
 #header {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
+
+  #controls {
+    margin-left: 1rem;
+
+    * {
+      height: 50%;
+      background: green;
+      padding: 0.1rem 0.3rem;
+      cursor: pointer;
+    }
+  }
 
   #settings {
     margin-right: 1rem;

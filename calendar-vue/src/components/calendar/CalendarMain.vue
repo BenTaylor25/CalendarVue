@@ -38,12 +38,7 @@ export default {
         dateStore.scrollDown();
       }
 
-      // State changes get sent to the virtual DOM first and are
-      // updated in batches. `nextTick()` has the callback
-      // wait a small amount of time before executing.
-      this.$nextTick(() => {
-        syncroniseScrollingWithDays();
-      });
+      syncroniseScrollingWithDays();
     }
   }
 }
