@@ -2,6 +2,7 @@
 
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
 import { hideYearViewModal } from '../../modalController.ts';
+import { getMonthViewDates } from '../../helpers/getMonthViewDates.ts';
 
 import ModalShadow from './ModalShadow.vue';
 import CalendarMonth from '../calendar/month-view/CalendarMonth.vue';
@@ -23,7 +24,9 @@ import CalendarMonth from '../calendar/month-view/CalendarMonth.vue';
     <div id="month-box-container">
 
       <div class="month-box" v-for="month in 12">
-        <calendar-month />
+        <calendar-month
+          :weeksSource="[[new Date()]]"
+        />
       </div>
 
     </div>

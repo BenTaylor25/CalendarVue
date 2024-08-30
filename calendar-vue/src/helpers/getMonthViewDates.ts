@@ -33,7 +33,7 @@ This month will also cause weeks to only have 6 entries where usually
 it would have 7.
 */
 
-export function getMonthViewDates() {
+export function getMonthViewDates(): Date[][] {
     const dateStore = useDateStore();
     const topOfScreenDate = dateStore.topOfScreenDate;
 

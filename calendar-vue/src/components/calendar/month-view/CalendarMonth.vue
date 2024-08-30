@@ -8,7 +8,7 @@ import CalendarMonthWeekRow from './CalendarMonthWeekRow.vue';
 <template>
   <div id="month-view">
     <calendar-month-week-row
-      v-for="(days, index) in getMonthViewDates()"
+      v-for="(days, index) in weeksSource"
       :key="days[0]?.toDateString() ?? index"
       :days="days"
       :isFirstOrLast="isFirstOrLastRow(index)"
@@ -18,9 +18,15 @@ import CalendarMonthWeekRow from './CalendarMonthWeekRow.vue';
 
 <script lang="ts">
 export default {
+  props: {
+    weeksSource: {
+      type: Array<Array<Date>>,
+      required: true
+    }
+  },
   methods: {
     isFirstOrLastRow(index: number) {
-      const rowCount = getMonthViewDates().length;
+      const rowCount = this.weeksSource.length;
       return index === 0 || index === rowCount - 1;
     }
   }
