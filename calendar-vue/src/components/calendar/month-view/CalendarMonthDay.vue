@@ -42,10 +42,9 @@ export default {
       const selected = this.selectedCheck();
       const today = this.todayCheck();
 
-      const shouldBeGreyedOut = this.shouldBeGreyedOut ?
-        'should-be-greyed-out' : '';
+      const greyedOut = this.shouldBeGreyedOut ? 'greyed-out' : '';
 
-      return `${disabled} ${selected} ${today} ${shouldBeGreyedOut}`;
+      return `${disabled} ${selected} ${today} ${greyedOut}`;
     },
     disabledCheck(): string {
       return this.day === null ? 'disabled' : '';
@@ -105,7 +104,7 @@ export default {
       border-color: cyan;
     }
 
-    &.should-be-greyed-out {
+    &.greyed-out {
       border-color: gray;
     }
   }
