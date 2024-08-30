@@ -46,7 +46,8 @@ const dateStore = useDateStore();
 
       <div
         class="month-box"
-        v-for="(month, index) in getYearViewMonthDates(dateStore.yearViewYear)"
+        v-for="(month, index) in
+          getYearViewMonthDates(dateStore.yearViewYear)"
       >
         <h2>{{ MONTHS[index] }}</h2>
 
@@ -61,12 +62,6 @@ const dateStore = useDateStore();
 
   </modal-shadow>
 </template>
-
-<script lang="ts">
-
-// To Do: ref for yearViewYear
-
-</script>
 
 <style scoped lang="scss">
 #year-view-modal-content {
