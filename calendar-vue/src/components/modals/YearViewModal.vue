@@ -23,9 +23,23 @@ const dateStore = useDateStore();
   >
 
     <div id="year-view-header">
-      <button @click="dateStore.decrementYearViewYear">&lt;</button>
-      <h1>{{ dateStore.yearViewYear }}</h1>
-      <button @click="dateStore.incrementYearViewYear">&gt;</button>
+      <button
+        @click="dateStore.decrementYearViewYear"
+      >
+        &lt;
+      </button>
+
+      <h1
+        @click="dateStore.resetYearViewYear"
+      >
+        {{ dateStore.yearViewYear }}
+      </h1>
+
+      <button
+        @click="dateStore.incrementYearViewYear"
+      >
+        &gt;
+      </button>
     </div>
 
     <div id="month-box-container">
@@ -83,11 +97,21 @@ const dateStore = useDateStore();
       height: 3rem;
       background-color: gray;
       border-color: lightgray;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     h1 {
-      margin-left: 2rem;
-      margin-right: 2rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
