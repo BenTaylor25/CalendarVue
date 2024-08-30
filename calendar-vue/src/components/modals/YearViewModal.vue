@@ -110,6 +110,7 @@ const dateStore = useDateStore();
       margin-right: 0.5rem;
 
       &:hover {
+        background-color: teal;
         cursor: pointer;
       }
     }
