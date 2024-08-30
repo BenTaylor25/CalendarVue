@@ -36,7 +36,7 @@ onMounted(() => {
     <div id="month-control">
       <calendar-month
         :weeksSource="getMonthViewDates()"
-        greyOutFirstAndLast="true"
+        :greyOutFirstAndLast="true"
       />
     </div>
 
