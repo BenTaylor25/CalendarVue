@@ -13,11 +13,17 @@ const dateStore = useDateStore();
 
     <div id="controls">
 
-      <div id="today" @click="dateStore.jumpToToday()">
+      <div
+        id="today"
+        @click="dateStore.jumpToToday()"
+      >
         <p>Today</p>
       </div>
 
-      <div id="year-view" @click="showYearViewModal()">
+      <div
+        id="year-view"
+        @click="showYearViewModal()"
+      >
         <p>Year</p>
       </div>
 
@@ -25,7 +31,10 @@ const dateStore = useDateStore();
 
     <div id="settings">
 
-      <div id="zoom-setting" @click="showZoomSettingsModal">
+      <div
+        id="zoom-setting"
+        @click="showZoomSettingsModal"
+      >
         <p>Zoom</p>
       </div>
 
