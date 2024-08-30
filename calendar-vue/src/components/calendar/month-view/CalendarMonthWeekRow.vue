@@ -35,7 +35,7 @@ export default {
 .month-week-row {
   display: flex;
   width: 100%;
-  height: 15%;
+  height: inherit;
 
   // Seperate weekdays from weekend.
   :nth-child(5) {
