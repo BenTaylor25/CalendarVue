@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { showZoomSettingsModal } from '../modalController.ts';
+import {
+  showZoomSettingsModal,
+  showYearViewModal
+} from '../modalController.ts';
 import { useDateStore } from '../stores/DateStore.ts';
 
 const dateStore = useDateStore();
@@ -10,15 +13,28 @@ const dateStore = useDateStore();
 
     <div id="controls">
 
-      <div id="today" @click="dateStore.jumpToToday()">
+      <div
+        id="today"
+        @click="dateStore.jumpToToday()"
+      >
         <p>Today</p>
+      </div>
+
+      <div
+        id="year-view"
+        @click="showYearViewModal()"
+      >
+        <p>Year</p>
       </div>
 
     </div>
 
     <div id="settings">
 
-      <div id="zoom-setting" @click="showZoomSettingsModal">
+      <div
+        id="zoom-setting"
+        @click="showZoomSettingsModal"
+      >
         <p>Zoom</p>
       </div>
 
@@ -35,12 +51,14 @@ const dateStore = useDateStore();
   justify-content: space-between;
 
   #controls {
+    display: flex;
     margin-left: 1rem;
 
     * {
       height: 50%;
       background: green;
       padding: 0.1rem 0.3rem;
+      margin: 1rem;
       cursor: pointer;
     }
   }

@@ -2,6 +2,7 @@
 import { onMounted, nextTick } from 'vue';
 
 import { useZoomStore } from '../../stores/DisplayZoomStore.ts';
+import { getMonthViewDates } from '../../helpers/getMonthViewDates.ts';
 
 import CalendarMonth from './month-view/CalendarMonth.vue'
 
@@ -33,7 +34,10 @@ onMounted(() => {
   <div id="calendar-header">
 
     <div id="month-control">
-      <calendar-month />
+      <calendar-month
+        :weeksSource="getMonthViewDates()"
+        :greyOutFirstAndLast="true"
+      />
     </div>
 
     <div id="time-bar" @scroll="syncroniseScrollingWithDays">

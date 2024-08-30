@@ -22,7 +22,7 @@ export default {
       type: [Date, null] as unknown as PropType<Date | null>,
       required: true
     },
-    isFirstOrLast: {
+    shouldBeGreyedOut: {
       type: Boolean,
       default: false,
       required: false
@@ -42,9 +42,9 @@ export default {
       const selected = this.selectedCheck();
       const today = this.todayCheck();
 
-      const firstOrLast = this.isFirstOrLast ? 'first-or-last' : '';
+      const greyedOut = this.shouldBeGreyedOut ? 'greyed-out' : '';
 
-      return `${disabled} ${selected} ${today} ${firstOrLast}`;
+      return `${disabled} ${selected} ${today} ${greyedOut}`;
     },
     disabledCheck(): string {
       return this.day === null ? 'disabled' : '';
@@ -104,7 +104,7 @@ export default {
       border-color: cyan;
     }
 
-    &.first-or-last {
+    &.greyed-out {
       border-color: gray;
     }
   }

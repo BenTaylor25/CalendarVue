@@ -10,7 +10,7 @@ import CalendarMonthDay from './CalendarMonthDay.vue';
       v-for="(day, index) in days"
       :key="day?.toDateString() ?? index"
       :day="day"
-      :isFirstOrLast="isFirstOrLast"
+      :shouldBeGreyedOut="shouldBeGreyedOut"
     />
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
       type: Array as PropType<Array<Date | null>>,
       required: true
     },
-    isFirstOrLast: {
+    shouldBeGreyedOut: {
       type: Boolean,
       default: false,
       required: false
@@ -35,7 +35,7 @@ export default {
 .month-week-row {
   display: flex;
   width: 100%;
-  height: 15%;
+  height: inherit;
 
   // Seperate weekdays from weekend.
   :nth-child(5) {
