@@ -33,19 +33,49 @@ This month will also cause weeks to only have 6 entries where usually
 it would have 7.
 */
 
-export function getMonthViewDates(): Date[][] {
+export function getMonthViewDates(): Array<Array<Date | null>> {
     const dateStore = useDateStore();
     const topOfScreenDate = dateStore.topOfScreenDate;
 
-    const prevMonthWeek = getPrevMonthWeek(topOfScreenDate);
-    const thisMonthWeeks = getThisMonthWeeks(topOfScreenDate);
-    const nextMonthWeek = getNextMonthWeek(topOfScreenDate);
+    const weeks = collectWeeks(topOfScreenDate, true);
+
+    return weeks;
+}
+
+export function getYearViewMonthDates(
+    year: number
+): Array<Array<Array<Date | null>>> {
+
+    const months = [] as Array<Array<Array<Date | null>>>;
+    
+    for (let month = 0; month < 12; month++) {
+        let firstOfMonth = new Date(year, month, 1);
+
+        const weeksOfMonth = collectWeeks(firstOfMonth, false)
+        months.push(weeksOfMonth);
+    }
+
+    return months;
+}
+
+function collectWeeks(
+    date: Date,
+    includeBeforeAndAfter: boolean
+): Array<Array<Date | null>> {
+
+    const thisMonthWeeks = getThisMonthWeeks(date);
 
     const weeks = [
-        prevMonthWeek,
         ...thisMonthWeeks,
-        nextMonthWeek
-    ] as Date[][];
+    ] as Array<Array<Date | null>>;
+
+    if (includeBeforeAndAfter) {
+        const prevMonthWeek = getPrevMonthWeek(date);
+        const nextMonthWeek = getNextMonthWeek(date);
+
+        weeks.unshift(prevMonthWeek);
+        weeks.push(nextMonthWeek);
+    }
 
     return weeks;
 }
