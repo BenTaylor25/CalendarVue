@@ -51,7 +51,7 @@ export function getYearViewMonthDates(
     for (let month = 0; month < 12; month++) {
         let firstOfMonth = new Date(year, month, 1);
 
-        const weeksOfMonth = collectWeeks(firstOfMonth, false)
+        const weeksOfMonth = collectWeeks(firstOfMonth, false);
         months.push(weeksOfMonth);
     }
 
