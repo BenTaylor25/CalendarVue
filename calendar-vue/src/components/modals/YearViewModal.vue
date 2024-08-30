@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
 import { hideYearViewModal } from '../../modalController.ts';
 import { getYearViewMonthDates } from '../../helpers/getMonthViewDates.ts';
+import { useDateStore } from '../../stores/DateStore.ts';
 
 import ModalShadow from './ModalShadow.vue';
 import CalendarMonth from '../calendar/month-view/CalendarMonth.vue';
+
+const dateStore = useDateStore();
 </script>
 
 <template>
@@ -23,7 +27,10 @@ import CalendarMonth from '../calendar/month-view/CalendarMonth.vue';
 
     <div id="month-box-container">
 
-      <div class="month-box" v-for="month in getYearViewMonthDates(2024)">
+      <div
+        class="month-box"
+        v-for="month in getYearViewMonthDates(dateStore.topOfScreenDate.getFullYear())"
+      >
         <calendar-month
           :weeksSource="month"
         />
@@ -37,6 +44,9 @@ import CalendarMonth from '../calendar/month-view/CalendarMonth.vue';
 </template>
 
 <script lang="ts">
+
+// To Do: ref for yearViewYear
+
 </script>
 
 <style scoped lang="scss">
