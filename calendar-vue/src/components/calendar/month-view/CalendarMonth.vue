@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { getMonthViewDates } from '../../../helpers/getMonthViewDates.ts';
-
 import CalendarMonthWeekRow from './CalendarMonthWeekRow.vue';
 
 </script>
@@ -20,7 +18,7 @@ import CalendarMonthWeekRow from './CalendarMonthWeekRow.vue';
 export default {
   props: {
     weeksSource: {
-      type: Array<Array<Date>>,
+      type: Array<Array<Date | null>>,
       required: true
     },
     greyOutFirstAndLast: {

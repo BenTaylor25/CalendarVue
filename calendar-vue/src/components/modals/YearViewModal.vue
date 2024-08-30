@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
 import { MONTHS } from '../../constants/months.ts';
 import { hideYearViewModal } from '../../modalController.ts';
@@ -81,7 +79,7 @@ const dateStore = useDateStore();
       display: flex;
       flex-direction: column;
       align-items: center;
-      border: 1px solid black;
+      border: 1px solid darkgray;
       width: 25%;
       height: 33%;
       padding: 0.25rem;
