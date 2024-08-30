@@ -11,7 +11,7 @@ import CalendarMonthWeekRow from './CalendarMonthWeekRow.vue';
       v-for="(days, index) in weeksSource"
       :key="days[0]?.toDateString() ?? index"
       :days="days"
-      :isFirstOrLast="isFirstOrLastRow(index)"
+      :shouldBeGreyedOut="shouldBeGreyedOut(index)"
     />
   </div>
 </template>
@@ -22,9 +22,16 @@ export default {
     weeksSource: {
       type: Array<Array<Date>>,
       required: true
+    },
+    greyOutFirstAndLast: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
+    shouldBeGreyedOut(index: number) {
+      return this.greyOutFirstAndLast && this.isFirstOrLastRow(index);
+    },
     isFirstOrLastRow(index: number) {
       const rowCount = this.weeksSource.length;
       return index === 0 || index === rowCount - 1;
