@@ -73,7 +73,6 @@ export const hideEditEventModal = () => {
 // Year View.
 export const showYearViewModal = () => {
     showElementWithId(MODAL_IDS.YEAR_VIEW_MODAL);
-    refreshEditEventModal();
 }
 
 export const hideYearViewModal = () => {

@@ -7,7 +7,8 @@ import {
 
 export const useDateStore = defineStore('dates', {
     state: () => ({
-        topOfScreenDate: getMondayThisWeek()
+        topOfScreenDate: getMondayThisWeek(),
+        yearViewYear: (new Date()).getFullYear()
     }),
     getters: {
         visibleDays(state) {
@@ -45,6 +46,15 @@ export const useDateStore = defineStore('dates', {
 
             this.topOfScreenDate = today;
             syncroniseScrollingWithDays();
+        },
+        decrementYearViewYear() {
+            this.yearViewYear--;
+        },
+        incrementYearViewYear() {
+            this.yearViewYear++;
+        },
+        resetYearViewYear() {
+            this.yearViewYear = (new Date()).getFullYear();
         }
     }
 });

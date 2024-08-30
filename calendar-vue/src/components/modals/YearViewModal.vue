@@ -22,13 +22,17 @@ const dateStore = useDateStore();
     @click.stop
   >
 
-    <h1>Year</h1>
+    <div id="year-view-header">
+      <button @click="dateStore.decrementYearViewYear">&lt;</button>
+      <h1>{{ dateStore.yearViewYear }}</h1>
+      <button @click="dateStore.incrementYearViewYear">&gt;</button>
+    </div>
 
     <div id="month-box-container">
 
       <div
         class="month-box"
-        v-for="(month, index) in getYearViewMonthDates(dateStore.topOfScreenDate.getFullYear())"
+        v-for="(month, index) in getYearViewMonthDates(dateStore.yearViewYear)"
       >
         <h2>{{ MONTHS[index] }}</h2>
 
@@ -52,6 +56,7 @@ const dateStore = useDateStore();
 
 <style scoped lang="scss">
 #year-view-modal-content {
+  display: flex;
   position: absolute;
   flex-direction: column;
   background-color: darkslategray;
@@ -67,6 +72,23 @@ const dateStore = useDateStore();
 
   &.show {
     display: flex;
+  }
+
+  #year-view-header {
+    display: flex;
+    align-items: center;
+
+    button {
+      padding: 1rem;
+      height: 3rem;
+      background-color: gray;
+      border-color: lightgray;
+    }
+
+    h1 {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
   }
 
   #month-box-container {
