@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Calendar.Controllers;
 
-internal class AppBaseController : ControllerBase
+[ApiController]
+public class AppBaseController : ControllerBase
 {
 
 }

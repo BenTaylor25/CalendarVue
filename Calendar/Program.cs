@@ -1,8 +1,11 @@
+using Calendar.Services.CalendarEvents;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    builder.Services.AddControllers();
+    builder.Services.AddScoped<ICalendarEventsService, CalendarEventsService>();
 }
 
 var app = builder.Build();
@@ -14,6 +17,7 @@ var app = builder.Build();
     }
 
     app.UseHttpsRedirection();
+    app.MapControllers();
 }
 
 app.Run();

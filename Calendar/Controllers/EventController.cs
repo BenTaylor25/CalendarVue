@@ -1,12 +1,45 @@
+using Microsoft.AspNetCore.Mvc;
+
+using ErrorOr;
+
+using Calendar.Models;
+using Calendar.Services.CalendarEvents;
 
 namespace Calendar.Controllers;
 
 public class EventController : AppBaseController
 {
-    private readonly IEventService _eventService;
+    private readonly ICalendarEventsService _eventService;
 
-    public EventController(IEventService eventService)
+    public EventController(ICalendarEventsService eventService)
     {
         _eventService = eventService;
+    }
+
+    [HttpPost("/calendarEvent")]
+    public IActionResult AddValue()
+    {
+        ErrorOr<CalendarEvent> calendarEventResult = CalendarEvent.Create(
+            new Guid(),
+            "test",
+            new DateTime(2024, 9, 2, 15, 0, 0),
+            new DateTime(2024, 9, 2, 18, 0, 0)
+        );
+
+        if (calendarEventResult.IsError)
+        {
+            return Problem("could not create object");
+        }
+        CalendarEvent calendarEvent = calendarEventResult.Value;
+
+        ErrorOr<Updated> addValueResponse =
+            _eventService.AddCalendarEvent(calendarEvent);
+        
+        if (addValueResponse.IsError)
+        {
+            return Problem("could not add event");
+        }
+
+        return Ok();
     }
 }
