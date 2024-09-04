@@ -14,9 +14,9 @@ public class CalendarEventsService : ICalendarEventsService
         _events = [];
     }
 
-    public ErrorOr<CalendarEvent> GetCalendarEvent(string calendarId)
+    public ErrorOr<List<CalendarEvent>> GetAllCalendarEvents()
     {
-        return Error.NotFound();
+        return _events;
     }
 
     public ErrorOr<Updated> AddCalendarEvent(CalendarEvent calendarEvent)

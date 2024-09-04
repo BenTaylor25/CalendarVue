@@ -16,6 +16,22 @@ public class EventController : AppBaseController
         _eventService = eventService;
     }
 
+    [HttpGet("/calendarEvent")]
+    public IActionResult GetAllCalendarEvents()
+    {
+        ErrorOr<List<CalendarEvent>> serviceResponse =
+            _eventService.GetAllCalendarEvents();
+
+        if (serviceResponse.IsError)
+        {
+            return Problem("Couldn't get Calendar Events.");
+        }
+
+        List<CalendarEvent> events = serviceResponse.Value;
+
+        return Ok(events);
+    }
+
     [HttpPost("/calendarEvent")]
     public IActionResult AddValue()
     {

@@ -6,6 +6,6 @@ namespace Calendar.Services.CalendarEvents;
 
 public interface ICalendarEventsService
 {
-    ErrorOr<CalendarEvent> GetCalendarEvent(string calendarId);
+    ErrorOr<List<CalendarEvent>> GetAllCalendarEvents();
     ErrorOr<Updated> AddCalendarEvent(CalendarEvent calendarEvent);
 }
