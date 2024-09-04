@@ -4,6 +4,7 @@ using ErrorOr;
 
 using Calendar.Models;
 using Calendar.Services.CalendarEvents;
+using Calendar.Controllers.RequestBodies;
 
 namespace Calendar.Controllers;
 
@@ -33,13 +34,15 @@ public class EventController : AppBaseController
     }
 
     [HttpPost("/calendarEvent")]
-    public IActionResult AddValue()
+    public IActionResult AddCalendarEvent(
+        [FromBody] EventControllerAddBody requestBody
+    )
     {
         ErrorOr<CalendarEvent> calendarEventResult = CalendarEvent.Create(
             new Guid(),
-            "test",
-            new DateTime(2024, 9, 2, 15, 0, 0),
-            new DateTime(2024, 9, 2, 18, 0, 0)
+            requestBody.Name,
+            requestBody.StartDateTime,
+            requestBody.EndDateTime
         );
 
         if (calendarEventResult.IsError)
