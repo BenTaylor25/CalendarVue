@@ -53,7 +53,7 @@ public class EventController : AppBaseController
 
         ErrorOr<Updated> addValueResponse =
             _eventService.AddCalendarEvent(calendarEvent);
-        
+
         if (addValueResponse.IsError)
         {
             return Problem("could not add event");
