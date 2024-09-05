@@ -12,4 +12,9 @@ public interface ICalendarEventsService
     );
 
     ErrorOr<Updated> AddCalendarEvent(CalendarEvent calendarEvent);
+
+    ErrorOr<Updated> UpdateCalendarEvent(
+        Guid eventId,
+        CalendarEvent calendarEvent
+    );
 }

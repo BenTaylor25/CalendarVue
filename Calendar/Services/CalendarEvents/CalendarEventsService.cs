@@ -1,6 +1,7 @@
 using ErrorOr;
 
 using Calendar.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Calendar.Services.CalendarEvents;
 
@@ -39,9 +40,43 @@ public class CalendarEventsService : ICalendarEventsService
         return events;
     }
 
+    public ErrorOr<CalendarEvent> GetCalendarEventById(
+        Guid calendarId
+    )
+    {
+        foreach (CalendarEvent calendarEvent in _events)
+        {
+            if (calendarEvent.Id == calendarId)
+            {
+                return calendarEvent;
+            }
+        }
+
+        return Error.NotFound();
+    }
+
     public ErrorOr<Updated> AddCalendarEvent(CalendarEvent calendarEvent)
     {
         _events.Add(calendarEvent);
+        return Result.Updated;
+    }
+
+    public ErrorOr<Updated> UpdateCalendarEvent(
+        Guid eventId,
+        CalendarEvent calendarEvent
+    )
+    {
+        ErrorOr<CalendarEvent> getEventResult =
+            GetCalendarEventById(eventId);
+
+        if (getEventResult.IsError)
+        {
+            return Error.NotFound();
+        }
+
+        CalendarEvent existingEvent = getEventResult.Value;
+
+        existingEvent.CopyPropertiesFrom(calendarEvent);
         return Result.Updated;
     }
 }

@@ -25,6 +25,13 @@ public class CalendarEvent
         EndDateTime = endDateTime;
     }
 
+    public void CopyPropertiesFrom(CalendarEvent otherEvent)
+    {
+        Name = otherEvent.Name;
+        StartDateTime = otherEvent.StartDateTime;
+        EndDateTime = otherEvent.EndDateTime;
+    }
+
     public static ErrorOr<CalendarEvent> Create(
         Guid id,
         string name,
