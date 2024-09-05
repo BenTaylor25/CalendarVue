@@ -14,9 +14,29 @@ public class CalendarEventsService : ICalendarEventsService
         _events = [];
     }
 
-    public ErrorOr<List<CalendarEvent>> GetAllCalendarEvents()
+    public ErrorOr<List<CalendarEvent>> GetAllCalendarEvents(
+        DateTime? after,
+        DateTime? before
+    )
     {
-        return _events;
+        List<CalendarEvent> events = [];
+
+        foreach (CalendarEvent calendarEvent in _events)
+        {
+            bool isBeforeValidRange =
+                after != null && calendarEvent.EndDateTime < after;
+            bool isAfterValidRange =
+                before != null && calendarEvent.StartDateTime > before;
+
+            if (isBeforeValidRange || isAfterValidRange)
+            {
+                continue;
+            }
+
+            events.Add(calendarEvent);
+        }
+
+        return events;
     }
 
     public ErrorOr<Updated> AddCalendarEvent(CalendarEvent calendarEvent)

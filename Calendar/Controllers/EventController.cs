@@ -5,6 +5,7 @@ using ErrorOr;
 using Calendar.Models;
 using Calendar.Services.CalendarEvents;
 using Calendar.Controllers.RequestBodies;
+using Calendar.Controllers.RequestParameters;
 
 namespace Calendar.Controllers;
 
@@ -18,10 +19,15 @@ public class EventController : AppBaseController
     }
 
     [HttpGet("/calendarEvent")]
-    public IActionResult GetAllCalendarEvents()
+    public IActionResult GetAllCalendarEvents(
+        [FromQuery] EventControllerGetAllParameters requestParameters
+    )
     {
         ErrorOr<List<CalendarEvent>> serviceResponse =
-            _eventService.GetAllCalendarEvents();
+            _eventService.GetAllCalendarEvents(
+                requestParameters?.After,
+                requestParameters?.Before
+            );
 
         if (serviceResponse.IsError)
         {
