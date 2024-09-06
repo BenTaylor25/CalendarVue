@@ -45,7 +45,7 @@ public class EventController : AppBaseController
     )
     {
         ErrorOr<CalendarEvent> calendarEventResult = CalendarEvent.Create(
-            new Guid(),
+            Guid.NewGuid(),
             requestBody.Name,
             requestBody.StartDateTime,
             requestBody.EndDateTime
