@@ -80,4 +80,20 @@ public class CalendarEventsService : ICalendarEventsService
         existingEvent.CopyPropertiesFrom(newValues);
         return Result.Updated;
     }
+
+    public ErrorOr<Deleted> DeleteCalendarEvent(Guid eventId)
+    {
+        ErrorOr<CalendarEvent> getEventResult =
+            GetCalendarEventById(eventId);
+
+        if (getEventResult.IsError)
+        {
+            return Error.NotFound();
+        }
+
+        CalendarEvent existingEvent = getEventResult.Value;
+
+        _events.Remove(existingEvent);
+        return Result.Deleted;
+    }
 }

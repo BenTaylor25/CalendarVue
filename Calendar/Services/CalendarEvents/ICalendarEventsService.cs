@@ -12,9 +12,7 @@ public interface ICalendarEventsService
         DateTime? before
     );
 
-    public ErrorOr<CalendarEvent> GetCalendarEventById(
-        Guid eventId
-    );
+    ErrorOr<CalendarEvent> GetCalendarEventById(Guid eventId);
 
     ErrorOr<Updated> AddCalendarEvent(CalendarEvent calendarEvent);
 
@@ -22,4 +20,6 @@ public interface ICalendarEventsService
         Guid eventId,
         EventControllerUpdateBody newValues
     );
+
+    ErrorOr<Deleted> DeleteCalendarEvent(Guid eventId);
 }

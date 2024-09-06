@@ -40,9 +40,7 @@ public class EventController : AppBaseController
     }
 
     [HttpGet("/calendarEvent/{id}")]
-    public IActionResult GetCalendarEventById(
-        Guid id
-    )
+    public IActionResult GetCalendarEventById(Guid id)
     {
         ErrorOr<CalendarEvent> serviceResponse =
             _eventService.GetCalendarEventById(id);
@@ -90,15 +88,28 @@ public class EventController : AppBaseController
         [FromBody] EventControllerUpdateBody requestBody
     )
     {
-        ErrorOr<Updated> updateValueResponse =
+        ErrorOr<Updated> serviceResponse =
             _eventService.UpdateCalendarEvent(
                 requestBody.EventId,
                 requestBody
             );
 
-        if (updateValueResponse.IsError)
+        if (serviceResponse.IsError)
         {
             return Problem("could not update event");
+        }
+        return Ok();
+    }
+
+    [HttpDelete("/calendarEvent/{id}")]
+    public IActionResult DeleteCalendarEvent(Guid id)
+    {
+        ErrorOr<Deleted> serviceResponse =
+            _eventService.DeleteCalendarEvent(id);
+
+        if (serviceResponse.IsError)
+        {
+            return Problem("could not delete event");
         }
         return Ok();
     }
