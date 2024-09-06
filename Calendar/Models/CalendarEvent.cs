@@ -1,3 +1,4 @@
+using Calendar.Controllers.RequestBodies;
 using ErrorOr;
 
 namespace Calendar.Models;
@@ -25,11 +26,12 @@ public class CalendarEvent
         EndDateTime = endDateTime;
     }
 
-    public void CopyPropertiesFrom(CalendarEvent otherEvent)
+    public void CopyPropertiesFrom(EventControllerUpdateBody newValues)
     {
-        Name = otherEvent.Name;
-        StartDateTime = otherEvent.StartDateTime;
-        EndDateTime = otherEvent.EndDateTime;
+        // Update values if provided value is not null.
+        Name = newValues.Name ?? Name;
+        StartDateTime = newValues.StartDateTime ?? StartDateTime;
+        EndDateTime = newValues.EndDateTime ?? EndDateTime;
     }
 
     public static ErrorOr<CalendarEvent> Create(

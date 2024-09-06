@@ -72,23 +72,10 @@ public class EventController : AppBaseController
         [FromBody] EventControllerUpdateBody requestBody
     )
     {
-        ErrorOr<CalendarEvent> calendarEventResult = CalendarEvent.Create(
-            requestBody.EventId,
-            requestBody.Name,
-            requestBody.StartDateTime,
-            requestBody.EndDateTime
-        );
-
-        if (calendarEventResult.IsError)
-        {
-            return Problem("could not create object");
-        }
-        CalendarEvent calendarEvent = calendarEventResult.Value;
-
         ErrorOr<Updated> updateValueResponse =
             _eventService.UpdateCalendarEvent(
                 requestBody.EventId,
-                calendarEvent
+                requestBody
             );
 
         if (updateValueResponse.IsError)

@@ -2,6 +2,7 @@ using ErrorOr;
 
 using Calendar.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Calendar.Controllers.RequestBodies;
 
 namespace Calendar.Services.CalendarEvents;
 
@@ -63,7 +64,7 @@ public class CalendarEventsService : ICalendarEventsService
 
     public ErrorOr<Updated> UpdateCalendarEvent(
         Guid eventId,
-        CalendarEvent calendarEvent
+        EventControllerUpdateBody newValues
     )
     {
         ErrorOr<CalendarEvent> getEventResult =
@@ -76,7 +77,7 @@ public class CalendarEventsService : ICalendarEventsService
 
         CalendarEvent existingEvent = getEventResult.Value;
 
-        existingEvent.CopyPropertiesFrom(calendarEvent);
+        existingEvent.CopyPropertiesFrom(newValues);
         return Result.Updated;
     }
 }

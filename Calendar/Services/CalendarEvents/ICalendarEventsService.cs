@@ -1,6 +1,7 @@
 using ErrorOr;
 
 using Calendar.Models;
+using Calendar.Controllers.RequestBodies;
 
 namespace Calendar.Services.CalendarEvents;
 
@@ -15,6 +16,6 @@ public interface ICalendarEventsService
 
     ErrorOr<Updated> UpdateCalendarEvent(
         Guid eventId,
-        CalendarEvent calendarEvent
+        EventControllerUpdateBody newValues
     );
 }
