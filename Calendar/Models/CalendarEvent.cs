@@ -35,7 +35,6 @@ public class CalendarEvent
     }
 
     public static ErrorOr<CalendarEvent> Create(
-        Guid id,
         string name,
         DateTime startDateTime,
         DateTime endDateTime
@@ -50,6 +49,8 @@ public class CalendarEvent
         {
             return Error.Validation();
         }
+
+        Guid id = Guid.NewGuid();
         return new CalendarEvent(id, name, startDateTime, endDateTime);
     }
 }
