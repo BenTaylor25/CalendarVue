@@ -42,12 +42,12 @@ public class CalendarEventsService : ICalendarEventsService
     }
 
     public ErrorOr<CalendarEvent> GetCalendarEventById(
-        Guid calendarId
+        Guid eventId
     )
     {
         foreach (CalendarEvent calendarEvent in _events)
         {
-            if (calendarEvent.Id == calendarId)
+            if (calendarEvent.Id == eventId)
             {
                 return calendarEvent;
             }

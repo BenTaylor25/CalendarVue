@@ -34,9 +34,27 @@ public class EventController : AppBaseController
             return Problem("Couldn't get Calendar Events.");
         }
 
-        List<CalendarEvent> events = serviceResponse.Value;
+        List<CalendarEvent> calendarEvents = serviceResponse.Value;
 
-        return Ok(events);
+        return Ok(calendarEvents);
+    }
+
+    [HttpGet("/calendarEvent/{id}")]
+    public IActionResult GetCalendarEventById(
+        Guid id
+    )
+    {
+        ErrorOr<CalendarEvent> serviceResponse =
+            _eventService.GetCalendarEventById(id);
+
+        if (serviceResponse.IsError)
+        {
+            return Problem("Couldn't find event.");
+        }
+
+        CalendarEvent calendarEvent = serviceResponse.Value;
+
+        return Ok(calendarEvent);
     }
 
     [HttpPost("/calendarEvent")]

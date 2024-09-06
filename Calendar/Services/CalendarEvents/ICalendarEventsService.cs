@@ -12,6 +12,10 @@ public interface ICalendarEventsService
         DateTime? before
     );
 
+    public ErrorOr<CalendarEvent> GetCalendarEventById(
+        Guid eventId
+    );
+
     ErrorOr<Updated> AddCalendarEvent(CalendarEvent calendarEvent);
 
     ErrorOr<Updated> UpdateCalendarEvent(
