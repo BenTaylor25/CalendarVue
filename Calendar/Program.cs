@@ -1,3 +1,4 @@
+using Calendar.Constants;
 using Calendar.Services.CalendarEvents;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,10 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     builder.Services.AddControllers();
-    builder.Services.AddSingleton<ICalendarEventsService, CalendarEventsService>();
+    builder.Services
+        .AddSingleton<ICalendarEventsService, CalendarEventsService>();
     builder.Services.Configure<IISServerOptions>(options =>
     {
-        options.MaxRequestBodySize = 10 * 1024;   // 10 KB
+        options.MaxRequestBodySize = Constants.API_REQUEST_MAX_BODY_SIZE;
     });
 }
 
