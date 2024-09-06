@@ -30,12 +30,12 @@ public class CalendarEventsService : ICalendarEventsService
             bool isAfterValidRange =
                 before != null && calendarEvent.StartDateTime > before;
 
-            if (isBeforeValidRange || isAfterValidRange)
-            {
-                continue;
-            }
+            bool isInRange = !(isBeforeValidRange || isAfterValidRange);
 
-            events.Add(calendarEvent);
+            if (isInRange)
+            {
+                events.Add(calendarEvent);
+            }
         }
 
         return events;
