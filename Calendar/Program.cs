@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using Calendar.Constants;
 using Calendar.Services.CalendarEvents;
 
@@ -12,6 +13,14 @@ var builder = WebApplication.CreateBuilder(args);
     {
         options.MaxRequestBodySize = Constants.API_REQUEST_MAX_BODY_SIZE;
     });
+    builder.Services.AddCors(setup => {
+        setup.AddDefaultPolicy(policyBuilder => {
+            policyBuilder
+                .WithOrigins(Constants.FRONTEND_URL)
+                .WithMethods("GET", "POST", "PUT", "DELETE")
+                .AllowAnyHeader();
+        });
+    });
 }
 
 var app = builder.Build();
@@ -23,6 +32,7 @@ var app = builder.Build();
     }
 
     app.UseHttpsRedirection();
+    app.UseCors();
     app.MapControllers();
 }
 
