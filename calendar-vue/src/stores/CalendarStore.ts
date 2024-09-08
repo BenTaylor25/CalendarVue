@@ -1,11 +1,23 @@
 import { defineStore } from "pinia";
 
 import { CalendarEventModel } from "../models/CalendarEventModel.ts";
-import { apiGetAllCalendarEvents } from "../api/events.ts";
+import { apiGetAllCalendarEvents } from "../api/getAllEvents.ts";
 
 export const useEventStore = defineStore('events', {
     state: () => ({
-        events: getInitialEvents(),
+        events: [
+            new CalendarEventModel(
+                "wed 7 aug 24 test",
+                // This is 7th AUGUST because JavaScript is stupid.
+                new Date(2024, 7, 7, 10, 0, 0, 0),
+                new Date(2024, 7, 7, 12, 0, 0, 0)
+            ),
+            new CalendarEventModel(
+                "fri 2 aug 2024 test",
+                new Date(2024, 7, 2, 12, 0, 0, 0),
+                new Date(2024, 7, 2, 16, 0, 0, 0)
+            )
+        ] as CalendarEventModel[],
         selectedEvent: null as CalendarEventModel | null
     }),
     actions: {
@@ -48,22 +60,11 @@ export const useEventStore = defineStore('events', {
     }
 });
 
-function getInitialEvents(): CalendarEventModel[] {
-    const events = [
-        new CalendarEventModel(
-            "wed 7 aug 24 test",
-            // This is 7th AUGUST because JavaScript is stupid.
-            new Date(2024, 7, 7, 10, 0, 0, 0),
-            new Date(2024, 7, 7, 12, 0, 0, 0)
-        ),
-        new CalendarEventModel(
-            "fri 2 aug 2024 test",
-            new Date(2024, 7, 2, 12, 0, 0, 0),
-            new Date(2024, 7, 2, 16, 0, 0, 0)
-        )
-    ] as CalendarEventModel[];
+apiGetAllCalendarEvents()
+    .then(serverEvents => {
+        const eventStore = useEventStore();
 
-    apiGetAllCalendarEvents();
-
-    return events;
-}
+        serverEvents.forEach(event => {
+            eventStore.events.push(event);
+        });
+    })
