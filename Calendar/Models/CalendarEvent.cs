@@ -22,8 +22,8 @@ public class CalendarEvent
     {
         Id = id;
         Name = name;
-        StartDateTime = startDateTime;
-        EndDateTime = endDateTime;
+        StartDateTime = startDateTime.ToUniversalTime();
+        EndDateTime = endDateTime.ToUniversalTime();
     }
 
     public void CopyPropertiesFrom(EventControllerUpdateBody newValues)
