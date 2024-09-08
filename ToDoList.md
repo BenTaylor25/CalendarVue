@@ -3,6 +3,7 @@
 ## Frontend
 - Sync Frontend stores to Backend.
 - Account Handling.
+- Display Events according to UTC time rather than local time?
 
 ### Zoom
 - Maintain centre point on zoom in and out.
