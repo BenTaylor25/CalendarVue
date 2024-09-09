@@ -8,7 +8,9 @@ interface ApiEventResponse {
     endDateTime: string
 }
 
-export async function apiGetAllCalendarEvents(): Promise<CalendarEventModel[]> {
+export async function apiGetAllCalendarEvents():
+    Promise<CalendarEventModel[]>
+{
     const eventsFromApi = [] as CalendarEventModel[];
 
     await fetch(API_CALENDAR_EVENT_ROUTE)
