@@ -1,5 +1,5 @@
-import { API_CALENDAR_EVENT_ROUTE } from "../constants/api.ts";
-import { CalendarEventModel } from "../models/CalendarEventModel.ts";
+import { API_CALENDAR_EVENT_ROUTE } from "../../constants/api.ts";
+import { CalendarEventModel } from "../../models/CalendarEventModel.ts";
 
 interface ApiEventResponse {
     id: string,

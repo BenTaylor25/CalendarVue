@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 import { CalendarEventModel } from "../models/CalendarEventModel.ts";
-import { apiGetAllCalendarEvents } from "../api/getAllEvents.ts";
+import { apiGetAllCalendarEvents } from "../api/CalendarEvents/getAllEvents.ts";
 
 export const useEventStore = defineStore('events', {
     state: () => ({
