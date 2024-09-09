@@ -1,4 +1,4 @@
-import { API_CALENDAR_EVENT_ROUTE, JSON_POST_HEADERS, NOT_SYNCED } from "../../constants/api.ts";
+import { API_CALENDAR_EVENT_ROUTE, JSON_HEADERS, NOT_SYNCED } from "../../constants/api.ts";
 import { CalendarEventModel } from "../../models/CalendarEventModel.ts";
 
 interface CreateBody {
@@ -21,8 +21,8 @@ export async function apiCreateNewEvent(
     } as CreateBody;
 
     await fetch(API_CALENDAR_EVENT_ROUTE, {
-        method: 'POST',
-        headers: JSON_POST_HEADERS,
+        method: "POST",
+        headers: JSON_HEADERS,
         body: JSON.stringify(body)
     })
     .then(res => {

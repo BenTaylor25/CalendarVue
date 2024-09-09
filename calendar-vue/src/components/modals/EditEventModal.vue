@@ -10,6 +10,8 @@ import { hideEditEventModal } from '../../modalController.ts';
 import { useEventStore } from '../../stores/CalendarStore.ts';
 
 import ModalShadow from './ModalShadow.vue';
+import { apiUpdateEvent } from '../../api/CalendarEvents/updateEvent.ts';
+import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
 </script>
 
 <template>
@@ -144,6 +146,8 @@ export default {
         eventStore.selectedEvent.name = eventName.value;
         eventStore.selectedEvent.startTime = newStartTimeDate;
         eventStore.selectedEvent.endTime = newEndTimeDate;
+
+        apiUpdateEvent(eventStore.selectedEvent as CalendarEventModel);
       }
 
       this.closeModal();

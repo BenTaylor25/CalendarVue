@@ -5,7 +5,7 @@ export const API_CALENDAR_EVENT_ROUTE = `${SERVER_URL}/calendarEvent`;
 
 export const NOT_SYNCED = "NOT SYNCED WITH SERVER";
 
-export const JSON_POST_HEADERS = {
+export const JSON_HEADERS = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
 }
