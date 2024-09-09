@@ -20,13 +20,14 @@ export async function apiGetAllCalendarEvents(): Promise<CalendarEventModel[]> {
                 const startDateTime = new Date(apiEvent.startDateTime);
                 const endDateTime = new Date(apiEvent.endDateTime);
 
-                eventsFromApi.push(
-                    new CalendarEventModel(
-                        apiEvent.name,
-                        startDateTime,
-                        endDateTime
-                    )
+                const eventFromApi = new CalendarEventModel(
+                    apiEvent.name,
+                    startDateTime,
+                    endDateTime
                 );
+                eventFromApi.serverId = apiEvent.id;
+
+                eventsFromApi.push(eventFromApi);
             }
         })
         .catch(err => {
