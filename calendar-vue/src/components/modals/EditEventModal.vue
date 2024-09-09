@@ -2,11 +2,14 @@
 import { ref } from 'vue';
 
 import { MODAL_IDS } from '../../constants/modalConstants.ts';
+import { CalendarEventModel } from '../../models/CalendarEventModel.ts';
 import {
   dateFromFormatString
 } from '../../validation/newEventFormValidation.ts';
 import { dateToString } from '../../helpers/dateStringFormatting.ts';
 import { hideEditEventModal } from '../../modalController.ts';
+import { apiUpdateEvent } from '../../api/CalendarEvents/updateEvent.ts';
+import { apiDeleteEvent } from '../../api/CalendarEvents/deleteEvent.ts';
 import { useEventStore } from '../../stores/CalendarStore.ts';
 
 import ModalShadow from './ModalShadow.vue';
@@ -144,6 +147,8 @@ export default {
         eventStore.selectedEvent.name = eventName.value;
         eventStore.selectedEvent.startTime = newStartTimeDate;
         eventStore.selectedEvent.endTime = newEndTimeDate;
+
+        apiUpdateEvent(eventStore.selectedEvent as CalendarEventModel);
       }
 
       this.closeModal();
@@ -155,6 +160,7 @@ export default {
 
       if (shouldDelete) {
         const eventStore = useEventStore();
+        apiDeleteEvent(eventStore.selectedEvent as CalendarEventModel);
         eventStore.deleteSelectedEvent();
         hideEditEventModal();
       }

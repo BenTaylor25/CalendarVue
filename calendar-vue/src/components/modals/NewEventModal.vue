@@ -13,6 +13,7 @@ import { useEventStore } from '../../stores/CalendarStore.ts';
 import {
   useNewEventStartTimeStore
 } from '../../stores/NewEventStartTime.ts';
+import { apiCreateNewEvent } from '../../api/CalendarEvents/createNewEvent.ts';
 
 import ModalShadow from './ModalShadow.vue';
 </script>
@@ -103,12 +104,16 @@ function createNewEventIfValid() {
   }
   //#endregion
 
-  const eventStore = useEventStore();
-  eventStore.addEvent(new CalendarEventModel(
+  const newEvent = new CalendarEventModel(
     newEventName.value,
     startTime,
     endTime
-  ));
+  );
+
+  apiCreateNewEvent(newEvent);
+
+  const eventStore = useEventStore();
+  eventStore.addEvent(newEvent);
 
   clearForm();
   hideNewEventModal();

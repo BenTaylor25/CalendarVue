@@ -79,17 +79,18 @@ public class EventController : AppBaseController
         {
             return Problem("could not add event");
         }
-        return Ok();
+        return Ok(calendarEvent);
     }
 
-    [HttpPut("/calendarEvent")]
+    [HttpPut("/calendarEvent/{id}")]
     public IActionResult UpdateCalendarEvent(
-        [FromBody] EventControllerUpdateBody requestBody
+        [FromBody] EventControllerUpdateBody requestBody,
+        Guid id
     )
     {
         ErrorOr<Updated> serviceResponse =
             _eventService.UpdateCalendarEvent(
-                requestBody.EventId,
+                id,
                 requestBody
             );
 
