@@ -28,6 +28,8 @@ export async function apiUpdateEvent(calendarEvent: CalendarEventModel) {
         body: JSON.stringify(body)
     })
     .catch(err => {
+        // This is when the request itself fails,
+        // it doesn't handle error results, but that's okay.
         console.error("Update event request failed: " + err);
     })
 }
