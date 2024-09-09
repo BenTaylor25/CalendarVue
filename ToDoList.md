@@ -1,7 +1,6 @@
 # To Do List:
 
 ## Frontend
-- Sync Frontend stores to Backend.
 - Account Handling.
 - Display Events according to UTC time rather than local time?
 
@@ -18,7 +17,6 @@
   - Show date of hover selection.
 
 ## Backend
-- C# Rest API.
 - Store Events to Database
   - SQLite or Postgres?
 - Account Handling.
