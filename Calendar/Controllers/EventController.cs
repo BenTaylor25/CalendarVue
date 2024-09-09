@@ -79,7 +79,7 @@ public class EventController : AppBaseController
         {
             return Problem("could not add event");
         }
-        return Ok();
+        return Ok(calendarEvent);
     }
 
     [HttpPut("/calendarEvent/{id}")]
